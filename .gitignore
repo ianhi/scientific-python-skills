@@ -20,5 +20,8 @@ research/*/bodies/
 tests/*/tmp*/
 tests/*/__pycache__/
 
+# Local prompts (not for public repo)
+prompts/
+
 # uv generated
 main.py
