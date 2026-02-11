@@ -1,0 +1,1770 @@
+{
+  "arrays/chunks": {
+    "count": 91,
+    "total_score": 7046,
+    "items": [
+      {
+        "number": 9543,
+        "title": "Flexible coordinate transform",
+        "score": 203,
+        "comments": 30,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 525,
+        "title": "support for units",
+        "score": 163,
+        "comments": 64,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 3213,
+        "title": "How should xarray use/support sparse arrays?",
+        "score": 155,
+        "comments": 55,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 2288,
+        "title": "Add CRS/projection information to xarray objects",
+        "score": 150,
+        "comments": 50,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 4118,
+        "title": "Feature Request: Hierarchical storage and processing in xarray",
+        "score": 147,
+        "comments": 62,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1603,
+        "title": "Explicit indexes in xarray's data-model (Future of MultiIndex)",
+        "score": 136,
+        "comments": 68,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 4060,
+        "title": "ENH: use `dask.array.apply_gufunc` in `xr.apply_ufunc` ",
+        "score": 135,
+        "comments": 63,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3232,
+        "title": "Use pytorch as backend for xarrays",
+        "score": 134,
+        "comments": 51,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 2706,
+        "title": "Appending to zarr store",
+        "score": 130,
+        "comments": 59,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 818,
+        "title": "Multidimensional groupby",
+        "score": 128,
+        "comments": 61,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 10888,
+        "title": "Migrate development workflow to Pixi",
+        "score": 124,
+        "comments": 52,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1473,
+        "title": "WIP: indexing with broadcasting",
+        "score": 120,
+        "comments": 60,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 798,
+        "title": "Integration  with dask/distributed (xarray backend design)",
+        "score": 118,
+        "comments": 59,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2799,
+        "title": "Performance: numpy indexes small amounts of data 1000 faster than xarray",
+        "score": 116,
+        "comments": 42,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 4470,
+        "title": "xarray / vtk integration",
+        "score": 116,
+        "comments": 21,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "xarray-integration": {
+    "count": 75,
+    "total_score": 5510,
+    "items": [
+      {
+        "number": 1528,
+        "title": "WIP: Zarr backend",
+        "score": 209,
+        "comments": 103,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3213,
+        "title": "How should xarray use/support sparse arrays?",
+        "score": 155,
+        "comments": 55,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 2288,
+        "title": "Add CRS/projection information to xarray objects",
+        "score": 150,
+        "comments": 50,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 4118,
+        "title": "Feature Request: Hierarchical storage and processing in xarray",
+        "score": 147,
+        "comments": 62,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1603,
+        "title": "Explicit indexes in xarray's data-model (Future of MultiIndex)",
+        "score": 136,
+        "comments": 68,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 3232,
+        "title": "Use pytorch as backend for xarrays",
+        "score": 134,
+        "comments": 51,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 798,
+        "title": "Integration  with dask/distributed (xarray backend design)",
+        "score": 118,
+        "comments": 59,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1385,
+        "title": "slow performance with open_mfdataset",
+        "score": 117,
+        "comments": 53,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2799,
+        "title": "Performance: numpy indexes small amounts of data 1000 faster than xarray",
+        "score": 116,
+        "comments": 42,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 4470,
+        "title": "xarray / vtk integration",
+        "score": 116,
+        "comments": 21,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1627,
+        "title": "html repr of xarray object (for the notebook)",
+        "score": 111,
+        "comments": 39,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1938,
+        "title": "Hooks for XArray operations",
+        "score": 106,
+        "comments": 53,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 4285,
+        "title": "Awkward array backend?",
+        "score": 100,
+        "comments": 38,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 1068,
+        "title": "Use xarray.open_dataset() for password-protected Opendap files",
+        "score": 96,
+        "comments": 48,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1672,
+        "title": "Append along an unlimited dimension to an existing netCDF file",
+        "score": 95,
+        "comments": 9,
+        "is_pr": false,
+        "state": "open"
+      }
+    ]
+  },
+  "other": {
+    "count": 35,
+    "total_score": 2305,
+    "items": [
+      {
+        "number": 5232,
+        "title": "release v0.18.0",
+        "score": 120,
+        "comments": 60,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 10135,
+        "title": "Add a `.to_polars_df()` method (very similar to `.to_dataframe()`, which implicitly uses pandas)",
+        "score": 115,
+        "comments": 40,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 3550,
+        "title": "cov() and corr() - finalization",
+        "score": 107,
+        "comments": 52,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2104,
+        "title": "implement interp()",
+        "score": 105,
+        "comments": 51,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3557,
+        "title": "merge scipy19 docs",
+        "score": 90,
+        "comments": 45,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3257,
+        "title": "0.13.0 release",
+        "score": 86,
+        "comments": 43,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 4979,
+        "title": "Flexible indexes refactoring notes",
+        "score": 83,
+        "comments": 22,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2217,
+        "title": "tolerance for alignment",
+        "score": 79,
+        "comments": 23,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 3199,
+        "title": "Add an example of ERA5 and GRIB data & visualization to the gallery",
+        "score": 78,
+        "comments": 39,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3349,
+        "title": "Implement polyfit?",
+        "score": 77,
+        "comments": 25,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 5365,
+        "title": "Add support for cross product",
+        "score": 72,
+        "comments": 36,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1017,
+        "title": "WIP: Optional indexes (no more default coordinates given by range(n))",
+        "score": 70,
+        "comments": 35,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3516,
+        "title": "Silence sphinx warnings",
+        "score": 67,
+        "comments": 32,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5475,
+        "title": "Is `_FillValue` really the same as zarr's `fill_value`?",
+        "score": 64,
+        "comments": 25,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 3980,
+        "title": "Make subclassing easier?",
+        "score": 63,
+        "comments": 9,
+        "is_pr": false,
+        "state": "open"
+      }
+    ]
+  },
+  "groups/hierarchy": {
+    "count": 27,
+    "total_score": 1801,
+    "items": [
+      {
+        "number": 4118,
+        "title": "Feature Request: Hierarchical storage and processing in xarray",
+        "score": 147,
+        "comments": 62,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 818,
+        "title": "Multidimensional groupby",
+        "score": 128,
+        "comments": 61,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 324,
+        "title": "Support group_over",
+        "score": 89,
+        "comments": 12,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 8572,
+        "title": "Track merging datatree into xarray",
+        "score": 88,
+        "comments": 31,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 3216,
+        "title": "Feature request: time-based rolling window functionality",
+        "score": 84,
+        "comments": 11,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 4610,
+        "title": "Add histogram method",
+        "score": 76,
+        "comments": 22,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 5734,
+        "title": "Enable `flox` in `GroupBy` and `resample`",
+        "score": 74,
+        "comments": 25,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 9077,
+        "title": "Coordinate inheritance for xarray.DataTree",
+        "score": 68,
+        "comments": 21,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 4314,
+        "title": "Recreate @gajomi's #2070 to keep attrs when calling astype()",
+        "score": 66,
+        "comments": 33,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 8343,
+        "title": "Add `metadata_only` param to `.to_zarr`?",
+        "score": 65,
+        "comments": 24,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 1823,
+        "title": "We need a fast path for open_mfdataset",
+        "score": 65,
+        "comments": 19,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 8656,
+        "title": "Datatree import",
+        "score": 64,
+        "comments": 28,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2237,
+        "title": "why time grouping doesn't preserve chunks",
+        "score": 63,
+        "comments": 30,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 9524,
+        "title": "Add SeasonGrouper, SeasonResampler",
+        "score": 60,
+        "comments": 26,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 9063,
+        "title": "Hierarchical coordinates in DataTree",
+        "score": 58,
+        "comments": 25,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "io/serialization": {
+    "count": 27,
+    "total_score": 1723,
+    "items": [
+      {
+        "number": 1385,
+        "title": "slow performance with open_mfdataset",
+        "score": 117,
+        "comments": 53,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1198,
+        "title": "Fixes OS error arising from too many files open",
+        "score": 108,
+        "comments": 54,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1068,
+        "title": "Use xarray.open_dataset() for password-protected Opendap files",
+        "score": 96,
+        "comments": 48,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 463,
+        "title": "open_mfdataset too many files",
+        "score": 94,
+        "comments": 47,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2844,
+        "title": "Read grid mapping and bounds as coords",
+        "score": 76,
+        "comments": 38,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1793,
+        "title": "fix distributed writes",
+        "score": 70,
+        "comments": 35,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2159,
+        "title": "Concatenate across multiple dimensions with open_mfdataset",
+        "score": 66,
+        "comments": 27,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 9955,
+        "title": "add  kwarg to handle invalid files in open_mfdataset",
+        "score": 65,
+        "comments": 30,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2042,
+        "title": "Anyone working on a to_tiff?  Alternatively, how do you write an xarray to a geotiff?  ",
+        "score": 65,
+        "comments": 31,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 8343,
+        "title": "Add `metadata_only` param to `.to_zarr`?",
+        "score": 65,
+        "comments": 24,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 1823,
+        "title": "We need a fast path for open_mfdataset",
+        "score": 65,
+        "comments": 19,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2368,
+        "title": "Let's list all the netCDF files that xarray can't open",
+        "score": 64,
+        "comments": 32,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1440,
+        "title": "If a NetCDF file is chunked on disk, open it with compatible dask chunks",
+        "score": 58,
+        "comments": 26,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2697,
+        "title": "read ncml files to create multifile datasets",
+        "score": 57,
+        "comments": 18,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 7446,
+        "title": "Parallel + multi-threaded reading of NetCDF4 + HDF5: Hidefix!",
+        "score": 57,
+        "comments": 9,
+        "is_pr": false,
+        "state": "open"
+      }
+    ]
+  },
+  "errors/bugs": {
+    "count": 25,
+    "total_score": 1498,
+    "items": [
+      {
+        "number": 1198,
+        "title": "Fixes OS error arising from too many files open",
+        "score": 108,
+        "comments": 54,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 7259,
+        "title": "\ud83d\udc1b NetCDF4 RuntimeWarning if xarray is imported before netCDF4",
+        "score": 79,
+        "comments": 19,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1793,
+        "title": "fix distributed writes",
+        "score": 70,
+        "comments": 35,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3922,
+        "title": "FIX: correct dask array handling in _calc_idxminmax",
+        "score": 70,
+        "comments": 35,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 10032,
+        "title": "TypeError: Expected a BytesBytesCodec. Got <class 'numcodecs.blosc.Blosc'> instead.",
+        "score": 70,
+        "comments": 13,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 3476,
+        "title": "Error when writing string coordinate variables to zarr",
+        "score": 68,
+        "comments": 18,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 8946,
+        "title": "Fix upcasting with python builtin numbers and numpy 2",
+        "score": 67,
+        "comments": 31,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 9955,
+        "title": "add  kwarg to handle invalid files in open_mfdataset",
+        "score": 65,
+        "comments": 30,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5065,
+        "title": "Zarr chunking fixes",
+        "score": 64,
+        "comments": 32,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5201,
+        "title": "Fix lag in Jupyter caused by CSS in `_repr_html_`",
+        "score": 64,
+        "comments": 29,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2064,
+        "title": "concat_dim getting added to *all* variables of multifile datasets",
+        "score": 62,
+        "comments": 31,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 7446,
+        "title": "Parallel + multi-threaded reading of NetCDF4 + HDF5: Hidefix!",
+        "score": 57,
+        "comments": 9,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 3847,
+        "title": "provide a error summary for assert_allclose",
+        "score": 54,
+        "comments": 27,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 6528,
+        "title": "cumsum drops index coordinates",
+        "score": 53,
+        "comments": 18,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 9561,
+        "title": "Soft import",
+        "score": 52,
+        "comments": 22,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "concurrency/async": {
+    "count": 19,
+    "total_score": 1368,
+    "items": [
+      {
+        "number": 1528,
+        "title": "WIP: Zarr backend",
+        "score": 209,
+        "comments": 103,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 4060,
+        "title": "ENH: use `dask.array.apply_gufunc` in `xr.apply_ufunc` ",
+        "score": 135,
+        "comments": 63,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 798,
+        "title": "Integration  with dask/distributed (xarray backend design)",
+        "score": 118,
+        "comments": 59,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 4155,
+        "title": "Implement interp for interpolating between chunks of data (dask)",
+        "score": 84,
+        "comments": 42,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 7019,
+        "title": "Generalize handling of chunked array types",
+        "score": 72,
+        "comments": 30,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3922,
+        "title": "FIX: correct dask array handling in _calc_idxminmax",
+        "score": 70,
+        "comments": 35,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 7363,
+        "title": "expand dimension by re-allocating larger arrays with more space \"at the end of the corresponding dimension\", block copying previously existing data, and autofill newly created entry by a default value (note: alternative to reindex, but much faster for extending large arrays along, for example, the time dimension)",
+        "score": 58,
+        "comments": 29,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1440,
+        "title": "If a NetCDF file is chunked on disk, open it with compatible dask chunks",
+        "score": 58,
+        "comments": 26,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 7446,
+        "title": "Parallel + multi-threaded reading of NetCDF4 + HDF5: Hidefix!",
+        "score": 57,
+        "comments": 9,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 5654,
+        "title": "recent versions of sparse and dask seem to be incompatible with our tests",
+        "score": 56,
+        "comments": 28,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 3147,
+        "title": "Implementing  map_overlap",
+        "score": 54,
+        "comments": 14,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 8902,
+        "title": "opening a zarr dataset taking so much time with dask",
+        "score": 53,
+        "comments": 24,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 2503,
+        "title": "Problems with distributed and opendap netCDF endpoint",
+        "score": 52,
+        "comments": 26,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 9914,
+        "title": "Automatic Dask-Zarr chunk alignment on the to_zarr method",
+        "score": 51,
+        "comments": 20,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1517,
+        "title": "Automatic parallelization for dask arrays in apply_ufunc",
+        "score": 50,
+        "comments": 22,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "dask-integration": {
+    "count": 18,
+    "total_score": 1336,
+    "items": [
+      {
+        "number": 1528,
+        "title": "WIP: Zarr backend",
+        "score": 209,
+        "comments": 103,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 4060,
+        "title": "ENH: use `dask.array.apply_gufunc` in `xr.apply_ufunc` ",
+        "score": 135,
+        "comments": 63,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 798,
+        "title": "Integration  with dask/distributed (xarray backend design)",
+        "score": 118,
+        "comments": 59,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 4155,
+        "title": "Implement interp for interpolating between chunks of data (dask)",
+        "score": 84,
+        "comments": 42,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 7019,
+        "title": "Generalize handling of chunked array types",
+        "score": 72,
+        "comments": 30,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1793,
+        "title": "fix distributed writes",
+        "score": 70,
+        "comments": 35,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3922,
+        "title": "FIX: correct dask array handling in _calc_idxminmax",
+        "score": 70,
+        "comments": 35,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1115,
+        "title": "Feature request: Compute cross-correlation (similar to pd.Series.corr()) of gridded data",
+        "score": 62,
+        "comments": 31,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1440,
+        "title": "If a NetCDF file is chunked on disk, open it with compatible dask chunks",
+        "score": 58,
+        "comments": 26,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 5654,
+        "title": "recent versions of sparse and dask seem to be incompatible with our tests",
+        "score": 56,
+        "comments": 28,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 3147,
+        "title": "Implementing  map_overlap",
+        "score": 54,
+        "comments": 14,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 8902,
+        "title": "opening a zarr dataset taking so much time with dask",
+        "score": 53,
+        "comments": 24,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 2503,
+        "title": "Problems with distributed and opendap netCDF endpoint",
+        "score": 52,
+        "comments": 26,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 9914,
+        "title": "Automatic Dask-Zarr chunk alignment on the to_zarr method",
+        "score": 51,
+        "comments": 20,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1517,
+        "title": "Automatic parallelization for dask arrays in apply_ufunc",
+        "score": 50,
+        "comments": 22,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "netcdf/io": {
+    "count": 20,
+    "total_score": 1276,
+    "items": [
+      {
+        "number": 1077,
+        "title": "MultiIndex serialization to NetCDF",
+        "score": 97,
+        "comments": 32,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1068,
+        "title": "Use xarray.open_dataset() for password-protected Opendap files",
+        "score": 96,
+        "comments": 48,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1672,
+        "title": "Append along an unlimited dimension to an existing netCDF file",
+        "score": 95,
+        "comments": 9,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 9136,
+        "title": "`numpy` 2 compatibility in the `netcdf4` and `h5netcdf` backends",
+        "score": 79,
+        "comments": 37,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 7259,
+        "title": "\ud83d\udc1b NetCDF4 RuntimeWarning if xarray is imported before netCDF4",
+        "score": 79,
+        "comments": 19,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2304,
+        "title": "float32 instead of float64 when decoding int16 with scale_factor netcdf var  using xarray ",
+        "score": 71,
+        "comments": 33,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2368,
+        "title": "Let's list all the netCDF files that xarray can't open",
+        "score": 64,
+        "comments": 32,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 4122,
+        "title": "Document writing netcdf from xarray directly to S3",
+        "score": 61,
+        "comments": 28,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 1440,
+        "title": "If a NetCDF file is chunked on disk, open it with compatible dask chunks",
+        "score": 58,
+        "comments": 26,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 10931,
+        "title": "Mostly restore `netcdf` backend behavior with URLs",
+        "score": 57,
+        "comments": 23,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 7446,
+        "title": "Parallel + multi-threaded reading of NetCDF4 + HDF5: Hidefix!",
+        "score": 57,
+        "comments": 9,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 1536,
+        "title": "Better compression algorithms for NetCDF",
+        "score": 56,
+        "comments": 28,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 8147,
+        "title": "Add support for netCDF4.EnumType",
+        "score": 55,
+        "comments": 25,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 4082,
+        "title": "\"write to read-only\" Error in xarray.open_mfdataset() with opendap datasets",
+        "score": 52,
+        "comments": 26,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2503,
+        "title": "Problems with distributed and opendap netCDF endpoint",
+        "score": 52,
+        "comments": 26,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "performance": {
+    "count": 16,
+    "total_score": 1143,
+    "items": [
+      {
+        "number": 10888,
+        "title": "Migrate development workflow to Pixi",
+        "score": 124,
+        "comments": 52,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1385,
+        "title": "slow performance with open_mfdataset",
+        "score": 117,
+        "comments": 53,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2799,
+        "title": "Performance: numpy indexes small amounts of data 1000 faster than xarray",
+        "score": 116,
+        "comments": 42,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 5692,
+        "title": "Explicit indexes",
+        "score": 92,
+        "comments": 46,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5734,
+        "title": "Enable `flox` in `GroupBy` and `resample`",
+        "score": 74,
+        "comments": 25,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 7019,
+        "title": "Generalize handling of chunked array types",
+        "score": 72,
+        "comments": 30,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 7368,
+        "title": "Expose \"Coordinates\" as part of Xarray's public API",
+        "score": 65,
+        "comments": 31,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1823,
+        "title": "We need a fast path for open_mfdataset",
+        "score": 65,
+        "comments": 19,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 7363,
+        "title": "expand dimension by re-allocating larger arrays with more space \"at the end of the corresponding dimension\", block copying previously existing data, and autofill newly created entry by a default value (note: alternative to reindex, but much faster for extending large arrays along, for example, the time dimension)",
+        "score": 58,
+        "comments": 29,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1440,
+        "title": "If a NetCDF file is chunked on disk, open it with compatible dask chunks",
+        "score": 58,
+        "comments": 26,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2227,
+        "title": "Slow performance of isel",
+        "score": 56,
+        "comments": 28,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 8902,
+        "title": "opening a zarr dataset taking so much time with dask",
+        "score": 53,
+        "comments": 24,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 1517,
+        "title": "Automatic parallelization for dask arrays in apply_ufunc",
+        "score": 50,
+        "comments": 22,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2857,
+        "title": "Quadratic slowdown when saving multiple datasets to the same h5 file (h5netcdf)",
+        "score": 48,
+        "comments": 24,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1745,
+        "title": "open_mfdataset() memory error in v0.10",
+        "score": 48,
+        "comments": 24,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "visualization": {
+    "count": 15,
+    "total_score": 1112,
+    "items": [
+      {
+        "number": 10888,
+        "title": "Migrate development workflow to Pixi",
+        "score": 124,
+        "comments": 52,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3425,
+        "title": "Html repr",
+        "score": 114,
+        "comments": 54,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1627,
+        "title": "html repr of xarray object (for the notebook)",
+        "score": 111,
+        "comments": 39,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2277,
+        "title": "ENH: Scatter plots of one variable vs another",
+        "score": 99,
+        "comments": 45,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1820,
+        "title": "WIP: html repr",
+        "score": 89,
+        "comments": 40,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 7052,
+        "title": "Add typing to plot methods",
+        "score": 67,
+        "comments": 32,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 527,
+        "title": "faceted plots",
+        "score": 66,
+        "comments": 33,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5201,
+        "title": "Fix lag in Jupyter caused by CSS in `_repr_html_`",
+        "score": 64,
+        "comments": 29,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 9671,
+        "title": "Support extension array indexes",
+        "score": 63,
+        "comments": 29,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2665,
+        "title": "enable internal plotting with cftime datetime",
+        "score": 56,
+        "comments": 28,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 608,
+        "title": "allow passing coordinate names as x and y to plot methods",
+        "score": 56,
+        "comments": 28,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 8702,
+        "title": "Add a simple `nbytes` representation in DataArrays and Dataset `repr`",
+        "score": 54,
+        "comments": 23,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 8690,
+        "title": "Add `nbytes` to repr?",
+        "score": 52,
+        "comments": 13,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 1199,
+        "title": "Document the new __repr__",
+        "score": 49,
+        "comments": 23,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 10062,
+        "title": "New defaults for `concat`, `merge`, `combine_*`",
+        "score": 48,
+        "comments": 20,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "indexing/selection": {
+    "count": 17,
+    "total_score": 1088,
+    "items": [
+      {
+        "number": 818,
+        "title": "Multidimensional groupby",
+        "score": 128,
+        "comments": 61,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 324,
+        "title": "Support group_over",
+        "score": 89,
+        "comments": 12,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 3216,
+        "title": "Feature request: time-based rolling window functionality",
+        "score": 84,
+        "comments": 11,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 4610,
+        "title": "Add histogram method",
+        "score": 76,
+        "comments": 22,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 5734,
+        "title": "Enable `flox` in `GroupBy` and `resample`",
+        "score": 74,
+        "comments": 25,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2237,
+        "title": "why time grouping doesn't preserve chunks",
+        "score": 63,
+        "comments": 30,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 9524,
+        "title": "Add SeasonGrouper, SeasonResampler",
+        "score": 60,
+        "comments": 26,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 7363,
+        "title": "expand dimension by re-allocating larger arrays with more space \"at the end of the corresponding dimension\", block copying previously existing data, and autofill newly created entry by a default value (note: alternative to reindex, but much faster for extending large arrays along, for example, the time dimension)",
+        "score": 58,
+        "comments": 29,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2227,
+        "title": "Slow performance of isel",
+        "score": 56,
+        "comments": 28,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 364,
+        "title": "pd.Grouper support?",
+        "score": 55,
+        "comments": 25,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1272,
+        "title": "Groupby-like API for resampling",
+        "score": 54,
+        "comments": 27,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 7152,
+        "title": "Cumulative examples",
+        "score": 51,
+        "comments": 21,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 8442,
+        "title": "Cannot pickle '_thread.lock' object exception after DataArray transpose and copy operations from netCDF file.",
+        "score": 49,
+        "comments": 22,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 924,
+        "title": "WIP: progress toward making groupby work with multiple arguments",
+        "score": 49,
+        "comments": 16,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 10062,
+        "title": "New defaults for `concat`, `merge`, `combine_*`",
+        "score": 48,
+        "comments": 20,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "compatibility/migration": {
+    "count": 9,
+    "total_score": 658,
+    "items": [
+      {
+        "number": 10888,
+        "title": "Migrate development workflow to Pixi",
+        "score": 124,
+        "comments": 52,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5648,
+        "title": "Duck array compatibility meeting",
+        "score": 89,
+        "comments": 31,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 9136,
+        "title": "`numpy` 2 compatibility in the `netcdf4` and `h5netcdf` backends",
+        "score": 79,
+        "comments": 37,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 7848,
+        "title": "Compatibility with the Array API standard ",
+        "score": 78,
+        "comments": 35,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 9552,
+        "title": "Compatibility for zarr-python 3.x",
+        "score": 70,
+        "comments": 25,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1440,
+        "title": "If a NetCDF file is chunked on disk, open it with compatible dask chunks",
+        "score": 58,
+        "comments": 26,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 8140,
+        "title": "Deprecate passing pd.MultiIndex implicitly",
+        "score": 57,
+        "comments": 26,
+        "is_pr": true,
+        "state": "open"
+      },
+      {
+        "number": 5654,
+        "title": "recent versions of sparse and dask seem to be incompatible with our tests",
+        "score": 56,
+        "comments": 28,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 4730,
+        "title": "Migrate CI from azure pipelines to GitHub Actions",
+        "score": 47,
+        "comments": 22,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "time-series": {
+    "count": 8,
+    "total_score": 590,
+    "items": [
+      {
+        "number": 1252,
+        "title": "CFTimeIndex",
+        "score": 143,
+        "comments": 70,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 9618,
+        "title": "Relax nanosecond datetime restriction in CF time decoding",
+        "score": 98,
+        "comments": 45,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2593,
+        "title": "CFTimeIndex Resampling",
+        "score": 81,
+        "comments": 39,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1084,
+        "title": "Towards a (temporary?) workaround for datetime issues at the xarray-level",
+        "score": 61,
+        "comments": 29,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2665,
+        "title": "enable internal plotting with cftime datetime",
+        "score": 56,
+        "comments": 28,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 7493,
+        "title": "Interoperability with Pandas 2.0 non-nanosecond datetime",
+        "score": 51,
+        "comments": 23,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 10527,
+        "title": "Add chunks='auto' support for cftime datasets",
+        "score": 50,
+        "comments": 21,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 7790,
+        "title": "Fill values in time arrays (numpy.datetime64) are lost in zarr",
+        "score": 50,
+        "comments": 25,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "storage/stores": {
+    "count": 7,
+    "total_score": 546,
+    "items": [
+      {
+        "number": 4118,
+        "title": "Feature Request: Hierarchical storage and processing in xarray",
+        "score": 147,
+        "comments": 62,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2706,
+        "title": "Appending to zarr store",
+        "score": 130,
+        "comments": 59,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 4122,
+        "title": "Document writing netcdf from xarray directly to S3",
+        "score": 61,
+        "comments": 28,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 10931,
+        "title": "Mostly restore `netcdf` backend behavior with URLs",
+        "score": 57,
+        "comments": 23,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 9924,
+        "title": "Store the dimension order when using Zarr",
+        "score": 57,
+        "comments": 26,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 4730,
+        "title": "Migrate CI from azure pipelines to GitHub Actions",
+        "score": 47,
+        "comments": 22,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 10209,
+        "title": "Cannot open zarr store stored in Azure blob file system",
+        "score": 47,
+        "comments": 21,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "codecs/compression": {
+    "count": 5,
+    "total_score": 287,
+    "items": [
+      {
+        "number": 10032,
+        "title": "TypeError: Expected a BytesBytesCodec. Got <class 'numcodecs.blosc.Blosc'> instead.",
+        "score": 70,
+        "comments": 13,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 7551,
+        "title": "Support for the new compression arguments.",
+        "score": 60,
+        "comments": 30,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1536,
+        "title": "Better compression algorithms for NetCDF",
+        "score": 56,
+        "comments": 28,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 844,
+        "title": "Add a filter_by_attrs method to Dataset",
+        "score": 54,
+        "comments": 27,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 9320,
+        "title": "Add `GroupBy.shuffle_to_chunks()`",
+        "score": 47,
+        "comments": 15,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  }
+}

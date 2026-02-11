@@ -1,0 +1,1356 @@
+{
+  "storage/stores": {
+    "count": 58,
+    "total_score": 2941,
+    "items": [
+      {
+        "number": 1661,
+        "title": "`obstore`-based Store implementation",
+        "score": 259,
+        "comments": 91,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 876,
+        "title": "Sharding Prototype I: implementation as translating Store",
+        "score": 153,
+        "comments": 69,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 252,
+        "title": "WIP: google cloud storage class",
+        "score": 107,
+        "comments": 52,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 556,
+        "title": "File Chunk Store",
+        "score": 88,
+        "comments": 32,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1096,
+        "title": "add storage_transformers and get/set_partial_values",
+        "score": 82,
+        "comments": 35,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1018,
+        "title": "Creating ZipStore with file-like object",
+        "score": 79,
+        "comments": 28,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 546,
+        "title": "Add FSStore",
+        "score": 76,
+        "comments": 38,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 540,
+        "title": "N5Store support of cloud buckets",
+        "score": 72,
+        "comments": 32,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 345,
+        "title": "Mutable mapping for Azure Blob",
+        "score": 68,
+        "comments": 34,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 938,
+        "title": "When I repeatedly append data to a zarr array in s3, appending takes longer and longer and longer",
+        "score": 66,
+        "comments": 33,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2706,
+        "title": "zarr v3 does not accept stores of type FSMap",
+        "score": 66,
+        "comments": 20,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 528,
+        "title": "Problems faced while storing onto Zarr store using ABSStore",
+        "score": 57,
+        "comments": 26,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 37,
+        "title": "Hierarchical storage",
+        "score": 56,
+        "comments": 28,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 709,
+        "title": "Expand (and pass) nested FSStore tests",
+        "score": 56,
+        "comments": 28,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1806,
+        "title": "[V3] Support for batched Store API in v3",
+        "score": 56,
+        "comments": 24,
+        "is_pr": false,
+        "state": "open"
+      }
+    ]
+  },
+  "arrays/chunks": {
+    "count": 53,
+    "total_score": 2634,
+    "items": [
+      {
+        "number": 276,
+        "title": "DOC: zarr spec v3: adds optional dimensions and the \"netZDF\" format",
+        "score": 120,
+        "comments": 60,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 486,
+        "title": "How to prevent Zarr from returning NaN for missing chunks?",
+        "score": 98,
+        "comments": 42,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 556,
+        "title": "File Chunk Store",
+        "score": 88,
+        "comments": 32,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 306,
+        "title": "LRU cache for decoded chunks ",
+        "score": 84,
+        "comments": 35,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 725,
+        "title": "Add support for fancy indexing on get/setitem",
+        "score": 81,
+        "comments": 39,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 769,
+        "title": "Confusion about the dimension_separator keyword",
+        "score": 78,
+        "comments": 39,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 715,
+        "title": "v2 spec: add optional dimension_separator (see #707)",
+        "score": 71,
+        "comments": 31,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 938,
+        "title": "When I repeatedly append data to a zarr array in s3, appending takes longer and longer and longer",
+        "score": 66,
+        "comments": 33,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 518,
+        "title": "Enhancement: Chunk level access api / indexing by chunk rather than voxel",
+        "score": 66,
+        "comments": 27,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1131,
+        "title": "Getitems: support `meta_array`",
+        "score": 62,
+        "comments": 31,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 278,
+        "title": "LRU cache for decoded chunks",
+        "score": 61,
+        "comments": 20,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 853,
+        "title": "Set write_empty_chunks to default to False",
+        "score": 60,
+        "comments": 30,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1972,
+        "title": "array tests: handle different hexdigests from zlib-ng (#1678)",
+        "score": 59,
+        "comments": 27,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 934,
+        "title": "[REVIEW] Support of alternative array classes",
+        "score": 58,
+        "comments": 29,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 738,
+        "title": "Optimize setitem with chunk equal to fill_value, round 2",
+        "score": 58,
+        "comments": 29,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "other": {
+    "count": 42,
+    "total_score": 1980,
+    "items": [
+      {
+        "number": 22,
+        "title": "Refactoring WIP",
+        "score": 206,
+        "comments": 103,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1777,
+        "title": "Announcement: Zarr-Python version 3 release schedule",
+        "score": 117,
+        "comments": 8,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 309,
+        "title": "Add N5 Support",
+        "score": 95,
+        "comments": 45,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3118,
+        "title": "Use mkdocs-material for Zarr-Python documentation",
+        "score": 65,
+        "comments": 18,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 877,
+        "title": "Add Sharding Support",
+        "score": 61,
+        "comments": 29,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1274,
+        "title": "Thinning down `zarr-python`",
+        "score": 60,
+        "comments": 23,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1592,
+        "title": "use src layout and use `hatch` for packaging",
+        "score": 56,
+        "comments": 18,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 339,
+        "title": "2.3 release planning",
+        "score": 56,
+        "comments": 28,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2585,
+        "title": "Use dataclasses for ByteRangeRequests",
+        "score": 55,
+        "comments": 25,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1459,
+        "title": "style: add ruff and black to pre-commit",
+        "score": 49,
+        "comments": 23,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 544,
+        "title": "Create Zenodo DOI for Zarr-Python",
+        "score": 49,
+        "comments": 20,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2852,
+        "title": "yank release 3.0.3",
+        "score": 48,
+        "comments": 14,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2589,
+        "title": "docs: split tutorial into multiple user guide sections",
+        "score": 43,
+        "comments": 19,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2689,
+        "title": "Issues with migration to zarr 3",
+        "score": 43,
+        "comments": 19,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2665,
+        "title": "feat/batch creation",
+        "score": 41,
+        "comments": 18,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "compatibility/migration": {
+    "count": 35,
+    "total_score": 1873,
+    "items": [
+      {
+        "number": 2874,
+        "title": "refactor v3 data types",
+        "score": 181,
+        "comments": 85,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 276,
+        "title": "DOC: zarr spec v3: adds optional dimensions and the \"netZDF\" format",
+        "score": 120,
+        "comments": 60,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3257,
+        "title": "Add CLI for converting v2 metadata to v3",
+        "score": 89,
+        "comments": 39,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1483,
+        "title": "POC implementation of ZEP003",
+        "score": 80,
+        "comments": 27,
+        "is_pr": true,
+        "state": "open"
+      },
+      {
+        "number": 1158,
+        "title": "Migrate to pyproject.toml + cleanup",
+        "score": 79,
+        "comments": 38,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 715,
+        "title": "v2 spec: add optional dimension_separator (see #707)",
+        "score": 71,
+        "comments": 31,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2706,
+        "title": "zarr v3 does not accept stores of type FSMap",
+        "score": 66,
+        "comments": 20,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 1972,
+        "title": "array tests: handle different hexdigests from zlib-ng (#1678)",
+        "score": 59,
+        "comments": 27,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1806,
+        "title": "[V3] Support for batched Store API in v3",
+        "score": 56,
+        "comments": 24,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 2134,
+        "title": "[v3] Structured dtype support",
+        "score": 55,
+        "comments": 25,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 2308,
+        "title": "Moving v3 development to `main`",
+        "score": 54,
+        "comments": 23,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2171,
+        "title": "Poor blosc compression ratios compared to v2",
+        "score": 52,
+        "comments": 22,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 3544,
+        "title": "Improve compatibility between old sphinx and new mkdocs setup",
+        "score": 51,
+        "comments": 23,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1798,
+        "title": "[V3] v2 -> v3 data migration",
+        "score": 50,
+        "comments": 15,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 2710,
+        "title": "Performance regression in V3",
+        "score": 48,
+        "comments": 20,
+        "is_pr": false,
+        "state": "open"
+      }
+    ]
+  },
+  "errors/bugs": {
+    "count": 33,
+    "total_score": 1283,
+    "items": [
+      {
+        "number": 3299,
+        "title": "fix chunk/shard iteration",
+        "score": 56,
+        "comments": 24,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2766,
+        "title": "Difference in behavior between 2.x and 3.x using identical compressor settings",
+        "score": 55,
+        "comments": 25,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2802,
+        "title": "Fix fill_value serialization issues",
+        "score": 53,
+        "comments": 24,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 962,
+        "title": "Passing dask array to zarr leads to a TypeError",
+        "score": 53,
+        "comments": 24,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 2171,
+        "title": "Poor blosc compression ratios compared to v2",
+        "score": 52,
+        "comments": 22,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2710,
+        "title": "Performance regression in V3",
+        "score": 48,
+        "comments": 20,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 2988,
+        "title": "[v3] Caching from `fsspec` doesn't work with `FSSpecStore`",
+        "score": 46,
+        "comments": 19,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 2267,
+        "title": "[v3] default compressor / codec pipeline",
+        "score": 45,
+        "comments": 20,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 263,
+        "title": "remove() before os.rename() breaks thread-safety",
+        "score": 42,
+        "comments": 21,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2735,
+        "title": "Buffer uses signed bytes with v2 compressors",
+        "score": 40,
+        "comments": 16,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 712,
+        "title": "Bug: zarr.open behaves different than zarr.open_group with mode `w-` on `gs://` URIs",
+        "score": 40,
+        "comments": 14,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2964,
+        "title": "TypeError when passing old numcodecs to zarr v3",
+        "score": 40,
+        "comments": 13,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 2830,
+        "title": "Nested groups not listed in zarr store  (?)",
+        "score": 39,
+        "comments": 17,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2647,
+        "title": "Regression with 3.0.0rc1: reading zarr with tensorstore",
+        "score": 36,
+        "comments": 14,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1435,
+        "title": "Initializing a group or array is not thread-safe, even with mode='w'",
+        "score": 36,
+        "comments": 14,
+        "is_pr": false,
+        "state": "open"
+      }
+    ]
+  },
+  "io/serialization": {
+    "count": 26,
+    "total_score": 1105,
+    "items": [
+      {
+        "number": 535,
+        "title": "Using the Zarr library to read HDF5",
+        "score": 74,
+        "comments": 21,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2774,
+        "title": "Support async FSMap objects in zarr.open",
+        "score": 72,
+        "comments": 32,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 667,
+        "title": "Partial read",
+        "score": 66,
+        "comments": 33,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3004,
+        "title": "Coalesce and parallelize partial shard reads",
+        "score": 63,
+        "comments": 29,
+        "is_pr": true,
+        "state": "open"
+      },
+      {
+        "number": 853,
+        "title": "Set write_empty_chunks to default to False",
+        "score": 60,
+        "comments": 30,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2429,
+        "title": "Feat/write empty chunks",
+        "score": 48,
+        "comments": 20,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1001,
+        "title": "Revert change to default write_empty_chunks.",
+        "score": 43,
+        "comments": 14,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 263,
+        "title": "remove() before os.rename() breaks thread-safety",
+        "score": 42,
+        "comments": 21,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2463,
+        "title": "top-level functions for reading, creating data",
+        "score": 41,
+        "comments": 18,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3413,
+        "title": "Remove Store.set_partial_writes",
+        "score": 41,
+        "comments": 18,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 712,
+        "title": "Bug: zarr.open behaves different than zarr.open_group with mode `w-` on `gs://` URIs",
+        "score": 40,
+        "comments": 14,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1163,
+        "title": "Integrating  tutorial.ipynb into readthedocs",
+        "score": 37,
+        "comments": 16,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 951,
+        "title": "Default write empty chunks false",
+        "score": 36,
+        "comments": 18,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2647,
+        "title": "Regression with 3.0.0rc1: reading zarr with tensorstore",
+        "score": 36,
+        "comments": 14,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1435,
+        "title": "Initializing a group or array is not thread-safe, even with mode='w'",
+        "score": 36,
+        "comments": 14,
+        "is_pr": false,
+        "state": "open"
+      }
+    ]
+  },
+  "codecs/compression": {
+    "count": 17,
+    "total_score": 755,
+    "items": [
+      {
+        "number": 2863,
+        "title": "Zstd Codec on the GPU",
+        "score": 72,
+        "comments": 23,
+        "is_pr": true,
+        "state": "open"
+      },
+      {
+        "number": 1398,
+        "title": "Allow batched/concurrent (de)compression support",
+        "score": 59,
+        "comments": 15,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2766,
+        "title": "Difference in behavior between 2.x and 3.x using identical compressor settings",
+        "score": 55,
+        "comments": 25,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2036,
+        "title": "Add `string` and `bytes` dtypes plus `vlen-utf8` and `vlen-bytes` codecs",
+        "score": 52,
+        "comments": 19,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2171,
+        "title": "Poor blosc compression ratios compared to v2",
+        "score": 52,
+        "comments": 22,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2904,
+        "title": "Codec pipeline performance",
+        "score": 48,
+        "comments": 14,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 2267,
+        "title": "[v3] default compressor / codec pipeline",
+        "score": 45,
+        "comments": 20,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1944,
+        "title": "use compressor, filters, post_compressor for Array v3 create",
+        "score": 42,
+        "comments": 17,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 96,
+        "title": "AsType Filter",
+        "score": 40,
+        "comments": 20,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2735,
+        "title": "Buffer uses signed bytes with v2 compressors",
+        "score": 40,
+        "comments": 16,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2964,
+        "title": "TypeError when passing old numcodecs to zarr v3",
+        "score": 40,
+        "comments": 13,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 3318,
+        "title": "add numcodec protocol",
+        "score": 39,
+        "comments": 17,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 208,
+        "title": "Filters for object dtype",
+        "score": 36,
+        "comments": 18,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2654,
+        "title": "should we abstract over v2 and v3 codecs",
+        "score": 36,
+        "comments": 11,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 2056,
+        "title": "zarr-python cannot read arrays saved by tensorstore using the zstd compressor",
+        "score": 35,
+        "comments": 15,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "groups/hierarchy": {
+    "count": 16,
+    "total_score": 742,
+    "items": [
+      {
+        "number": 268,
+        "title": "Consolidate zarr metadata into single key",
+        "score": 132,
+        "comments": 66,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3257,
+        "title": "Add CLI for converting v2 metadata to v3",
+        "score": 89,
+        "comments": 39,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 140,
+        "title": "Add tree",
+        "score": 69,
+        "comments": 33,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 712,
+        "title": "Bug: zarr.open behaves different than zarr.open_group with mode `w-` on `gs://` URIs",
+        "score": 40,
+        "comments": 14,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2830,
+        "title": "Nested groups not listed in zarr store  (?)",
+        "score": 39,
+        "comments": 17,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1660,
+        "title": "Remove attrs",
+        "score": 37,
+        "comments": 16,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3119,
+        "title": "Allow Stores to opt out of consolidated metadata.",
+        "score": 36,
+        "comments": 14,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1435,
+        "title": "Initializing a group or array is not thread-safe, even with mode='w'",
+        "score": 36,
+        "comments": 14,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 2490,
+        "title": "`zarr.open` do not allow creating zarr group (regressions since zarr 3.0.0b1)",
+        "score": 35,
+        "comments": 15,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 3156,
+        "title": "Create read only copy if needed when opening a store path",
+        "score": 34,
+        "comments": 13,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 261,
+        "title": "open...() functions should accept pathlib.Path",
+        "score": 34,
+        "comments": 14,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2716,
+        "title": "Different Objects Pointing at the Same `store_path` can have different metadata",
+        "score": 34,
+        "comments": 13,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 1370,
+        "title": "asciitree has no wheels",
+        "score": 33,
+        "comments": 11,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1112,
+        "title": "Bump ipytree from 0.2.1 to 0.2.2",
+        "score": 32,
+        "comments": 16,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 280,
+        "title": "Best practices for metadata conventions",
+        "score": 31,
+        "comments": 13,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "concurrency/async": {
+    "count": 10,
+    "total_score": 656,
+    "items": [
+      {
+        "number": 536,
+        "title": "async in zarr ",
+        "score": 222,
+        "comments": 93,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2774,
+        "title": "Support async FSMap objects in zarr.open",
+        "score": 72,
+        "comments": 32,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3004,
+        "title": "Coalesce and parallelize partial shard reads",
+        "score": 63,
+        "comments": 29,
+        "is_pr": true,
+        "state": "open"
+      },
+      {
+        "number": 1398,
+        "title": "Allow batched/concurrent (de)compression support",
+        "score": 59,
+        "comments": 15,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 962,
+        "title": "Passing dask array to zarr leads to a TypeError",
+        "score": 53,
+        "comments": 24,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 263,
+        "title": "remove() before os.rename() breaks thread-safety",
+        "score": 42,
+        "comments": 21,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 3083,
+        "title": "Add async oindex and vindex methods to AsyncArray",
+        "score": 40,
+        "comments": 10,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1435,
+        "title": "Initializing a group or array is not thread-safe, even with mode='w'",
+        "score": 36,
+        "comments": 14,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 2909,
+        "title": "Using both `AsyncArray` and `Array` from `FSSpecStore`",
+        "score": 35,
+        "comments": 15,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 766,
+        "title": "Python multiprocessing writes get deadlocked on Linux systems",
+        "score": 34,
+        "comments": 17,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "performance": {
+    "count": 13,
+    "total_score": 604,
+    "items": [
+      {
+        "number": 938,
+        "title": "When I repeatedly append data to a zarr array in s3, appending takes longer and longer and longer",
+        "score": 66,
+        "comments": 33,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 738,
+        "title": "Optimize setitem with chunk equal to fill_value, round 2",
+        "score": 58,
+        "comments": 29,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3561,
+        "title": "optimize shard writing",
+        "score": 57,
+        "comments": 20,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2766,
+        "title": "Difference in behavior between 2.x and 3.x using identical compressor settings",
+        "score": 55,
+        "comments": 25,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 519,
+        "title": "zarr slower than npy, hdf5 etc?",
+        "score": 48,
+        "comments": 24,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2710,
+        "title": "Performance regression in V3",
+        "score": 48,
+        "comments": 20,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 2904,
+        "title": "Codec pipeline performance",
+        "score": 48,
+        "comments": 14,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 295,
+        "title": "Optimisation for the __contains__ method of storage.LRUStoreCache",
+        "score": 46,
+        "comments": 19,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 3562,
+        "title": "add benchmarks using pytest-benchmark and codspeed",
+        "score": 39,
+        "comments": 14,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 377,
+        "title": "RFC: Optionally support memory-mapping DirectoryStore values",
+        "score": 37,
+        "comments": 17,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2529,
+        "title": "Iteration over Zarr arrays is significantly slower in v3",
+        "score": 36,
+        "comments": 14,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 1343,
+        "title": "Sharded array is very slow to load",
+        "score": 35,
+        "comments": 15,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 3358,
+        "title": "Expose LatencyStore as public API?",
+        "score": 31,
+        "comments": 13,
+        "is_pr": false,
+        "state": "open"
+      }
+    ]
+  },
+  "xarray-integration": {
+    "count": 6,
+    "total_score": 222,
+    "items": [
+      {
+        "number": 299,
+        "title": "Add MongoDB storage backend?",
+        "score": 46,
+        "comments": 20,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 3199,
+        "title": "Peformance regression: 3.0.9 issues twice as many GET requests when used with xarray",
+        "score": 43,
+        "comments": 19,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2994,
+        "title": "fix: Special-case suffix requests in obstore backend to support Azure",
+        "score": 36,
+        "comments": 11,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2638,
+        "title": "Fix create_dataset with data kwarg",
+        "score": 36,
+        "comments": 11,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3520,
+        "title": "Proposal: Make Obstore backend the default for s3/gcs/azure/https",
+        "score": 31,
+        "comments": 1,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 3436,
+        "title": "Add registry for chunk key encodings for extensibility",
+        "score": 30,
+        "comments": 11,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "indexing/selection": {
+    "count": 5,
+    "total_score": 176,
+    "items": [
+      {
+        "number": 548,
+        "title": "Relocatable store support",
+        "score": 39,
+        "comments": 17,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 325,
+        "title": "Set file permissions accoding to umask",
+        "score": 38,
+        "comments": 19,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1154,
+        "title": "Omit chunks with no elements in slice selection with step",
+        "score": 34,
+        "comments": 17,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 766,
+        "title": "Python multiprocessing writes get deadlocked on Linux systems",
+        "score": 34,
+        "comments": 17,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 3272,
+        "title": "Add a policy on where to implement new codecs",
+        "score": 31,
+        "comments": 13,
+        "is_pr": false,
+        "state": "open"
+      }
+    ]
+  },
+  "netcdf/io": {
+    "count": 2,
+    "total_score": 122,
+    "items": [
+      {
+        "number": 535,
+        "title": "Using the Zarr library to read HDF5",
+        "score": 74,
+        "comments": 21,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 519,
+        "title": "zarr slower than npy, hdf5 etc?",
+        "score": 48,
+        "comments": 24,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "dask-integration": {
+    "count": 1,
+    "total_score": 53,
+    "items": [
+      {
+        "number": 962,
+        "title": "Passing dask array to zarr leads to a TypeError",
+        "score": 53,
+        "comments": 24,
+        "is_pr": false,
+        "state": "open"
+      }
+    ]
+  },
+  "visualization": {
+    "count": 1,
+    "total_score": 40,
+    "items": [
+      {
+        "number": 514,
+        "title": "Consider moving the tutorial to a Jupyter notebook",
+        "score": 40,
+        "comments": 20,
+        "is_pr": false,
+        "state": "open"
+      }
+    ]
+  }
+}

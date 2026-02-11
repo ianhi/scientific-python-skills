@@ -1,0 +1,12 @@
+[project]
+name = "scientific-python-skills"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "dask[complete]>=2026.1.2",
+    "icechunk>=1.1.18",
+    "numpy>=2.4.2",
+    "xarray>=2026.1.0",
+    "zarr>=3.1.5",
+]

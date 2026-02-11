@@ -1,0 +1,1288 @@
+{
+  "arrays/chunks": {
+    "count": 60,
+    "total_score": 1075,
+    "items": [
+      {
+        "number": 461,
+        "title": "Icechunk could use a command line interface",
+        "score": 42,
+        "comments": 14,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1136,
+        "title": "Support for multiple sources (and a fallback mechanism) for virtual chunks",
+        "score": 34,
+        "comments": 10,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 1189,
+        "title": "Added new namespaces for icechunk",
+        "score": 33,
+        "comments": 14,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 133,
+        "title": "Saving a group errors when serializing `NaN` in `IcechunkStore.set`",
+        "score": 33,
+        "comments": 14,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1194,
+        "title": "Get a list of all the files referenced by a virtual icechunk store",
+        "score": 32,
+        "comments": 12,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 252,
+        "title": "conda-forge receipe for icechunk-python",
+        "score": 31,
+        "comments": 4,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 665,
+        "title": "The examples of the docs raise IcechunkError: repository error: repositories can only be created in clean prefixes",
+        "score": 29,
+        "comments": 12,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1032,
+        "title": "Improved user experience for virtual chunks requiring authentication",
+        "score": 25,
+        "comments": 10,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 175,
+        "title": "Don't allow to write chunks to invalid chunk coordinates",
+        "score": 25,
+        "comments": 10,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 716,
+        "title": "[Ready for review] Icechunk CLI Initial Implementation",
+        "score": 24,
+        "comments": 8,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 395,
+        "title": "Error when chunk coordinates are invalid",
+        "score": 23,
+        "comments": 9,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1458,
+        "title": "Add `write_empty_chunks` parameter to `to_icechunk`",
+        "score": 23,
+        "comments": 9,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 1545,
+        "title": "Warn on opening a repo without authorizing all virtual chunk containers?",
+        "score": 22,
+        "comments": 7,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 1469,
+        "title": "Feature: Identify chunks as virtual/native",
+        "score": 21,
+        "comments": 8,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 962,
+        "title": "Icechunk should fail early if user tries to write with consolidated metadata",
+        "score": 21,
+        "comments": 8,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "storage/stores": {
+    "count": 49,
+    "total_score": 946,
+    "items": [
+      {
+        "number": 266,
+        "title": "Support Microsoft Azure for the object store",
+        "score": 62,
+        "comments": 27,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 743,
+        "title": "Error writing object to object store service - JASMIN OS.",
+        "score": 45,
+        "comments": 20,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 277,
+        "title": "Rust API: `Store` lacks a method for querying the size of values",
+        "score": 33,
+        "comments": 14,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 133,
+        "title": "Saving a group errors when serializing `NaN` in `IcechunkStore.set`",
+        "score": 33,
+        "comments": 14,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1194,
+        "title": "Get a list of all the files referenced by a virtual icechunk store",
+        "score": 32,
+        "comments": 12,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 723,
+        "title": "slow perf with object_store (GCS)",
+        "score": 27,
+        "comments": 11,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 667,
+        "title": "s3_storage with Express One zone raise an error while listing the objects",
+        "score": 27,
+        "comments": 11,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 561,
+        "title": "Azure blob suppport object store",
+        "score": 27,
+        "comments": 2,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1522,
+        "title": "Possible silent data loss on case-insentive storage",
+        "score": 25,
+        "comments": 10,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 533,
+        "title": "Make config updating safe in all object stores",
+        "score": 25,
+        "comments": 10,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 997,
+        "title": "Support basic and bearer auth for Http Storage",
+        "score": 23,
+        "comments": 9,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 1463,
+        "title": "S3 virtual references fail when object keys contain spaces due to URL encoding",
+        "score": 21,
+        "comments": 8,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1292,
+        "title": "Validate credentials for storage + virtual containers from the python API",
+        "score": 21,
+        "comments": 8,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 610,
+        "title": "Content Addressable Storage",
+        "score": 21,
+        "comments": 8,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 375,
+        "title": "Generalize \"Consolidated\" Zarr Store Representation",
+        "score": 21,
+        "comments": 8,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "other": {
+    "count": 54,
+    "total_score": 924,
+    "items": [
+      {
+        "number": 544,
+        "title": "Sync with zarr 3.0 rc-2",
+        "score": 31,
+        "comments": 13,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 309,
+        "title": "Add `git status` functionality",
+        "score": 29,
+        "comments": 12,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 399,
+        "title": "Discussion: Creating a C Interface",
+        "score": 29,
+        "comments": 3,
+        "is_pr": true,
+        "state": "open"
+      },
+      {
+        "number": 18,
+        "title": "Remove Catalog from spec",
+        "score": 27,
+        "comments": 11,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1034,
+        "title": "clone / export repo",
+        "score": 27,
+        "comments": 2,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 356,
+        "title": "Add WASM bindings",
+        "score": 26,
+        "comments": 9,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 921,
+        "title": "Credential refresh can be initialized with the first set of credentials",
+        "score": 25,
+        "comments": 10,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1204,
+        "title": "Publish a Nightly Build",
+        "score": 25,
+        "comments": 10,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1172,
+        "title": "Split up top-level python namespace into modules",
+        "score": 25,
+        "comments": 10,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 422,
+        "title": "New python API - design document",
+        "score": 25,
+        "comments": 10,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1367,
+        "title": "Follow HTTP redirect",
+        "score": 25,
+        "comments": 7,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 297,
+        "title": "Support conflict resolution",
+        "score": 24,
+        "comments": 2,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 777,
+        "title": "Start of executable docs",
+        "score": 23,
+        "comments": 9,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1488,
+        "title": "Option to disable etag/checksum check",
+        "score": 23,
+        "comments": 9,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 938,
+        "title": "Initial HTTP support for Virtual Refs",
+        "score": 19,
+        "comments": 4,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "errors/bugs": {
+    "count": 42,
+    "total_score": 772,
+    "items": [
+      {
+        "number": 743,
+        "title": "Error writing object to object store service - JASMIN OS.",
+        "score": 45,
+        "comments": 20,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1431,
+        "title": "virtual reference error: \"connection closed before message completed\"",
+        "score": 38,
+        "comments": 15,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 133,
+        "title": "Saving a group errors when serializing `NaN` in `IcechunkStore.set`",
+        "score": 33,
+        "comments": 14,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 665,
+        "title": "The examples of the docs raise IcechunkError: repository error: repositories can only be created in clean prefixes",
+        "score": 29,
+        "comments": 12,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 667,
+        "title": "s3_storage with Express One zone raise an error while listing the objects",
+        "score": 27,
+        "comments": 11,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1087,
+        "title": "Commit fails with segfault when using Ceph Object Gateway",
+        "score": 25,
+        "comments": 10,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 952,
+        "title": "Improve errors for invalid credentials",
+        "score": 25,
+        "comments": 10,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 395,
+        "title": "Error when chunk coordinates are invalid",
+        "score": 23,
+        "comments": 9,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 931,
+        "title": "Fix dask 2025.4.X compatibility",
+        "score": 23,
+        "comments": 9,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1291,
+        "title": "Bug: delete_branch does not actually remove branches (Rust API)",
+        "score": 22,
+        "comments": 7,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1463,
+        "title": "S3 virtual references fail when object keys contain spaces due to URL encoding",
+        "score": 21,
+        "comments": 8,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1094,
+        "title": "Fix Rendering of some code blocks",
+        "score": 21,
+        "comments": 8,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 962,
+        "title": "Icechunk should fail early if user tries to write with consolidated metadata",
+        "score": 21,
+        "comments": 8,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 279,
+        "title": "[Virtual Datasets] Local Storage ValueError: `Filenames containing trailing '/#\\d+/' are not supported: `",
+        "score": 21,
+        "comments": 8,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1428,
+        "title": "repository: add `list_` prefix to manifest_files() method",
+        "score": 20,
+        "comments": 6,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "io/serialization": {
+    "count": 27,
+    "total_score": 528,
+    "items": [
+      {
+        "number": 104,
+        "title": "Reading virtual references back out into VirtualiZarr Manifests",
+        "score": 71,
+        "comments": 27,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 175,
+        "title": "Don't allow to write chunks to invalid chunk coordinates",
+        "score": 25,
+        "comments": 10,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 716,
+        "title": "[Ready for review] Icechunk CLI Initial Implementation",
+        "score": 24,
+        "comments": 8,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1038,
+        "title": "Manifest preload magic methods",
+        "score": 24,
+        "comments": 5,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1458,
+        "title": "Add `write_empty_chunks` parameter to `to_icechunk`",
+        "score": 23,
+        "comments": 9,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 1545,
+        "title": "Warn on opening a repo without authorizing all virtual chunk containers?",
+        "score": 22,
+        "comments": 7,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 1566,
+        "title": "read only typescript support",
+        "score": 22,
+        "comments": 1,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 1464,
+        "title": "Manifest preloading might stops early with nested zarr groups",
+        "score": 21,
+        "comments": 8,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 962,
+        "title": "Icechunk should fail early if user tries to write with consolidated metadata",
+        "score": 21,
+        "comments": 8,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 618,
+        "title": "Missing information about how to start a read_only session",
+        "score": 20,
+        "comments": 6,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1228,
+        "title": "Open Icechunk within Flask context",
+        "score": 19,
+        "comments": 7,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 1030,
+        "title": "preload_config not reflected in config.yml",
+        "score": 19,
+        "comments": 7,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1019,
+        "title": "Icechunk fails to read some sharded arrays",
+        "score": 17,
+        "comments": 6,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 363,
+        "title": "Intermittent `streaming bytes from object store error` when reading Zarr array from object store",
+        "score": 17,
+        "comments": 6,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 176,
+        "title": "\"Store already exists\" when creating multiple groups in one store",
+        "score": 17,
+        "comments": 6,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "groups/hierarchy": {
+    "count": 16,
+    "total_score": 262,
+    "items": [
+      {
+        "number": 133,
+        "title": "Saving a group errors when serializing `NaN` in `IcechunkStore.set`",
+        "score": 33,
+        "comments": 14,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1464,
+        "title": "Manifest preloading might stops early with nested zarr groups",
+        "score": 21,
+        "comments": 8,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 962,
+        "title": "Icechunk should fail early if user tries to write with consolidated metadata",
+        "score": 21,
+        "comments": 8,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 375,
+        "title": "Generalize \"Consolidated\" Zarr Store Representation",
+        "score": 21,
+        "comments": 8,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 994,
+        "title": "Bump the rust-dependencies group with 7 updates",
+        "score": 17,
+        "comments": 6,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 619,
+        "title": "FileNotFoundError: Unable to find group: <icechunk.store.IcechunkStore object at 0x7e7e3f19c110>",
+        "score": 17,
+        "comments": 6,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 176,
+        "title": "\"Store already exists\" when creating multiple groups in one store",
+        "score": 17,
+        "comments": 6,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1298,
+        "title": "ZarrStore.open_group got an unexpected keyword argument 'align_chunks'",
+        "score": 15,
+        "comments": 5,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1263,
+        "title": "Bump the rust-dependencies group with 8 updates",
+        "score": 13,
+        "comments": 4,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1126,
+        "title": "Bump the rust-dependencies group with 2 updates",
+        "score": 13,
+        "comments": 4,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 601,
+        "title": "Icechunk as storage format for JSON-like trees with array leaves",
+        "score": 13,
+        "comments": 4,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 30,
+        "title": "Bump the rust-dependencies group across 1 directory with 4 updates",
+        "score": 13,
+        "comments": 4,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1502,
+        "title": "Do we need/want to separate chunk storage from metadata storage?",
+        "score": 13,
+        "comments": 1,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 744,
+        "title": "Feature request: `repo.tree()` to visualize ancestry",
+        "score": 13,
+        "comments": 1,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 863,
+        "title": "Fix repo serialization with default commit metadata",
+        "score": 11,
+        "comments": 3,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "xarray-integration": {
+    "count": 13,
+    "total_score": 225,
+    "items": [
+      {
+        "number": 197,
+        "title": "Virtual Dataset Workflow Tracking Issue",
+        "score": 39,
+        "comments": 11,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1463,
+        "title": "S3 virtual references fail when object keys contain spaces due to URL encoding",
+        "score": 21,
+        "comments": 8,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 279,
+        "title": "[Virtual Datasets] Local Storage ValueError: `Filenames containing trailing '/#\\d+/' are not supported: `",
+        "score": 21,
+        "comments": 8,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 555,
+        "title": "Unpin zarr & xarray",
+        "score": 20,
+        "comments": 3,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 378,
+        "title": "Demo dataset with UFS-Replay",
+        "score": 16,
+        "comments": 1,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 357,
+        "title": "Add `to_icechunk` for xarray",
+        "score": 15,
+        "comments": 5,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 188,
+        "title": "Add Xarray ERA5 notebook",
+        "score": 15,
+        "comments": 5,
+        "is_pr": true,
+        "state": "open"
+      },
+      {
+        "number": 1626,
+        "title": "Add plan for decoupling storage backends and enabling WASM support",
+        "score": 13,
+        "comments": 4,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1299,
+        "title": "Fix `align_chunks` xarray backcompat + add min version tests",
+        "score": 13,
+        "comments": 4,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 975,
+        "title": "Issue writing custom MRMS Xarray Store to Icechunk using to_icechunk",
+        "score": 13,
+        "comments": 4,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 452,
+        "title": "`chunk_key_encoding` with `separator='.'` is not supported",
+        "score": 13,
+        "comments": 4,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 119,
+        "title": "Use Case: [C]Worthy OAE dataset",
+        "score": 13,
+        "comments": 4,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 1010,
+        "title": "Fix typo in Virtual Datasets Docs",
+        "score": 13,
+        "comments": 1,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "concurrency/async": {
+    "count": 12,
+    "total_score": 195,
+    "items": [
+      {
+        "number": 931,
+        "title": "Fix dask 2025.4.X compatibility",
+        "score": 23,
+        "comments": 9,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1094,
+        "title": "Fix Rendering of some code blocks",
+        "score": 21,
+        "comments": 8,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1074,
+        "title": "Bring back async methods for python",
+        "score": 19,
+        "comments": 7,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1181,
+        "title": "deserialization error when using distributed dask and virtualizarr",
+        "score": 17,
+        "comments": 6,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1222,
+        "title": "Split CI workflows for better parallelization and separation of concerns [EAR-2135]",
+        "score": 15,
+        "comments": 5,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 914,
+        "title": "[Design Document] First pass at async api options design ",
+        "score": 15,
+        "comments": 5,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 864,
+        "title": "Use dask array native reduction",
+        "score": 15,
+        "comments": 5,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1309,
+        "title": "Error writing to OSN S3 bucket during cooperative parallel writes",
+        "score": 15,
+        "comments": 5,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 929,
+        "title": "Dask `2025.4.0` breaks distributed functionality",
+        "score": 15,
+        "comments": 5,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 185,
+        "title": "dask.array writing with distributed / multiprocessing schedulers",
+        "score": 14,
+        "comments": 3,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 383,
+        "title": "Zero values after saving to a local store with dask localcluster.",
+        "score": 13,
+        "comments": 4,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1374,
+        "title": "Ignore mypy complaint about `dask.__version__`",
+        "score": 13,
+        "comments": 1,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "visualization": {
+    "count": 8,
+    "total_score": 160,
+    "items": [
+      {
+        "number": 1490,
+        "title": "added support for __str__, __repr__ and _repr_html_",
+        "score": 31,
+        "comments": 10,
+        "is_pr": true,
+        "state": "open"
+      },
+      {
+        "number": 1208,
+        "title": "Nicer python reprs (string and HTML)",
+        "score": 28,
+        "comments": 7,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 310,
+        "title": "better Python reprs",
+        "score": 26,
+        "comments": 0,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 375,
+        "title": "Generalize \"Consolidated\" Zarr Store Representation",
+        "score": 21,
+        "comments": 8,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 242,
+        "title": "Add performance notebooks",
+        "score": 15,
+        "comments": 5,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 188,
+        "title": "Add Xarray ERA5 notebook",
+        "score": 15,
+        "comments": 5,
+        "is_pr": true,
+        "state": "open"
+      },
+      {
+        "number": 1110,
+        "title": "Updates the glad-ingest jupyter notebook to reflect the new session fork and session merge capabilities",
+        "score": 12,
+        "comments": 2,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 296,
+        "title": "Removed \"await\" from era5 notebook to get it running",
+        "score": 12,
+        "comments": 2,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "performance": {
+    "count": 8,
+    "total_score": 149,
+    "items": [
+      {
+        "number": 401,
+        "title": "PetaByte-scale virtual ref performance benchmark",
+        "score": 36,
+        "comments": 5,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 723,
+        "title": "slow perf with object_store (GCS)",
+        "score": 27,
+        "comments": 11,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 570,
+        "title": "Add TensorStore to performance benchmarks",
+        "score": 18,
+        "comments": 2,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 242,
+        "title": "Add performance notebooks",
+        "score": 15,
+        "comments": 5,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1558,
+        "title": "Commiting 72M virtual chunks at once results in panic",
+        "score": 15,
+        "comments": 2,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 1564,
+        "title": "Bulletproofing repo storage size calculation",
+        "score": 13,
+        "comments": 4,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 178,
+        "title": "Slow write performance compared to s3fs store",
+        "score": 13,
+        "comments": 4,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1143,
+        "title": "Add repo method to report total memory used by internal caches",
+        "score": 12,
+        "comments": 2,
+        "is_pr": false,
+        "state": "open"
+      }
+    ]
+  },
+  "dask-integration": {
+    "count": 8,
+    "total_score": 123,
+    "items": [
+      {
+        "number": 931,
+        "title": "Fix dask 2025.4.X compatibility",
+        "score": 23,
+        "comments": 9,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1181,
+        "title": "deserialization error when using distributed dask and virtualizarr",
+        "score": 17,
+        "comments": 6,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 864,
+        "title": "Use dask array native reduction",
+        "score": 15,
+        "comments": 5,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 929,
+        "title": "Dask `2025.4.0` breaks distributed functionality",
+        "score": 15,
+        "comments": 5,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 185,
+        "title": "dask.array writing with distributed / multiprocessing schedulers",
+        "score": 14,
+        "comments": 3,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1206,
+        "title": "Cooperative distributed writes example",
+        "score": 13,
+        "comments": 4,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 383,
+        "title": "Zero values after saving to a local store with dask localcluster.",
+        "score": 13,
+        "comments": 4,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1374,
+        "title": "Ignore mypy complaint about `dask.__version__`",
+        "score": 13,
+        "comments": 1,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "indexing/selection": {
+    "count": 6,
+    "total_score": 113,
+    "items": [
+      {
+        "number": 277,
+        "title": "Rust API: `Store` lacks a method for querying the size of values",
+        "score": 33,
+        "comments": 14,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1094,
+        "title": "Fix Rendering of some code blocks",
+        "score": 21,
+        "comments": 8,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 279,
+        "title": "[Virtual Datasets] Local Storage ValueError: `Filenames containing trailing '/#\\d+/' are not supported: `",
+        "score": 21,
+        "comments": 8,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1494,
+        "title": "Resolve concurrency issues for LocalFileSystem",
+        "score": 13,
+        "comments": 4,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 383,
+        "title": "Zero values after saving to a local store with dask localcluster.",
+        "score": 13,
+        "comments": 4,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1047,
+        "title": "Don't do docstring inspection to solve local docs build error",
+        "score": 12,
+        "comments": 2,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "compatibility/migration": {
+    "count": 6,
+    "total_score": 105,
+    "items": [
+      {
+        "number": 381,
+        "title": "Add a C-compatible API",
+        "score": 27,
+        "comments": 5,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 931,
+        "title": "Fix dask 2025.4.X compatibility",
+        "score": 23,
+        "comments": 9,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 793,
+        "title": "Default `region` for S3-compatible Storage",
+        "score": 16,
+        "comments": 4,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1425,
+        "title": "Enable a requester pays flag for use with S3 compatible stores.",
+        "score": 15,
+        "comments": 5,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1299,
+        "title": "Fix `align_chunks` xarray backcompat + add min version tests",
+        "score": 13,
+        "comments": 4,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1099,
+        "title": "Update docs on virtual references to match VirtualiZarr v2.0's updated API",
+        "score": 11,
+        "comments": 3,
+        "is_pr": true,
+        "state": "open"
+      }
+    ]
+  }
+}

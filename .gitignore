@@ -1,0 +1,24 @@
+# Cloned repos (large, re-cloneable)
+repos/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# uv
+uv.lock
+
+# Raw issue data (large, re-fetchable)
+research/*/all_issues_raw.jsonl
+research/*/ranked_issues.jsonl
+research/*/top_100_numbers.txt
+research/*/comments/
+research/*/bodies/
+
+# Test output artifacts
+tests/*/tmp*/
+tests/*/__pycache__/
+
+# uv generated
+main.py
