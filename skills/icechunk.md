@@ -138,7 +138,7 @@ ds_old = xr.open_zarr(session.store, consolidated=False)
 
 # --- Transaction context manager (auto-commits) ---
 with repo.transaction("main", message="Auto-commit") as store:
-    zarr.create_array(store, "data", shape=(10,), dtype=float)
+    zarr.create_array(store, name="data", shape=(10,), dtype=float)
 ```
 
 ## Core API

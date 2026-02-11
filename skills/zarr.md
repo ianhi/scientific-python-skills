@@ -59,10 +59,11 @@ from zarr.storage import LocalStore, MemoryStore, ZipStore, FsspecStore, ObjectS
 z = zarr.create_array(store, shape=(100,), dtype='f4',
                       compressor=Blosc(), filters=[Delta()])
 
-# RIGHT - v3 uses codecs= or compressors=/serializer=/filters=
+# RIGHT - v3 uses compressors=/serializer=/filters= (NOT codecs=)
 z = zarr.create_array(store, shape=(100,), dtype='f4',
-                      codecs=[zarr.codecs.BytesCodec(), zarr.codecs.BloscCodec()])
-# Or simpler with compressors shorthand (v3 keyword, not v2 compressor):
+                      serializer=zarr.codecs.BytesCodec(),
+                      compressors=zarr.codecs.BloscCodec())
+# Or simpler (compressors shorthand, v3 keyword, not v2 compressor):
 z = zarr.create_array(store, shape=(100,), dtype='f4',
                       compressors=zarr.codecs.ZstdCodec(level=3))
 ```
@@ -292,14 +293,13 @@ z = zarr.open_array('s3://bucket/data.zarr',     # -> FsspecStore
 # Default: BytesCodec + ZstdCodec (good default, just works)
 z = zarr.create_array(store, shape=(1000,), dtype='f4')
 
-# Explicit codec pipeline
+# Explicit codec pipeline (use serializer= + compressors=, NOT codecs=)
+# NOTE: codecs= only works on ShardingCodec, NOT on create_array()
 z = zarr.create_array(
     store, shape=(1000,), dtype='f4',
-    codecs=[
-        zarr.codecs.BytesCodec(endian='little'),
-        zarr.codecs.BloscCodec(cname='zstd', clevel=5,
-                               shuffle=zarr.codecs.BloscShuffle.shuffle),
-    ]
+    serializer=zarr.codecs.BytesCodec(endian='little'),
+    compressors=zarr.codecs.BloscCodec(cname='zstd', clevel=5,
+                                        shuffle=zarr.codecs.BloscShuffle.shuffle),
 )
 
 # Shorthand (compressors= is a v3 convenience, NOT v2 compressor=)
@@ -315,7 +315,8 @@ z = zarr.create_array(store, shape=(1000,), dtype='f4',
 # Checksum only
 z = zarr.create_array(
     store, shape=(1000,), dtype='f4',
-    codecs=[zarr.codecs.BytesCodec(), zarr.codecs.Crc32cCodec()]
+    serializer=zarr.codecs.BytesCodec(),
+    compressors=zarr.codecs.Crc32cCodec()
 )
 
 # Variable-length strings
@@ -344,19 +345,15 @@ z = zarr.create_array(
     shards='auto',
 )
 
-# Explicit ShardingCodec in pipeline
+# Explicit sharding with custom inner codecs
 z = zarr.create_array(
     store='data.zarr',
     shape=(1000, 1000),
     dtype='f4',
-    codecs=[
-        zarr.codecs.ShardingCodec(
-            chunk_shape=(100, 100),
-            codecs=[zarr.codecs.BytesCodec(), zarr.codecs.ZstdCodec()],
-            index_location='end',
-        )
-    ],
-    chunks=(1000, 1000),  # shard shape = chunks when using ShardingCodec directly
+    chunks=(100, 100),        # logical chunk size
+    shards=(1000, 1000),      # shard size (contains 10x10 chunks)
+    serializer=zarr.codecs.BytesCodec(),
+    compressors=zarr.codecs.ZstdCodec(),
 )
 ```
 
@@ -471,9 +468,9 @@ Blosc typesize defaults to 1 byte in v3 (instead of dtype size), causing 10-20x 
 ```python
 # BAD - shuffle is ineffective because typesize=1 internally
 z = zarr.create_array(store, shape=(1000,), dtype='float64',
-                      codecs=[zarr.codecs.BytesCodec(),
-                              zarr.codecs.BloscCodec(cname='lz4', clevel=1,
-                                                     shuffle=zarr.codecs.BloscShuffle.shuffle)])
+                      serializer=zarr.codecs.BytesCodec(),
+                      compressors=zarr.codecs.BloscCodec(cname='lz4', clevel=1,
+                                                          shuffle=zarr.codecs.BloscShuffle.shuffle))
 # Compressed chunks may be 10-20x larger than equivalent v2
 
 # WORKAROUND - use ZstdCodec (default) which is not affected
