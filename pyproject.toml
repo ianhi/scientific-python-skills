@@ -5,8 +5,12 @@ description = "Add your description here"
 requires-python = ">=3.12"
 dependencies = [
     "dask[complete]>=2026.1.2",
+    "h5netcdf>=1.8.1",
+    "h5py>=3.15.1",
     "icechunk>=1.1.18",
+    "matplotlib>=3.10.8",
     "numpy>=2.4.2",
+    "pandas>=3.0.0",
     "xarray>=2026.1.0",
     "zarr>=3.1.5",
 ]

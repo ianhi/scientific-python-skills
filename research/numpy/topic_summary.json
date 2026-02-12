@@ -1,0 +1,924 @@
+{
+  "other": {
+    "count": 86,
+    "total_score": 13147,
+    "items": [
+      {
+        "number": 5844,
+        "title": "Decide on what the resolution rules for __op__/__rop__/__numpy_ufunc__ actually are",
+        "score": 656,
+        "comments": 328,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 5479,
+        "title": "Windows wheel package (.whl) on Pypi",
+        "score": 558,
+        "comments": 267,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 13163,
+        "title": "ENH: randomgen",
+        "score": 412,
+        "comments": 203,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2269,
+        "title": "first nonzero element (Trac #1673)",
+        "score": 336,
+        "comments": 33,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 6938,
+        "title": "ENH: Allow Randint to Broadcast Arguments",
+        "score": 334,
+        "comments": 167,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 13635,
+        "title": "Decide on new PRNG BitGenerator default",
+        "score": 332,
+        "comments": 166,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 9998,
+        "title": "ENH: Nditer as context manager",
+        "score": 318,
+        "comments": 159,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 14086,
+        "title": "ENH: Propose standard policy for dropping support of old Python versions",
+        "score": 289,
+        "comments": 89,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 9211,
+        "title": "ENH: Weighted quantile",
+        "score": 266,
+        "comments": 115,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 24300,
+        "title": "NumPy 2.0 development status & announcements",
+        "score": 263,
+        "comments": 66,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 9836,
+        "title": "ENH: minmax function",
+        "score": 252,
+        "comments": 32,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 10161,
+        "title": "numpy.isclose vs math.isclose",
+        "score": 239,
+        "comments": 118,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 5978,
+        "title": "ENH: adding maxlag mode to convolve and correlate",
+        "score": 219,
+        "comments": 105,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 7372,
+        "title": "Tracker issue for BLIS support in NumPy",
+        "score": 217,
+        "comments": 98,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 10156,
+        "title": "Request: use semantic versioning",
+        "score": 212,
+        "comments": 88,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "arrays/chunks": {
+    "count": 54,
+    "total_score": 8429,
+    "items": [
+      {
+        "number": 7370,
+        "title": "Type hinting / annotation (PEP 484) for ndarray, dtype, and ufunc",
+        "score": 1132,
+        "comments": 88,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 8247,
+        "title": "ENH: Add `__array_ufunc__`",
+        "score": 468,
+        "comments": 234,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 16544,
+        "title": "Typing support for shapes",
+        "score": 379,
+        "comments": 55,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 6584,
+        "title": "\"setting an array element with a sequence\" error could be improved.",
+        "score": 298,
+        "comments": 17,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 16935,
+        "title": "ENH: implement NEP-35's `like=` argument",
+        "score": 237,
+        "comments": 108,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 22315,
+        "title": "ENH: Vectorize quicksort for 16-bit and 64-bit dtype using AVX512",
+        "score": 189,
+        "comments": 60,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 12065,
+        "title": "API: Optimize np.isin and np.in1d for integer arrays and add `kind=`",
+        "score": 178,
+        "comments": 89,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 26710,
+        "title": "NumPy 2.0.0 on Python 3.12 causes binary compatibilty issues with numpy.dtype for pandas 2.1.1",
+        "score": 174,
+        "comments": 20,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 14012,
+        "title": "Unittest: RuntimeError: implement_array_function method already has a docstring",
+        "score": 173,
+        "comments": 22,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 6053,
+        "title": "MAINT: struct assignment \"by field position\", multi-field indices return views",
+        "score": 162,
+        "comments": 81,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 11175,
+        "title": " ENH: Generalized ufunc signature expansion for frozen and flexible dimensions",
+        "score": 154,
+        "comments": 77,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2776,
+        "title": "ndarray should derive from collections.abc.Sequence?",
+        "score": 151,
+        "comments": 56,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 25347,
+        "title": "API: Introduce stringdtype [NEP 55]",
+        "score": 148,
+        "comments": 61,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5077,
+        "title": "WIP: gufunc core dimensions should not broadcast",
+        "score": 146,
+        "comments": 73,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5580,
+        "title": "BUG, DEP: Fix masked arrays to properly edit views. ( #5558 )",
+        "score": 144,
+        "comments": 72,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "errors/bugs": {
+    "count": 49,
+    "total_score": 7748,
+    "items": [
+      {
+        "number": 4351,
+        "title": "A new PEP for infix matrix multiplication",
+        "score": 621,
+        "comments": 308,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 17807,
+        "title": "BLD: fail to build on Apple M1",
+        "score": 449,
+        "comments": 97,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 16744,
+        "title": "polyfit and eig regression tests fail after Windows 10 update to 2004",
+        "score": 364,
+        "comments": 182,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 17784,
+        "title": "BUG: Error installing NumPy via Pip on macOS Big Sur with python from HomeBrew",
+        "score": 354,
+        "comments": 80,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 4007,
+        "title": "numpy.dot crash with numpy.float32 input",
+        "score": 310,
+        "comments": 155,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 6584,
+        "title": "\"setting an array element with a sequence\" error could be improved.",
+        "score": 298,
+        "comments": 17,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 12736,
+        "title": "Attribute Error after installing v1.16.0 because pip is not uninstalling",
+        "score": 279,
+        "comments": 81,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 27957,
+        "title": "TYP: regression between 2.1.3 and 2.2.0 (mypy only)",
+        "score": 242,
+        "comments": 111,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 14012,
+        "title": "Unittest: RuntimeError: implement_array_function method already has a docstring",
+        "score": 173,
+        "comments": 22,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 17726,
+        "title": "RuntimeError when importing numpy 1.19.4",
+        "score": 169,
+        "comments": 32,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 12889,
+        "title": "BUG: Make allow_pickle=False the default for loading",
+        "score": 148,
+        "comments": 74,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5580,
+        "title": "BUG, DEP: Fix masked arrays to properly edit views. ( #5558 )",
+        "score": 144,
+        "comments": 72,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 18124,
+        "title": "BUG: Multiprocessing issue for .npz files",
+        "score": 143,
+        "comments": 12,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 9139,
+        "title": "ENH: remove unneeded spaces in float/bool reprs, fixes 0d str",
+        "score": 142,
+        "comments": 71,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 10736,
+        "title": "Restructure percentile methods",
+        "score": 138,
+        "comments": 69,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "indexing/selection": {
+    "count": 10,
+    "total_score": 1416,
+    "items": [
+      {
+        "number": 16313,
+        "title": "The PCG implementation provided by Numpy has significant, dangerous self-correlation",
+        "score": 217,
+        "comments": 106,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 11971,
+        "title": "MAINT: Block algorithm with a single copy per call to `block`",
+        "score": 183,
+        "comments": 90,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5580,
+        "title": "BUG, DEP: Fix masked arrays to properly edit views. ( #5558 )",
+        "score": 144,
+        "comments": 72,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5312,
+        "title": "Use an aligned allocator for NumPy?",
+        "score": 140,
+        "comments": 70,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 23896,
+        "title": "BUG: Repeated calls to the var method of complex MaskedArrays lead to increasing large results",
+        "score": 136,
+        "comments": 68,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 5706,
+        "title": "ENH: make some masked array methods behave more like ndarray methods",
+        "score": 132,
+        "comments": 66,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 17582,
+        "title": "ENH: Configurable allocator",
+        "score": 128,
+        "comments": 55,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3537,
+        "title": "GBB: New version of select which is several times faster, bugfixes, more input validation, better internal documentation.",
+        "score": 118,
+        "comments": 59,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 7194,
+        "title": "BUG: Raise a quieter `MaskedArrayFutureWarning` for mask changes.",
+        "score": 116,
+        "comments": 58,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 8886,
+        "title": "ENH: add np.block to improve upon np.bmat",
+        "score": 102,
+        "comments": 51,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "performance": {
+    "count": 11,
+    "total_score": 1397,
+    "items": [
+      {
+        "number": 11888,
+        "title": "ENH: Add pocketfft sources to numpy for testing, benchmarks, etc.",
+        "score": 220,
+        "comments": 110,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 12065,
+        "title": "API: Optimize np.isin and np.in1d for integer arrays and add `kind=`",
+        "score": 178,
+        "comments": 89,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 4977,
+        "title": "ENH: add `mdot`: fast dot with multiple arguments.",
+        "score": 166,
+        "comments": 83,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 6166,
+        "title": "Better memory overlap detection",
+        "score": 136,
+        "comments": 68,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3537,
+        "title": "GBB: New version of select which is several times faster, bugfixes, more input validation, better internal documentation.",
+        "score": 118,
+        "comments": 59,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 17130,
+        "title": "fft with 1.16.6 is faster than with 1.18.0",
+        "score": 103,
+        "comments": 49,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 14197,
+        "title": "ENH: Multivariate normal speedups",
+        "score": 102,
+        "comments": 51,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 334,
+        "title": "Import speedup - Ticket #2181",
+        "score": 98,
+        "comments": 49,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 12317,
+        "title": "ENH: port np.core.overrides to C for speed",
+        "score": 94,
+        "comments": 47,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 13393,
+        "title": "[$] Optimize NumPy SIMD algorithms for Power VSX",
+        "score": 92,
+        "comments": 46,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 9855,
+        "title": "Speed improvement to np.random.choice under replace=False and p=None",
+        "score": 90,
+        "comments": 45,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "io/serialization": {
+    "count": 8,
+    "total_score": 971,
+    "items": [
+      {
+        "number": 14012,
+        "title": "Unittest: RuntimeError: implement_array_function method already has a docstring",
+        "score": 173,
+        "comments": 22,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 12889,
+        "title": "BUG: Make allow_pickle=False the default for loading",
+        "score": 148,
+        "comments": 74,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 11826,
+        "title": "Set number of threads after numpy import",
+        "score": 126,
+        "comments": 48,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 26157,
+        "title": "ENH: Support free-threaded python build (tracking issue)",
+        "score": 126,
+        "comments": 32,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 20089,
+        "title": "ENH: upload musllinux wheels to PyPI",
+        "score": 113,
+        "comments": 34,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 19478,
+        "title": "ENH: Vectorizing umath module using AVX-512 (open sourced from Intel Short Vector Math Library, SVML)",
+        "score": 106,
+        "comments": 50,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 30494,
+        "title": "BUG: Multithreaded scaling bottlenecks on free-threaded Python",
+        "score": 91,
+        "comments": 43,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 16200,
+        "title": "ENH: Rewrite of array-coercion to support new dtypes",
+        "score": 88,
+        "comments": 38,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "compatibility/migration": {
+    "count": 5,
+    "total_score": 965,
+    "items": [
+      {
+        "number": 26191,
+        "title": "Ecosystem compatibility with numpy 2.0",
+        "score": 465,
+        "comments": 167,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 26710,
+        "title": "NumPy 2.0.0 on Python 3.12 causes binary compatibilty issues with numpy.dtype for pandas 2.1.1",
+        "score": 174,
+        "comments": 20,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 12519,
+        "title": "ENH/DEP: Use a ufunc under the hood for ndarray.clip",
+        "score": 132,
+        "comments": 66,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 10615,
+        "title": "DEP: deprecate scalar conversions for arrays with ndim > 0",
+        "score": 102,
+        "comments": 51,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 11788,
+        "title": "RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility.",
+        "score": 92,
+        "comments": 34,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "concurrency/async": {
+    "count": 6,
+    "total_score": 771,
+    "items": [
+      {
+        "number": 11971,
+        "title": "MAINT: Block algorithm with a single copy per call to `block`",
+        "score": 183,
+        "comments": 90,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 18124,
+        "title": "BUG: Multiprocessing issue for .npz files",
+        "score": 143,
+        "comments": 12,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 11826,
+        "title": "Set number of threads after numpy import",
+        "score": 126,
+        "comments": 48,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 26157,
+        "title": "ENH: Support free-threaded python build (tracking issue)",
+        "score": 126,
+        "comments": 32,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 8886,
+        "title": "ENH: add np.block to improve upon np.bmat",
+        "score": 102,
+        "comments": 51,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 30494,
+        "title": "BUG: Multithreaded scaling bottlenecks on free-threaded Python",
+        "score": 91,
+        "comments": 43,
+        "is_pr": false,
+        "state": "open"
+      }
+    ]
+  },
+  "visualization": {
+    "count": 5,
+    "total_score": 538,
+    "items": [
+      {
+        "number": 9139,
+        "title": "ENH: remove unneeded spaces in float/bool reprs, fixes 0d str",
+        "score": 142,
+        "comments": 71,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 4804,
+        "title": "WIP: Fix matplotlib, etc. errors",
+        "score": 112,
+        "comments": 56,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 8983,
+        "title": "ENH: fix str/repr for 0d-arrays and int* scalars",
+        "score": 102,
+        "comments": 51,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 6551,
+        "title": "matplotlib does not build with numpy master",
+        "score": 94,
+        "comments": 47,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 8981,
+        "title": "ENH: implement voidtype_repr and voidtype_str",
+        "score": 88,
+        "comments": 41,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "storage/stores": {
+    "count": 5,
+    "total_score": 538,
+    "items": [
+      {
+        "number": 12051,
+        "title": "TST: add macos azure testing to CI",
+        "score": 140,
+        "comments": 70,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 16938,
+        "title": "ENH,API: Store exported buffer info on the array",
+        "score": 112,
+        "comments": 56,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 16913,
+        "title": "Error on Azure CI (Windows instance) with numpy 1.19.0",
+        "score": 108,
+        "comments": 54,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 12667,
+        "title": "BUG: Python from windows 10 store does not extend PATH via numpy.__config__.py",
+        "score": 90,
+        "comments": 45,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 12158,
+        "title": "TST: Azure suddenly missing from PR CI lists",
+        "score": 88,
+        "comments": 44,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "time-series": {
+    "count": 3,
+    "total_score": 363,
+    "items": [
+      {
+        "number": 156,
+        "title": "MinGW enhancements for datetime functionality.",
+        "score": 156,
+        "comments": 78,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 21199,
+        "title": "ENH: expose datetime.c functions to cython",
+        "score": 112,
+        "comments": 56,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 12550,
+        "title": "BUG: astype(object) downcasts for datetime-dtype",
+        "score": 95,
+        "comments": 45,
+        "is_pr": false,
+        "state": "open"
+      }
+    ]
+  },
+  "xarray-integration": {
+    "count": 3,
+    "total_score": 313,
+    "items": [
+      {
+        "number": 15947,
+        "title": "Buggy Accelerate Backend when using numpy 1.19",
+        "score": 126,
+        "comments": 48,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 19713,
+        "title": "MAINT: Replace numpy custom generation engine by raw C++",
+        "score": 98,
+        "comments": 34,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 23838,
+        "title": "BLD: switch to meson-python as the default build backend",
+        "score": 89,
+        "comments": 36,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "codecs/compression": {
+    "count": 1,
+    "total_score": 112,
+    "items": [
+      {
+        "number": 5173,
+        "title": "ENH: Alternative to `random.shuffle`, with an `axis` argument.",
+        "score": 112,
+        "comments": 35,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "netcdf/io": {
+    "count": 1,
+    "total_score": 98,
+    "items": [
+      {
+        "number": 19713,
+        "title": "MAINT: Replace numpy custom generation engine by raw C++",
+        "score": 98,
+        "comments": 34,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "groups/hierarchy": {
+    "count": 1,
+    "total_score": 90,
+    "items": [
+      {
+        "number": 12667,
+        "title": "BUG: Python from windows 10 store does not extend PATH via numpy.__config__.py",
+        "score": 90,
+        "comments": 45,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  }
+}

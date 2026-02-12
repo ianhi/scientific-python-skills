@@ -1,0 +1,1324 @@
+{
+  "other": {
+    "count": 75,
+    "total_score": 15444,
+    "items": [
+      {
+        "number": 15988,
+        "title": "When using to_sql(), continue if duplicate primary keys are detected?",
+        "score": 1504,
+        "comments": 41,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 4164,
+        "title": "ENH: add expression evaluation functionality via eval",
+        "score": 954,
+        "comments": 477,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 54466,
+        "title": "FEEDBACK: PyArrow as a required dependency and PyArrow backed strings",
+        "score": 586,
+        "comments": 166,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 14553,
+        "title": "Adding (Insert or update if key exists)  option to `.to_sql`",
+        "score": 571,
+        "comments": 59,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 29636,
+        "title": "Adding (Insert or update if key exists) option to .to_sql #14553",
+        "score": 553,
+        "comments": 98,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 15354,
+        "title": "Rolling window with step size",
+        "score": 363,
+        "comments": 41,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 4163,
+        "title": "ENH: sql support",
+        "score": 357,
+        "comments": 176,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 4384,
+        "title": "CLN/ENH/BLD: Remove need for 2to3 for Python 3.",
+        "score": 350,
+        "comments": 175,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 16386,
+        "title": "New Interval / IntervalIndex behavior spec",
+        "score": 278,
+        "comments": 139,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 29547,
+        "title": "Replace old string formatting syntax with f-strings",
+        "score": 274,
+        "comments": 137,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 27237,
+        "title": "ENH: Added key option to df/series.sort_values(key=...) and df/series.sort_index(key=...) sorting",
+        "score": 242,
+        "comments": 118,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 9422,
+        "title": "API: sum of Series of all NaN should return 0 or NaN ?",
+        "score": 232,
+        "comments": 116,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 49115,
+        "title": "BLD: Setup meson builds",
+        "score": 228,
+        "comments": 107,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 52711,
+        "title": "PDEP-10: Add pyarrow as a required dependency",
+        "score": 217,
+        "comments": 95,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 46776,
+        "title": "RLS: 2.0",
+        "score": 216,
+        "comments": 108,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "arrays/chunks": {
+    "count": 45,
+    "total_score": 6984,
+    "items": [
+      {
+        "number": 35407,
+        "title": "Deprecate Series / DataFrame.append",
+        "score": 371,
+        "comments": 103,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 24024,
+        "title": "REF: DatetimeLikeArray",
+        "score": 288,
+        "comments": 144,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 32265,
+        "title": "API: distinguish NA vs NaN in floating dtypes",
+        "score": 266,
+        "comments": 123,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 2801,
+        "title": "ENH: Add 'inplace' parameter to DataFrame.append()",
+        "score": 249,
+        "comments": 39,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2922,
+        "title": "ENH: add .iloc attribute to provide location-based indexing",
+        "score": 244,
+        "comments": 122,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 61618,
+        "title": "Moving to PyArrow dtypes by default",
+        "score": 215,
+        "comments": 105,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 22026,
+        "title": "TST: restructure internal extension arrays tests (split between /arrays and /extension)",
+        "score": 188,
+        "comments": 94,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 7501,
+        "title": "Can't slice float indices, but can slice integer indices?",
+        "score": 188,
+        "comments": 94,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 3629,
+        "title": "frame values access is slow with large frames with different dtypes",
+        "score": 174,
+        "comments": 87,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 11892,
+        "title": "ENH: RangeIndex redux",
+        "score": 170,
+        "comments": 85,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 36195,
+        "title": "Proposal for future copy / view semantics in indexing operations",
+        "score": 169,
+        "comments": 80,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 62437,
+        "title": "DOC: Replace `@Appender`, `@Substitution`, `@doc` with inlined docstrings",
+        "score": 165,
+        "comments": 80,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 6508,
+        "title": "pandas.DataFrame.query to allow column name with space",
+        "score": 163,
+        "comments": 41,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 14904,
+        "title": "ENH: Added to_json_schema",
+        "score": 160,
+        "comments": 77,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 8707,
+        "title": "WIP/API/ENH: IntervalIndex",
+        "score": 158,
+        "comments": 79,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "indexing/selection": {
+    "count": 25,
+    "total_score": 4167,
+    "items": [
+      {
+        "number": 3729,
+        "title": "ENH: pivot/groupby index with nan",
+        "score": 322,
+        "comments": 55,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 7217,
+        "title": "WIP: categoricals as an internal CategoricalBlock GH5313",
+        "score": 312,
+        "comments": 156,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 4140,
+        "title": "ENH: Google BigQuery IO Module",
+        "score": 272,
+        "comments": 136,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 32265,
+        "title": "API: distinguish NA vs NaN in floating dtypes",
+        "score": 266,
+        "comments": 123,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 2922,
+        "title": "ENH: add .iloc attribute to provide location-based indexing",
+        "score": 244,
+        "comments": 122,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 18366,
+        "title": "Deprecation of relabeling dicts in groupby.agg brings many issues",
+        "score": 242,
+        "comments": 37,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 34998,
+        "title": "API: User-control of result keys in GroupBy.apply",
+        "score": 192,
+        "comments": 96,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 6508,
+        "title": "pandas.DataFrame.query to allow column name with space",
+        "score": 163,
+        "comments": 41,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 39862,
+        "title": "BUG: Docs website is blocked by google safe browsing",
+        "score": 162,
+        "comments": 48,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 10477,
+        "title": "API: add DatetimeBlockTZ #8260",
+        "score": 156,
+        "comments": 78,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 10309,
+        "title": "New feature/enhancement request: Merge dataframes where one value is between two others",
+        "score": 148,
+        "comments": 4,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 5751,
+        "title": "Parallelization for embarrassingly parallel tasks",
+        "score": 143,
+        "comments": 64,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 29268,
+        "title": "Named aggregations with multiple columns",
+        "score": 137,
+        "comments": 15,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 24559,
+        "title": "Changes to i8data for DatetimeIndex",
+        "score": 136,
+        "comments": 68,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 7434,
+        "title": "ENH: select_dypes impl",
+        "score": 132,
+        "comments": 66,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "errors/bugs": {
+    "count": 25,
+    "total_score": 3789,
+    "items": [
+      {
+        "number": 4039,
+        "title": "ENH/BUG: Fix names, levels and labels handling in MultiIndex",
+        "score": 308,
+        "comments": 154,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 57049,
+        "title": "BUG: Pandas 2.2 breaks SQLAlchemy 1.4 compatibility",
+        "score": 236,
+        "comments": 36,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 48855,
+        "title": "STYLE fix pylint issues",
+        "score": 210,
+        "comments": 105,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 26314,
+        "title": "Pivot / unstack on large data frame does not work int32 overflow",
+        "score": 205,
+        "comments": 47,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 7501,
+        "title": "Can't slice float indices, but can slice integer indices?",
+        "score": 188,
+        "comments": 94,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 3360,
+        "title": "Test failures on FreeBSD 9.1",
+        "score": 184,
+        "comments": 92,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 5148,
+        "title": "ENH: Cleanup backend for Offsets and Period",
+        "score": 176,
+        "comments": 88,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 39862,
+        "title": "BUG: Docs website is blocked by google safe browsing",
+        "score": 162,
+        "comments": 48,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 17834,
+        "title": "Please add force_suffixes to pandas.merge()",
+        "score": 150,
+        "comments": 23,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 4404,
+        "title": "fix the excel reader: hours & header",
+        "score": 146,
+        "comments": 73,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5231,
+        "title": "EHN/FIX: Add na_last parameter to DataFrame.sort. Fixes GH3917",
+        "score": 142,
+        "comments": 71,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3270,
+        "title": "ENH: Fix for #1512, added StataReader and StataWriter to pandas.io.parsers",
+        "score": 142,
+        "comments": 71,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 56804,
+        "title": "DOC: fix EX03 errors in docstrings",
+        "score": 140,
+        "comments": 66,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 28373,
+        "title": "ENH: Fix `by` in DataFrame.plot.hist and DataFrame.plot.box",
+        "score": 136,
+        "comments": 68,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 28283,
+        "title": "Various methods don't call call __finalize__",
+        "score": 133,
+        "comments": 58,
+        "is_pr": false,
+        "state": "open"
+      }
+    ]
+  },
+  "time-series": {
+    "count": 22,
+    "total_score": 3228,
+    "items": [
+      {
+        "number": 24024,
+        "title": "REF: DatetimeLikeArray",
+        "score": 288,
+        "comments": 144,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 11470,
+        "title": "ENH: Adding origin parameter in pd.to_datetime",
+        "score": 234,
+        "comments": 117,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5004,
+        "title": "ENH: Support for \"52\u201353-week fiscal year\" / \"4\u20134\u20135 calendar\" and LastWeekOfMonth DateOffset",
+        "score": 196,
+        "comments": 98,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 13513,
+        "title": "ENH: add time-window capability to .rolling",
+        "score": 178,
+        "comments": 71,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5148,
+        "title": "ENH: Cleanup backend for Offsets and Period",
+        "score": 176,
+        "comments": 88,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 22862,
+        "title": "REF: Make PeriodArray an ExtensionArray",
+        "score": 156,
+        "comments": 78,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 10477,
+        "title": "API: add DatetimeBlockTZ #8260",
+        "score": 156,
+        "comments": 78,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 23185,
+        "title": "Datetimelike Array Refactor",
+        "score": 144,
+        "comments": 72,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 24559,
+        "title": "Changes to i8data for DatetimeIndex",
+        "score": 136,
+        "comments": 68,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 3060,
+        "title": "ENH: support for nanosecond time in offset and period",
+        "score": 134,
+        "comments": 67,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 51298,
+        "title": "[READY] perf improvements for strftime",
+        "score": 133,
+        "comments": 64,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 15303,
+        "title": "Can't use dt.ceil, dt.floor, dt.round with coarser target frequencies",
+        "score": 130,
+        "comments": 11,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 8184,
+        "title": "ENH: create Timedelta scalar / TimedeltaIndex",
+        "score": 128,
+        "comments": 64,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 7307,
+        "title": "Support or default to less detailed datetime64",
+        "score": 127,
+        "comments": 40,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 24757,
+        "title": "implement+test mean for datetimelike EA/Index/Series",
+        "score": 124,
+        "comments": 62,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "compatibility/migration": {
+    "count": 17,
+    "total_score": 3154,
+    "items": [
+      {
+        "number": 35407,
+        "title": "Deprecate Series / DataFrame.append",
+        "score": 371,
+        "comments": 103,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 16529,
+        "title": "API/DEPR: Deprecate inplace parameter",
+        "score": 323,
+        "comments": 60,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 4039,
+        "title": "ENH/BUG: Fix names, levels and labels handling in MultiIndex",
+        "score": 308,
+        "comments": 154,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 18366,
+        "title": "Deprecation of relabeling dicts in groupby.agg brings many issues",
+        "score": 242,
+        "comments": 37,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 57049,
+        "title": "BUG: Pandas 2.2 breaks SQLAlchemy 1.4 compatibility",
+        "score": 236,
+        "comments": 36,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 28142,
+        "title": "Typing Stubs and PEP 561 compatibility",
+        "score": 219,
+        "comments": 63,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 34998,
+        "title": "API: User-control of result keys in GroupBy.apply",
+        "score": 192,
+        "comments": 96,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5530,
+        "title": "sphinxext py3 compatibility",
+        "score": 164,
+        "comments": 82,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 6581,
+        "title": "DEPR: Clean up list of deprecations from prior versions",
+        "score": 162,
+        "comments": 81,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 5950,
+        "title": "ENH: sql support via SQLAlchemy, with legacy fallback",
+        "score": 144,
+        "comments": 72,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 54747,
+        "title": "PDEP-13: Deprecate the apply method on Series and DataFrame and make the agg and transform methods operate on series data",
+        "score": 133,
+        "comments": 61,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 16955,
+        "title": "Deprecating Series.argmin and Series.argmax (#16830)",
+        "score": 116,
+        "comments": 58,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 6599,
+        "title": "CLN/API refactor drop and filter and deprecate select",
+        "score": 114,
+        "comments": 57,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 12413,
+        "title": "BUG: Matched SearchedSorted Signature with NumPy's",
+        "score": 110,
+        "comments": 55,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 19954,
+        "title": ".values on ExtensionArray-backed containers",
+        "score": 108,
+        "comments": 54,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "performance": {
+    "count": 16,
+    "total_score": 2764,
+    "items": [
+      {
+        "number": 3393,
+        "title": "ENH: eval function",
+        "score": 596,
+        "comments": 298,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 8953,
+        "title": "Use multi-row inserts for massive speedups on to_sql over high latency connections",
+        "score": 233,
+        "comments": 49,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 3059,
+        "title": "ENH: improve performance of df.to_csv GH3054",
+        "score": 204,
+        "comments": 102,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3629,
+        "title": "frame values access is slow with large frames with different dtypes",
+        "score": 174,
+        "comments": 87,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 11892,
+        "title": "ENH: RangeIndex redux",
+        "score": 170,
+        "comments": 85,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 10477,
+        "title": "API: add DatetimeBlockTZ #8260",
+        "score": 156,
+        "comments": 78,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5751,
+        "title": "Parallelization for embarrassingly parallel tasks",
+        "score": 143,
+        "comments": 64,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 51298,
+        "title": "[READY] perf improvements for strftime",
+        "score": 133,
+        "comments": 64,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 8640,
+        "title": "API/ENH: dtype='string' / pd.String",
+        "score": 132,
+        "comments": 63,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 7282,
+        "title": "PERF: pandas import is too slow",
+        "score": 126,
+        "comments": 53,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 32779,
+        "title": "PERF: block-wise arithmetic for frame-with-frame",
+        "score": 124,
+        "comments": 62,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 7619,
+        "title": "ENH: dataframe memory usage",
+        "score": 122,
+        "comments": 61,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 20796,
+        "title": "ENH: Implemented lazy iteration",
+        "score": 122,
+        "comments": 61,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 23516,
+        "title": "read_csv() is 3.5X Slower in Pandas 0.23.4 on Python 3.7.1 vs Pandas 0.22.0 on Python 3.5.2",
+        "score": 112,
+        "comments": 56,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 13111,
+        "title": "ENH: parallel support in .apply",
+        "score": 109,
+        "comments": 8,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "groups/hierarchy": {
+    "count": 11,
+    "total_score": 1950,
+    "items": [
+      {
+        "number": 3729,
+        "title": "ENH: pivot/groupby index with nan",
+        "score": 322,
+        "comments": 55,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2485,
+        "title": "Allow custom metadata to be attached to panel/df/series?",
+        "score": 291,
+        "comments": 84,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 18366,
+        "title": "Deprecation of relabeling dicts in groupby.agg brings many issues",
+        "score": 242,
+        "comments": 37,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 34998,
+        "title": "API: User-control of result keys in GroupBy.apply",
+        "score": 192,
+        "comments": 96,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5751,
+        "title": "Parallelization for embarrassingly parallel tasks",
+        "score": 143,
+        "comments": 64,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 28394,
+        "title": "Optionally disallow duplicate labels",
+        "score": 142,
+        "comments": 71,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 29268,
+        "title": "Named aggregations with multiple columns",
+        "score": 137,
+        "comments": 15,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 28283,
+        "title": "Various methods don't call call __finalize__",
+        "score": 133,
+        "comments": 58,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 20583,
+        "title": "API: categorical grouping will no longer return the cartesian product",
+        "score": 119,
+        "comments": 58,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5452,
+        "title": "add optional default value to GroupBy.get_group",
+        "score": 118,
+        "comments": 59,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 6884,
+        "title": "ENH: Allow aggregate numeric operations on timedelta64.",
+        "score": 111,
+        "comments": 53,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "io/serialization": {
+    "count": 12,
+    "total_score": 1546,
+    "items": [
+      {
+        "number": 4052,
+        "title": "ENH: read_sas, to_sas",
+        "score": 169,
+        "comments": 82,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2311,
+        "title": "Wish: Input / output for Open Document Spreadsheet (ODS)",
+        "score": 162,
+        "comments": 27,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 4404,
+        "title": "fix the excel reader: hours & header",
+        "score": 146,
+        "comments": 73,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3270,
+        "title": "ENH: Fix for #1512, added StataReader and StataWriter to pandas.io.parsers",
+        "score": 142,
+        "comments": 71,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 51298,
+        "title": "[READY] perf improvements for strftime",
+        "score": 133,
+        "comments": 64,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5686,
+        "title": "Add ability to process bad lines for read_csv",
+        "score": 119,
+        "comments": 21,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 9070,
+        "title": "ENH: Open Document Format ODS support in read_excel()",
+        "score": 118,
+        "comments": 59,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3477,
+        "title": "Read html tables into DataFrames",
+        "score": 116,
+        "comments": 58,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5602,
+        "title": "ENH: Added method to pandas.data.Options to download all option data for...",
+        "score": 114,
+        "comments": 57,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 23516,
+        "title": "read_csv() is 3.5X Slower in Pandas 0.23.4 on Python 3.7.1 vs Pandas 0.22.0 on Python 3.5.2",
+        "score": 112,
+        "comments": 56,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 53011,
+        "title": "BUG: read_parquet converts pyarrow list type to numpy dtype",
+        "score": 108,
+        "comments": 35,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 11166,
+        "title": "read_csv C-engine CParserError: Error tokenizing data",
+        "score": 107,
+        "comments": 19,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "visualization": {
+    "count": 10,
+    "total_score": 1361,
+    "items": [
+      {
+        "number": 22511,
+        "title": "ENH: better MultiIndex.__repr__",
+        "score": 187,
+        "comments": 92,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 10250,
+        "title": "ENH: Conditional HTML Formatting",
+        "score": 178,
+        "comments": 89,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 17023,
+        "title": "Set pd.options.display.max_columns=0 by default",
+        "score": 157,
+        "comments": 77,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 28373,
+        "title": "ENH: Fix `by` in DataFrame.plot.hist and DataFrame.plot.box",
+        "score": 136,
+        "comments": 68,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 9901,
+        "title": "Index repr changes to make them consistent",
+        "score": 122,
+        "comments": 61,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3473,
+        "title": "ENH: Scatterplot Method added",
+        "score": 120,
+        "comments": 60,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 7086,
+        "title": "Tidy representation when truncating dfs",
+        "score": 118,
+        "comments": 59,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5550,
+        "title": "HTML (and text) reprs for large dataframes.",
+        "score": 118,
+        "comments": 59,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3477,
+        "title": "Read html tables into DataFrames",
+        "score": 116,
+        "comments": 58,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 10611,
+        "title": "xticks missing for scatter plots with colors",
+        "score": 109,
+        "comments": 35,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "concurrency/async": {
+    "count": 8,
+    "total_score": 1252,
+    "items": [
+      {
+        "number": 7217,
+        "title": "WIP: categoricals as an internal CategoricalBlock GH5313",
+        "score": 312,
+        "comments": 156,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 39862,
+        "title": "BUG: Docs website is blocked by google safe browsing",
+        "score": 162,
+        "comments": 48,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 10477,
+        "title": "API: add DatetimeBlockTZ #8260",
+        "score": 156,
+        "comments": 78,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5751,
+        "title": "Parallelization for embarrassingly parallel tasks",
+        "score": 143,
+        "comments": 64,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 24559,
+        "title": "Changes to i8data for DatetimeIndex",
+        "score": 136,
+        "comments": 68,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 32779,
+        "title": "PERF: block-wise arithmetic for frame-with-frame",
+        "score": 124,
+        "comments": 62,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 48673,
+        "title": "BUG: Unclear FutureWarning regarding inplace iloc setitem",
+        "score": 110,
+        "comments": 34,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 13111,
+        "title": "ENH: parallel support in .apply",
+        "score": 109,
+        "comments": 8,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "storage/stores": {
+    "count": 3,
+    "total_score": 515,
+    "items": [
+      {
+        "number": 22854,
+        "title": "CI: Linting with azure instead of travis",
+        "score": 208,
+        "comments": 104,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 4155,
+        "title": "WIP: use eval expression parsing as replacement for Term in HDFStore",
+        "score": 168,
+        "comments": 84,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 62434,
+        "title": "STY: Enforce Ruff rule B905, zip-without-explicit-strict",
+        "score": 139,
+        "comments": 67,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "xarray-integration": {
+    "count": 2,
+    "total_score": 283,
+    "items": [
+      {
+        "number": 5148,
+        "title": "ENH: Cleanup backend for Offsets and Period",
+        "score": 176,
+        "comments": 88,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 11166,
+        "title": "read_csv C-engine CParserError: Error tokenizing data",
+        "score": 107,
+        "comments": 19,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "netcdf/io": {
+    "count": 2,
+    "total_score": 250,
+    "items": [
+      {
+        "number": 5751,
+        "title": "Parallelization for embarrassingly parallel tasks",
+        "score": 143,
+        "comments": 64,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 11166,
+        "title": "read_csv C-engine CParserError: Error tokenizing data",
+        "score": 107,
+        "comments": 19,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "codecs/compression": {
+    "count": 1,
+    "total_score": 114,
+    "items": [
+      {
+        "number": 6599,
+        "title": "CLN/API refactor drop and filter and deprecate select",
+        "score": 114,
+        "comments": 57,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  }
+}

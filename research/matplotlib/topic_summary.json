@@ -1,0 +1,840 @@
+{
+  "other": {
+    "count": 98,
+    "total_score": 9820,
+    "items": [
+      {
+        "number": 3652,
+        "title": "MEP22: Navigation by events",
+        "score": 228,
+        "comments": 114,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 7294,
+        "title": "ENH: Added FuncNorm and PiecewiseNorm classes in colors",
+        "score": 221,
+        "comments": 106,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 13139,
+        "title": "font family ['serif'] not found. Falling back to DejaVu Sans",
+        "score": 220,
+        "comments": 58,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 4686,
+        "title": "[WIP] Property Cycling",
+        "score": 188,
+        "comments": 94,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 15065,
+        "title": "step-between as drawstyle [Alternative approach to #15019]",
+        "score": 177,
+        "comments": 87,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 9460,
+        "title": "Color blind-friendly default color cycle",
+        "score": 164,
+        "comments": 46,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 5405,
+        "title": "WIP: issue #5325, convert from nose to pytest",
+        "score": 162,
+        "comments": 81,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 16603,
+        "title": "axes collage",
+        "score": 161,
+        "comments": 73,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 4762,
+        "title": "Traitlets",
+        "score": 160,
+        "comments": 80,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 9082,
+        "title": "[MRG] Constrained_layout  (geometry manager)",
+        "score": 155,
+        "comments": 76,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3644,
+        "title": "Feature Request: manually set colorbar without mappable",
+        "score": 142,
+        "comments": 59,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 18275,
+        "title": "feat: StepPatch",
+        "score": 141,
+        "comments": 63,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 14168,
+        "title": "Feature request: Bivariate colormapping",
+        "score": 137,
+        "comments": 63,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 875,
+        "title": "Replace \"jet\" as the default colormap",
+        "score": 136,
+        "comments": 68,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 5836,
+        "title": "Repeated warning about fc-list",
+        "score": 132,
+        "comments": 66,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "visualization": {
+    "count": 57,
+    "total_score": 6553,
+    "items": [
+      {
+        "number": 4143,
+        "title": "MEP27 Decouple pyplot from backends (refactoring Gcf out of backend code)",
+        "score": 386,
+        "comments": 193,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 16911,
+        "title": "type1ec.sty needed for TeX output of plots. Not a standard texlive",
+        "score": 364,
+        "comments": 10,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 11155,
+        "title": "`plot` and `scatter` should allow `marker` to be a list",
+        "score": 344,
+        "comments": 33,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 209,
+        "title": "3D scatter plots don't work in logscale",
+        "score": 191,
+        "comments": 33,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 1077,
+        "title": "3d plots with aspect='equal'",
+        "score": 168,
+        "comments": 30,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 29152,
+        "title": "ENH: introduce wedge_labels parameter for `pie`",
+        "score": 147,
+        "comments": 71,
+        "is_pr": true,
+        "state": "open"
+      },
+      {
+        "number": 4829,
+        "title": "ENH: plotting methods can unpack labeled data",
+        "score": 144,
+        "comments": 72,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 28551,
+        "title": "[Bug]: Possible issue with Matplotlib 3.9.1 wheel on Windows only",
+        "score": 144,
+        "comments": 68,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 12188,
+        "title": " matplotlib 3 pyplot on MacOS bounces rocket icon in dock",
+        "score": 142,
+        "comments": 71,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 22347,
+        "title": "correctly treat pan/zoom events of overlapping axes",
+        "score": 139,
+        "comments": 64,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 26827,
+        "title": "[Bug]: ImportError when using Matplotlib v3.8.0 in Python package tests",
+        "score": 127,
+        "comments": 49,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 8896,
+        "title": "Fix mplot3d projection",
+        "score": 125,
+        "comments": 61,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3937,
+        "title": "Rectangle Selector Upgrade",
+        "score": 124,
+        "comments": 62,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 5754,
+        "title": "IPython Widget",
+        "score": 122,
+        "comments": 52,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 20740,
+        "title": "Implement Font-Fallback in Matplotlib",
+        "score": 120,
+        "comments": 48,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "errors/bugs": {
+    "count": 32,
+    "total_score": 3327,
+    "items": [
+      {
+        "number": 779,
+        "title": "Fix failing tests on maintenance branch",
+        "score": 262,
+        "comments": 131,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 209,
+        "title": "3D scatter plots don't work in logscale",
+        "score": 191,
+        "comments": 33,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 22673,
+        "title": "[Bug]: tight_layout (version 3.5+)",
+        "score": 152,
+        "comments": 76,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 28551,
+        "title": "[Bug]: Possible issue with Matplotlib 3.9.1 wheel on Windows only",
+        "score": 144,
+        "comments": 68,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 12221,
+        "title": "Scaling issue with 4K panel!",
+        "score": 132,
+        "comments": 56,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 26827,
+        "title": "[Bug]: ImportError when using Matplotlib v3.8.0 in Python package tests",
+        "score": 127,
+        "comments": 49,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 8896,
+        "title": "Fix mplot3d projection",
+        "score": 125,
+        "comments": 61,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 22710,
+        "title": "Fix the error- TypeError: 'float' object is not iterable",
+        "score": 122,
+        "comments": 61,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 12074,
+        "title": "v2.2.3 matplotlib.pyplot.plot() creates empty plot. savefig() works as expected. ",
+        "score": 117,
+        "comments": 42,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 27907,
+        "title": "[Bug]: undefined \\mathdefault",
+        "score": 114,
+        "comments": 11,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 4970,
+        "title": "Fixed ZoomPanBase to work with log plots",
+        "score": 110,
+        "comments": 55,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 28187,
+        "title": "Add a filename-prefix option to the Sphinx plot directive",
+        "score": 103,
+        "comments": 49,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 9637,
+        "title": "scrolling in plot crashes matplotlib",
+        "score": 100,
+        "comments": 29,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 2305,
+        "title": "Request: Set figure size in pixels, not inches",
+        "score": 97,
+        "comments": 11,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 4482,
+        "title": "PGF Backend: \"Dimension too large\" error while processing log-scale plot",
+        "score": 95,
+        "comments": 40,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "xarray-integration": {
+    "count": 15,
+    "total_score": 1872,
+    "items": [
+      {
+        "number": 4143,
+        "title": "MEP27 Decouple pyplot from backends (refactoring Gcf out of backend code)",
+        "score": 386,
+        "comments": 193,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 11944,
+        "title": "wx backends: don't use ClientDC any more",
+        "score": 172,
+        "comments": 86,
+        "is_pr": true,
+        "state": "open"
+      },
+      {
+        "number": 2471,
+        "title": "Qt5 Backend",
+        "score": 124,
+        "comments": 62,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 20740,
+        "title": "Implement Font-Fallback in Matplotlib",
+        "score": 120,
+        "comments": 48,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 2624,
+        "title": "Backend plt/gcf refactor",
+        "score": 120,
+        "comments": 60,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 30059,
+        "title": "Drop the FT2Font intermediate buffer.",
+        "score": 119,
+        "comments": 57,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3421,
+        "title": "make wx backends compatible with wxPython-Phoenix",
+        "score": 116,
+        "comments": 58,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 27907,
+        "title": "[Bug]: undefined \\mathdefault",
+        "score": 114,
+        "comments": 11,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 3072,
+        "title": "Implement backend for PyQt5 + modify Qt4 backends to use Qt5 module via shim",
+        "score": 98,
+        "comments": 49,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 4482,
+        "title": "PGF Backend: \"Dimension too large\" error while processing log-scale plot",
+        "score": 95,
+        "comments": 40,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 14930,
+        "title": "Set Dock icon on the macosx backend",
+        "score": 92,
+        "comments": 46,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1563,
+        "title": "macosx backend slowdown with 1.2.0",
+        "score": 90,
+        "comments": 45,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 665,
+        "title": "Mac OSX backend keyboard focus stays in terminal",
+        "score": 80,
+        "comments": 40,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 11259,
+        "title": "Symbols appear as streaks with usetex=True, times font and PDF backend",
+        "score": 74,
+        "comments": 31,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 6597,
+        "title": "Reproducible PS/PDF output (master)",
+        "score": 72,
+        "comments": 36,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "indexing/selection": {
+    "count": 7,
+    "total_score": 900,
+    "items": [
+      {
+        "number": 16447,
+        "title": "Proposal for the baseline images problem",
+        "score": 195,
+        "comments": 95,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 2236,
+        "title": "Add easy style sheet selection",
+        "score": 164,
+        "comments": 82,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3874,
+        "title": "New C++ contour code with corner_mask kwarg",
+        "score": 138,
+        "comments": 69,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3937,
+        "title": "Rectangle Selector Upgrade",
+        "score": 124,
+        "comments": 62,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 13306,
+        "title": "Qt5: SIGINT kills just the mpl window and not the process itself",
+        "score": 108,
+        "comments": 54,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 1313,
+        "title": "Add `loc=best' kwarg to pyplot.text()",
+        "score": 88,
+        "comments": 17,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 17479,
+        "title": "Add thumbnails for tutorials/gallery where missing",
+        "score": 83,
+        "comments": 39,
+        "is_pr": false,
+        "state": "open"
+      }
+    ]
+  },
+  "arrays/chunks": {
+    "count": 7,
+    "total_score": 650,
+    "items": [
+      {
+        "number": 26864,
+        "title": "[TST]: increase unit test coverage ",
+        "score": 139,
+        "comments": 67,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 4482,
+        "title": "PGF Backend: \"Dimension too large\" error while processing log-scale plot",
+        "score": 95,
+        "comments": 40,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 19236,
+        "title": "Add support for handling timedelta",
+        "score": 88,
+        "comments": 40,
+        "is_pr": true,
+        "state": "open"
+      },
+      {
+        "number": 8869,
+        "title": "Enable plotting of timedeltas",
+        "score": 87,
+        "comments": 23,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 9774,
+        "title": "Rethink categoricals.",
+        "score": 86,
+        "comments": 43,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 13236,
+        "title": "A reasonable default width for bar() with units?",
+        "score": 82,
+        "comments": 41,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 25887,
+        "title": "Update `_unpack_to_numpy` function to convert JAX and PyTorch arrays to NumPy",
+        "score": 73,
+        "comments": 34,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "groups/hierarchy": {
+    "count": 6,
+    "total_score": 493,
+    "items": [
+      {
+        "number": 6321,
+        "title": "Feature Request: Label Grouping and Multi-Level Axis Labels",
+        "score": 105,
+        "comments": 18,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 26050,
+        "title": "Sketch seed",
+        "score": 93,
+        "comments": 44,
+        "is_pr": true,
+        "state": "open"
+      },
+      {
+        "number": 1329,
+        "title": "Add a \"sketch\" path filter",
+        "score": 77,
+        "comments": 34,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 3517,
+        "title": "Issue with non-ascii paths in font look up",
+        "score": 76,
+        "comments": 38,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 1188,
+        "title": "Errors in rendering boundaries between filled paths and within a quadmesh",
+        "score": 71,
+        "comments": 33,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 24313,
+        "title": "[ENH]: API discussion for grouped bar charts",
+        "score": 71,
+        "comments": 27,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "io/serialization": {
+    "count": 5,
+    "total_score": 444,
+    "items": [
+      {
+        "number": 12074,
+        "title": "v2.2.3 matplotlib.pyplot.plot() creates empty plot. savefig() works as expected. ",
+        "score": 117,
+        "comments": 42,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 5718,
+        "title": "Rewrite of image infrastructure",
+        "score": 94,
+        "comments": 47,
+        "is_pr": true,
+        "state": "closed"
+      },
+      {
+        "number": 29782,
+        "title": "[ENH]: Make savefig close plot by default",
+        "score": 84,
+        "comments": 38,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 11764,
+        "title": "Feature request: savefig with separated pad_inches in each direction",
+        "score": 75,
+        "comments": 26,
+        "is_pr": false,
+        "state": "open"
+      },
+      {
+        "number": 6473,
+        "title": "Matplotlib manylinux wheel - ready to ship?",
+        "score": 74,
+        "comments": 34,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "compatibility/migration": {
+    "count": 3,
+    "total_score": 360,
+    "items": [
+      {
+        "number": 26827,
+        "title": "[Bug]: ImportError when using Matplotlib v3.8.0 in Python package tests",
+        "score": 127,
+        "comments": 49,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 12074,
+        "title": "v2.2.3 matplotlib.pyplot.plot() creates empty plot. savefig() works as expected. ",
+        "score": 117,
+        "comments": 42,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 3421,
+        "title": "make wx backends compatible with wxPython-Phoenix",
+        "score": 116,
+        "comments": 58,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "concurrency/async": {
+    "count": 2,
+    "total_score": 229,
+    "items": [
+      {
+        "number": 29686,
+        "title": "DOC: Add policy for people stating concurrent interest",
+        "score": 135,
+        "comments": 65,
+        "is_pr": true,
+        "state": "open"
+      },
+      {
+        "number": 15410,
+        "title": "Change in OSX Catalina makes matplotlib + multiprocessing crash",
+        "score": 94,
+        "comments": 38,
+        "is_pr": false,
+        "state": "closed"
+      }
+    ]
+  },
+  "time-series": {
+    "count": 2,
+    "total_score": 175,
+    "items": [
+      {
+        "number": 19236,
+        "title": "Add support for handling timedelta",
+        "score": 88,
+        "comments": 40,
+        "is_pr": true,
+        "state": "open"
+      },
+      {
+        "number": 8869,
+        "title": "Enable plotting of timedeltas",
+        "score": 87,
+        "comments": 23,
+        "is_pr": false,
+        "state": "open"
+      }
+    ]
+  },
+  "performance": {
+    "count": 2,
+    "total_score": 172,
+    "items": [
+      {
+        "number": 1563,
+        "title": "macosx backend slowdown with 1.2.0",
+        "score": 90,
+        "comments": 45,
+        "is_pr": false,
+        "state": "closed"
+      },
+      {
+        "number": 9565,
+        "title": "Stem performance boost",
+        "score": 82,
+        "comments": 41,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  },
+  "codecs/compression": {
+    "count": 1,
+    "total_score": 77,
+    "items": [
+      {
+        "number": 1329,
+        "title": "Add a \"sketch\" path filter",
+        "score": 77,
+        "comments": 34,
+        "is_pr": true,
+        "state": "closed"
+      }
+    ]
+  }
+}

@@ -28,11 +28,14 @@ Create Claude Code skills (.md files in `skills/`) that teach Claude to write id
 
 ## Skill File Requirements
 - **Max 30KB** per skill file
-- Lead with anti-patterns ("DO NOT" section) - this is the highest-value content
+- **Lead with modern patterns** - teach the correct, idiomatic way to use the library FIRST
+- **Don't over-focus on removed APIs** - only warn about removals if they are recent AND Claude is likely to generate the old pattern. Ancient removals that Claude doesn't know about anyway are noise.
+- **Encourage good behavior over disallowing bad behavior** - show the right way to do things rather than exhaustively listing every wrong way
 - Code over prose - working snippets over explanations
 - Include function signatures for key APIs, verified against actual source code
 - Link issue numbers for known bugs/gotchas
-- Structure: Anti-patterns -> Quick Reference -> Core API -> Patterns -> Integration -> Gotchas -> Known Limitations -> Performance Tips
+- Structure: Modern Patterns -> Core API -> Migration Notes (compact) -> Integration -> Gotchas -> Known Limitations -> Performance Tips
+- Consolidate removed/deprecated API lists into compact markdown tables, NOT verbose code blocks for each item
 - Label performance-only issues as "SLOW"/"FAST", NOT "WRONG"/"RIGHT" (Claude will refuse to generate functional "WRONG" code)
 
 ## Process per Library
@@ -66,7 +69,10 @@ Create Claude Code skills (.md files in `skills/`) that teach Claude to write id
 - **Parallel agents are effective** - run research, writing, reviewing, and testing agents in parallel (one per library). 3 agents working simultaneously is the sweet spot.
 
 ### Skill File Quality
-- **Anti-patterns are the highest-value content.** Claude WILL generate outdated code (e.g., zarr v2 patterns) without explicit "DO NOT" warnings. This section alone justifies the skill file.
+- **Lead with modern patterns, not anti-patterns.** Teaching the correct way is more valuable than exhaustively listing wrong ways. Show good code first, migration notes second.
+- **Only warn about recent removals Claude is likely to generate.** If an API was removed years ago and Claude doesn't know about it, a warning adds no value. Focus on changes from the version Claude's training data covered.
+- **Consolidate deprecation lists into compact tables.** A 2-column table (old → new) is better than 10 separate code blocks with WRONG/RIGHT pairs.
+- **Anti-patterns still matter for high-impact behavioral changes** (e.g., zarr v2→v3 patterns, pandas CoW semantics, NumPy copy=False). These deserve detailed explanation because the OLD code silently does the wrong thing.
 - **Every code example must be verified against source.** Inaccurate signatures are WORSE than no signatures - Claude trusts the skill file implicitly. Common errors:
   - Wrong parameter names (e.g., `expiry_time` vs `delete_object_older_than`)
   - Wrong return types (e.g., `list[str]` vs `set[str]`)
