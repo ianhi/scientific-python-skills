@@ -54,14 +54,14 @@ from icechunk.dask import store_dask
 
 # 1. Initialize array structure first
 session = repo.writable_session("main")
-zarr_arr = zarr.create_array(session.store, path="data",
+zarr_arr = zarr.create_array(session.store, name="data",
     shape=(100, 100), chunks=(10, 10), dtype="f8")
 session.commit("Initialize array")
 
 # 2. Fork session for distributed writes
 session = repo.writable_session("main")
 fork = session.fork()
-zarr_arr = zarr.open_array(fork.store, path="data")
+zarr_arr = zarr.open_array(fork.store, path="data", mode="r+")
 
 # 3. Write dask array through fork
 dask_arr = da.random.random((100, 100), chunks=(20, 20))

@@ -198,16 +198,16 @@ ds = xr.open_dataset("file.nc", decode_times=coder)
 
 ## Gotchas & Common Mistakes
 
-### Automatic coordinate alignment silently introduces NaN
+### Automatic coordinate alignment silently drops data
 ```python
-# GOTCHA: a + b with partially overlapping coords fills gaps with NaN
+# GOTCHA: a + b with partially overlapping coords silently drops non-shared coords
 a = xr.DataArray([1, 2, 3], dims=["x"], coords={"x": [0, 1, 2]})
 b = xr.DataArray([10, 20, 30], dims=["x"], coords={"x": [1, 2, 3]})
-result = a + b  # x=[0,1,2,3], with NaN at x=0 and x=3!
+result = a + b  # x=[1, 2] only! x=0 and x=3 silently dropped (inner join)
 
-# Fix: explicitly align first
-a2, b2 = xr.align(a, b, join="inner")  # only shared coords
-result = a2 + b2  # x=[1,2], no NaN
+# To keep all coords (outer join, fills with NaN):
+a2, b2 = xr.align(a, b, join="outer")
+result = a2 + b2  # x=[0,1,2,3], NaN at x=0 and x=3
 ```
 
 ### sel() slices are inclusive on both ends
@@ -223,11 +223,13 @@ da.sel(x=slice(10, 30))  # Returns x=[10, 20, 30] -- includes 30!
 # Workaround: xr.open_dataset("store.zarr", engine="zarr", mask_and_scale=False)
 ```
 
-### Attributes are dropped by default in operations
+### Attributes silently dropped when they conflict
 ```python
-result = da1 + da2  # result.attrs == {}
-with xr.set_options(keep_attrs=True):
-    result = da1 + da2  # attrs preserved
+# Identical attrs are preserved, conflicting attrs are silently dropped
+da1 = xr.DataArray([1, 2], attrs={"units": "K"})
+da2 = xr.DataArray([3, 4], attrs={"units": "C"})  # different!
+result = da1 + da2  # result.attrs == {} - silently dropped
+# Fix: xr.set_options(keep_attrs=True) to always keep from first operand
 ```
 
 ### Performance: avoid iterating with .sel/.isel (#2799)

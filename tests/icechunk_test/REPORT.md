@@ -1,89 +1,88 @@
-# Icechunk Skill File Test Report
+# Icechunk Skill Assessment
 
-**Skill file**: `skills/icechunk.md`
-**Test script**: `tests/icechunk_test/test_icechunk_skill.py`
-**Date**: 2026-02-11
-**icechunk version**: >= 1.1.18 (installed via pyproject.toml)
-**zarr version**: >= 3.1.5
+Tested against: icechunk 1.1.18, zarr 3.1.5, xarray 2026.1.0
 
-## Summary
+## Verified Correct
 
-8 sections were tested. 7 worked on first attempt using the skill file examples directly. 1 had a code error in the skill file that required correction.
+- **`icechunk.in_memory_storage()`**: Works as documented
+- **`Repository.open_or_create(storage)`**: Works, idempotent as claimed
+- **`Repository.create(storage)`**: Works on fresh storage
+- **`repo.writable_session("main")`**: Returns a Session object, works as documented
+- **`repo.readonly_session(branch="main")`**: Works as documented
+- **`session.commit(message)`**: Returns snapshot ID string, works as documented
+- **`to_icechunk(ds, session, mode="w")`**: Writes xarray Dataset correctly, round-trips with `xr.open_zarr`
+- **`xr.open_zarr(session.store, consolidated=False)`**: Reads data correctly
+- **`to_icechunk(ds, session, append_dim="time")`**: Appends along dimension correctly
+- **`repo.create_tag(name, snapshot_id=snap)`**: Works as documented
+- **`repo.readonly_session(tag="v1.0")`**: Returns historical data from tagged snapshot correctly
+- **`repo.lookup_branch("main")`**: Returns correct latest snapshot ID
+- **`repo.create_branch(name, snapshot_id=snap)`**: Creates independent branch correctly
+- **Transaction context manager**: `with repo.transaction("main", message="...") as store:` works, yields `IcechunkStore`, auto-commits on exit
+- **Session becomes read-only after commit**: `session.read_only` is `True` after commit, writing to committed session raises `IcechunkError: cannot write to read-only store`
+- **New writable session needed for subsequent writes**: Confirmed
+- **Multiple groups with `mode="a"`**: Works as documented
+- **`to_icechunk` takes session, not store**: Passing `session.store` raises `AttributeError`
+- **`ds.to_zarr(session.store, zarr_format=3, consolidated=False)`**: Works for non-dask data
+- **Conflict resolution**: `ConflictError` raised on conflicting commit; `BasicConflictSolver(on_chunk_conflict=VersionSelection.UseOurs)` + `session.rebase()` resolves correctly
+- **All API names exist**: `icechunk.ConflictError`, `BasicConflictSolver`, `VersionSelection`, `VersionSelection.UseOurs`, `ConflictDetector`
+- **`RepositoryConfig` and `StorageSettings`**: Both exist and can be instantiated with the documented parameters (`unsafe_use_conditional_update`, `unsafe_use_conditional_create`)
+- **`repo.list_branches()`**: Returns `set` of branch names (e.g., `{'main', 'dev'}`)
+- **`repo.list_tags()`**: Returns `set` of tag names
+- **`repo.lookup_tag(name)`**: Returns correct snapshot ID
+- **`repo.ancestry(branch="main")`**: Works (not in skill file, but functional)
+- **Dask fork/store_dask/merge pattern**: Works correctly with `local_filesystem_storage` (not testable with `in_memory_storage` -- see Issues)
+- **`to_icechunk` with dask-backed data**: Works with `local_filesystem_storage`, handles forking internally as claimed
 
-## Examples That Worked Correctly
+## Issues Found
 
-### Section 1: Create a repository with in-memory storage
-The skill file examples for `icechunk.in_memory_storage()`, `Repository.create(storage)`, `repo.writable_session("main")`, `zarr.create_group(session.store)`, `root.create_array(...)`, and `session.commit(message)` all worked exactly as documented.
-
-### Section 2: Branching workflow
-`repo.lookup_branch("main")`, `repo.create_branch("dev", snapshot_id=...)`, writing to separate branches, and `repo.readonly_session(branch=...)` all worked correctly. `repo.list_branches()` returned the expected `{'main', 'dev'}` set.
-
-### Section 3: Tagging
-`repo.create_tag("v1.0-initial", snapshot_id=...)`, `repo.readonly_session(tag="v1.0-initial")`, `repo.list_tags()`, and `repo.lookup_tag(name)` all worked exactly as documented. Time-travel to a tagged snapshot correctly returned the original data.
-
-### Section 4: History browsing
-`repo.ancestry(branch="main")` returned an iterator of `SnapshotInfo` objects. The properties `ancestor.id`, `ancestor.message`, and `ancestor.written_at` all worked as documented. The ancestry correctly included the initial "Repository initialized" commit that icechunk creates automatically.
-
-### Section 5: Conflict resolution
-Creating two writable sessions on the same branch, committing the first, then attempting to commit the second correctly raised `icechunk.ConflictError`. Calling `session.rebase(icechunk.BasicConflictSolver(on_chunk_conflict=icechunk.VersionSelection.UseOurs))` followed by `session.commit(...)` worked exactly as documented. The "UseOurs" resolution correctly preserved the second session's value.
-
-### Section 7: Xarray integration
-`to_icechunk(ds, session, mode="w")` and `xr.open_zarr(session.store, consolidated=False)` worked correctly. The round-trip was verified with `xr.testing.assert_equal`. Note: the read-back dataset uses dask-backed arrays (lazy loading), which is expected behavior.
-
-### Section 8: Session lifecycle
-After `session.commit(...)`, `session.read_only` correctly returned `True`. Attempting to write to the committed session's store raised `IcechunkError: cannot write to read-only store`. Creating a new `repo.writable_session("main")` and writing through it worked correctly.
-
-## Examples That Were Wrong or Misleading
-
-### Section 6: Transaction context manager - INCORRECT code example
-
-**Skill file code (Quick Reference section):**
+### 1. Skill file Dask example uses `path=` instead of `name=` (WRONG)
+The Dask writes section shows:
 ```python
-with repo.transaction("main", message="Auto-commit") as store:
-    zarr.create_array(store, "data", shape=(10,), dtype=float)
+zarr_arr = zarr.create_array(session.store, path="data", ...)
 ```
-
-**Error:**
-```
-TypeError: create_array() takes 1 positional argument but 2 positional arguments (and 2 keyword-only arguments) were given
-```
-
-**Root cause:** In zarr 3, `zarr.create_array()` accepts `store` as the only positional argument. The array name/path must be passed as a keyword argument: `name="data"`.
-
-**Correct code:**
+But zarr v3 `create_array()` uses `name=`, not `path=`. This raises `TypeError: create_array() got an unexpected keyword argument 'path'`. Should be:
 ```python
-with repo.transaction("main", message="Auto-commit") as store:
-    zarr.create_array(store, name="data", shape=(10,), dtype=float)
+zarr_arr = zarr.create_array(session.store, name="data", ...)
 ```
+Note: `zarr.open_array(..., path="data")` is correct -- only `create_array` uses `name=`.
 
-This same error pattern appears in the "Write with Zarr Directly" example under Patterns & Idioms, where `root.create_array("temperature", shape=..., ...)` is used. However, when called on a `zarr.Group` object (as opposed to `zarr.create_array` at module level), the first positional argument IS the name, so `root.create_array("temperature", ...)` works correctly. The inconsistency is that `zarr.create_array(store, "name", ...)` does NOT work the same way as `group.create_array("name", ...)`.
+### 2. `NoChangesToCommitError` does not exist as a named exception
+The skill file mentions "commit raises NoChangesToCommitError with no changes" but:
+- The actual error is `icechunk.IcechunkError` with message "cannot commit, no changes made to the session"
+- `icechunk.NoChangesToCommitError` does not exist as a module attribute
+- Should reference `IcechunkError` instead, or note the message pattern to catch
 
-**Recommendation:** Fix the transaction example to use `name=` keyword argument:
+### 3. `ConflictDetector` with `rebase_with=` did not auto-rebase in testing
 ```python
-with repo.transaction("main", message="Auto-commit") as store:
-    zarr.create_array(store, name="data", shape=(10,), dtype=float)
+session.commit("Update", rebase_with=icechunk.ConflictDetector())
 ```
+Raised `RebaseFailedError` even for writes to distant array elements (element 0 vs element 199 in a 200-element array). This is because `ConflictDetector` operates at chunk granularity, not element granularity. With default chunk sizes, all elements may be in the same chunk. The API exists and is callable, but the example may give false expectations about what "non-conflicting" means.
 
-## What Was Missing From the Skill File
+### 4. Dask patterns (fork, store_dask, to_icechunk with dask) fail with `in_memory_storage`
+Both the manual fork/store_dask/merge pattern and `to_icechunk` with dask-backed data fail when using `in_memory_storage()`. They work correctly with `local_filesystem_storage()`. The error is `IcechunkError: Object at location snapshots/... not found: No data in memory found`. This is because dask workers can't access the in-memory storage from separate threads/processes. The skill file does not mention this limitation.
 
-1. **No mention of the automatic "Repository initialized" commit.** When you create a repository, icechunk automatically creates an initial snapshot with the message "Repository initialized". This shows up in ancestry listings and affects snapshot count expectations. The skill file should mention this.
+### 5. `consolidated=True` does not raise an error (minor)
+The skill says "consolidated=True writes a key that hides new groups" but in testing, `xr.open_zarr(store, consolidated=True)` did NOT raise an error and returned correct data. The default (no `consolidated` arg) also works fine. The advice to always use `consolidated=False` is still good practice, but the claim that `True` causes problems may be overstated or version-dependent.
 
-2. **The `zarr.open_array(store, path=...)` pattern is not documented.** The skill file shows how to create arrays and groups, but does not show how to open an existing array from a store by path. This is essential for branching workflows (open array on a different branch to read/modify it).
+### 6. `mode="w"` for second group does not destroy first group (minor nuance)
+The skill implies mode="w" for the second group would destroy the first group, motivating the need for mode="a". In testing, using mode="w" for group B did NOT destroy group A. The groups are independent. However, using mode="a" is still best practice since mode="w" on the ROOT (no group specified) WOULD wipe everything.
 
-3. **`session.store` behavior after commit is not fully explained.** The skill file says "session is read-only after commit" but does not clarify that `session.store` also becomes read-only (writes to the store raise `IcechunkError`). It would help to be explicit that the store object inherits the session's read-only state.
+## Missing Content
 
-4. **No explicit examples of `zarr.open_array` or `zarr.open_group` for reading via store.** The "Read with xarray" pattern is documented, but reading individual zarr arrays from a store (without xarray) is not shown.
+- **Dask operations don't work with `in_memory_storage()`**: Should note this limitation explicitly since `in_memory_storage()` is prominently featured for testing. Dask fork/store_dask and to_icechunk with dask arrays require persistent storage (local filesystem or object store).
+- **`list_branches()` and `list_tags()`**: Not mentioned in the skill file but are useful for discovery. They return `set` types.
+- **`lookup_tag(name)`**: Not mentioned but useful paired with `create_tag`.
+- **`repo.ancestry(branch=)`**: Useful for history browsing, not mentioned.
+- **`session.read_only` property**: Not explicitly mentioned (the behavior is described but not the property name).
+- **`to_icechunk` with `mode="w"` on empty repo fails with dask**: First write to a fresh repo with dask-backed data fails even with local filesystem storage. Workaround: do a non-dask initial write first, or use the manual fork/store_dask pattern.
 
-## Suggestions for Improving the Skill File
+## Overall Assessment
 
-1. **Fix the transaction context manager example** to use `name=` keyword argument for `zarr.create_array()`. This is the only code error found.
+The skill file is **largely accurate and well-structured**. The core workflows (create repo, write xarray data, read back, append, branch, tag, time travel, conflict resolution, transactions) all work as documented. The main issues are:
 
-2. **Add a note about the auto-created initial snapshot** ("Repository initialized") so users are not surprised when they see it in ancestry listings.
+1. **One wrong keyword** in the Dask example (`path=` should be `name=`) -- easy fix
+2. **`NoChangesToCommitError` doesn't exist** as a named exception -- should reference `IcechunkError`
+3. **Missing note about dask + in_memory_storage incompatibility** -- important for users following the skill file's testing pattern
+4. The `consolidated=False` advice is good but the consequences of `True` are overstated
 
-3. **Add a "Read with Zarr Directly" section** showing `zarr.open_array(session.store, path="temperature")` and `zarr.open_group(session.store)` patterns, parallel to the existing "Write with Zarr Directly" section.
-
-4. **Clarify that `session.store` becomes read-only after commit** in the gotchas section, not just the session itself.
-
-5. **Add a note that `xr.open_zarr` returns dask-backed (lazy) arrays** by default. This is standard xarray/zarr behavior but worth noting since users may expect eager arrays when working with small in-memory datasets.
-
-6. **Consider adding `zarr_format=3` to the `to_zarr` examples.** The skill file mentions `zarr_format=3` in the anti-patterns section but some `to_zarr` calls in examples omit it. Since icechunk requires zarr v3 format, this should be consistent.
+50 of 52 test assertions passed. The 2 failures were both dask-related and confirmed to be `in_memory_storage` limitations (they pass with `local_filesystem_storage`).

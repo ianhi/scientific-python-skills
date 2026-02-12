@@ -27,9 +27,9 @@ subset = df.loc[mask]      # No copy needed
 arr = df.to_numpy().copy()  # guaranteed writable
 ```
 
-**Anti-patterns (SILENT behavior):**
+**Anti-patterns:**
 ```python
-# SILENT - chained assignment does NOT modify df (ChainedAssignmentError)
+# WARNING - chained assignment raises ChainedAssignmentError, df unchanged
 df["col"][df["other"] > 5] = 100  # df unchanged!
 # RIGHT: df.loc[df["other"] > 5, "col"] = 100
 

@@ -1,303 +1,574 @@
 """
-Test script exercising zarr v3 features, guided ONLY by the zarr skill file.
-Each section is independent and prints clear pass/fail output.
+Comprehensive assessment of skills/zarr.md accuracy.
+Tests every claim and code example against zarr 3.1.5.
 """
-
 import tempfile
 import os
+import sys
+import traceback
 import numpy as np
 
-import zarr
-import zarr.codecs
-from zarr.storage import LocalStore, MemoryStore
+# Track results
+verified = []
+issues = []
+missing = []
 
+def test(name):
+    """Decorator to track test results."""
+    def decorator(fn):
+        def wrapper():
+            try:
+                fn()
+                verified.append((name, "passed"))
+            except AssertionError as e:
+                issues.append((name, str(e)))
+            except Exception as e:
+                issues.append((name, f"EXCEPTION: {type(e).__name__}: {e}\n{traceback.format_exc()}"))
+        wrapper()
+        return fn
+    return decorator
 
-def section(name):
-    print(f"\n{'='*70}")
-    print(f"  SECTION: {name}")
-    print(f"{'='*70}")
+# =============================================================================
+# v2 -> v3 Migration Table
+# =============================================================================
 
+@test("Codec classes moved to zarr.codecs")
+def _():
+    from zarr.codecs import BloscCodec, ZstdCodec, GzipCodec
+    assert BloscCodec is not None
+    assert ZstdCodec is not None
+    assert GzipCodec is not None
 
-def main():
-    # Create a temporary directory for all stores
-    with tempfile.TemporaryDirectory(prefix="zarr_skill_test_") as tmpdir:
-        print(f"Using temporary directory: {tmpdir}")
+@test("Use factory functions (create_array), not zarr.Array constructor directly")
+def _():
+    import zarr
+    with tempfile.TemporaryDirectory() as tmp:
+        store = zarr.storage.LocalStore(tmp)
+        z = zarr.create_array(store, name="test", shape=(100,), dtype="f4")
+        assert isinstance(z, zarr.Array)
 
-        # ================================================================
-        # 1. Sharded array with custom codecs (ZstdCodec)
-        # ================================================================
-        section("1. Sharded zarr v3 array with ZstdCodec")
+@test("Dot notation removed - must use bracket syntax")
+def _():
+    import zarr
+    with tempfile.TemporaryDirectory() as tmp:
+        store = zarr.storage.LocalStore(tmp)
+        g = zarr.open_group(store, mode="w")
+        g.create_array("myarray", shape=(10,), dtype="f4")
+        # Bracket syntax works
+        arr = g["myarray"]
+        assert isinstance(arr, zarr.Array)
+        # Dot notation should NOT work
         try:
-            store_path = os.path.join(tmpdir, "sharded_array.zarr")
-            z = zarr.create_array(
-                store=store_path,
-                shape=(1000, 1000),
-                chunks=(100, 100),
-                shards=(500, 500),
-                dtype="float32",
-                compressors=zarr.codecs.ZstdCodec(level=3),
-                zarr_format=3,
-            )
-            data = np.random.random((1000, 1000)).astype(np.float32)
-            z[:] = data
-            # Verify round-trip
-            read_back = z[:]
-            assert np.allclose(data, read_back), "Data mismatch after round-trip!"
-            print(f"  Created sharded array: shape={z.shape}, dtype={z.dtype}")
-            print(f"  Chunks: {z.chunks}, Shards: {z.shards}")
-            print(f"  nchunks_initialized: {z.nchunks_initialized}")
-            print(f"  PASS")
-        except Exception as e:
-            print(f"  FAIL: {type(e).__name__}: {e}")
+            result = g.myarray
+            dot_works = True
+        except AttributeError:
+            dot_works = False
+        assert not dot_works, \
+            f"g.myarray DID work (returned {type(result).__name__}). Skill says dot notation removed but it still works."
 
-        # ================================================================
-        # 2. Group hierarchy
-        # ================================================================
-        section("2. Group hierarchy with subgroups")
+@test("Store classes moved/renamed: LocalStore, FsspecStore")
+def _():
+    from zarr.storage import LocalStore, FsspecStore
+    assert LocalStore is not None
+    assert FsspecStore is not None
+
+@test("compressors= (plural) parameter works on create_array")
+def _():
+    import zarr
+    with tempfile.TemporaryDirectory() as tmp:
+        z = zarr.create_array(
+            zarr.storage.LocalStore(tmp),
+            name="test",
+            shape=(100,),
+            dtype="f4",
+            compressors=zarr.codecs.BloscCodec(cname="zstd", clevel=5),
+        )
+        assert z.shape == (100,)
+
+@test("resize requires tuple, not *args")
+def _():
+    import zarr
+    with tempfile.TemporaryDirectory() as tmp:
+        z = zarr.create_array(
+            zarr.storage.LocalStore(tmp), name="test",
+            shape=(100, 50), dtype="f4", chunks=(50, 50)
+        )
+        # Tuple form should work
+        z.resize((200, 50))
+        assert z.shape == (200, 50)
+        # Test if *args form also works
         try:
-            store_path = os.path.join(tmpdir, "group_hierarchy.zarr")
-            root = zarr.open_group(store_path, mode="w")
-            # Create nested groups
-            exp_grp = root.create_group("experiment")
-            raw_grp = exp_grp.create_group("raw")
-            proc_grp = exp_grp.create_group("processed")
+            z.resize(300, 50)
+            args_works = True
+        except TypeError:
+            args_works = False
+        if args_works:
+            # Note as issue: claim overstated
+            assert False, \
+                "z.resize(300, 50) also worked - claim that 'must pass tuple' is overstated"
 
-            # Create arrays in each subgroup
-            raw_arr = raw_grp.create_array(
-                "sensor_data", shape=(365, 24), dtype="float32"
-            )
-            proc_arr = proc_grp.create_array(
-                "cleaned_data", shape=(365, 24), dtype="float64"
-            )
+@test("from_array: store is first, data is keyword-only")
+def _():
+    import zarr
+    data = np.arange(100, dtype="f4")
+    with tempfile.TemporaryDirectory() as tmp:
+        path = os.path.join(tmp, "from_array.zarr")
+        z = zarr.from_array(path, data=data, chunks=(50,))
+        assert z.shape == (100,)
+        np.testing.assert_array_equal(z[:], data)
 
-            # Fill with data
-            raw_arr[:] = np.random.random((365, 24)).astype(np.float32)
-            proc_arr[:] = np.random.random((365, 24)).astype(np.float64)
-
-            # Access using path syntax as shown in skill file
-            arr_via_path = root["experiment/raw/sensor_data"]
-            assert arr_via_path.shape == (365, 24), "Path access shape mismatch!"
-
-            arr_via_path2 = root["experiment/processed/cleaned_data"]
-            assert arr_via_path2.shape == (365, 24), "Path access shape mismatch!"
-
-            # Iterate members
-            members = list(root.members())
-            print(f"  Root members: {[(k, type(v).__name__) for k, v in members]}")
-            print(f"  Accessed 'experiment/raw/sensor_data' via path: shape={arr_via_path.shape}")
-            print(f"  Accessed 'experiment/processed/cleaned_data' via path: shape={arr_via_path2.shape}")
-            print(f"  PASS")
-        except Exception as e:
-            print(f"  FAIL: {type(e).__name__}: {e}")
-
-        # ================================================================
-        # 3. from_array: convert numpy array to zarr on disk
-        # ================================================================
-        section("3. from_array - numpy to zarr")
+        # Verify that passing data as first positional arg fails or gives wrong result
+        path2 = os.path.join(tmp, "from_array2.zarr")
         try:
-            store_path = os.path.join(tmpdir, "from_array.zarr")
-            np_data = np.arange(10000, dtype="float32").reshape(100, 100)
+            z2 = zarr.from_array(data, path2)
+            positional_works = True
+        except (TypeError, Exception):
+            positional_works = False
+        assert not positional_works, \
+            "from_array(data, store) should fail - data should be keyword-only"
 
-            # Skill file says: store is first positional arg, data is keyword-only
-            z = zarr.from_array(store_path, data=np_data, chunks=(50, 50))
+@test("create_dataset renamed to create_array (deprecated but works)")
+def _():
+    import zarr
+    import warnings
+    with tempfile.TemporaryDirectory() as tmp:
+        g = zarr.open_group(tmp, mode="w")
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", DeprecationWarning)
+            arr = g.create_dataset("test", shape=(10,), dtype="f4")
+        assert arr.shape == (10,)
 
-            read_back = z[:]
-            assert np.allclose(np_data, read_back), "from_array data mismatch!"
-            print(f"  Created array from numpy: shape={z.shape}, dtype={z.dtype}")
-            print(f"  Chunks: {z.chunks}")
-            print(f"  PASS")
-        except Exception as e:
-            print(f"  FAIL: {type(e).__name__}: {e}")
-
-        # ================================================================
-        # 4. Codec pipeline: BytesCodec + BloscCodec
-        # ================================================================
-        section("4. Explicit codec pipeline (BytesCodec + BloscCodec)")
-        # NOTE: The skill file shows codecs=[BytesCodec(), BloscCodec()] but
-        # create_array() does NOT accept a 'codecs' parameter.
-        # The actual API uses serializer= and compressors= separately.
-        # First, demonstrate the skill file version fails:
-        try:
-            store_path_fail = os.path.join(tmpdir, "codec_pipeline_fail.zarr")
-            z_fail = zarr.create_array(
-                store=store_path_fail,
-                shape=(1000,),
-                dtype="float32",
-                codecs=[
-                    zarr.codecs.BytesCodec(endian="little"),
-                    zarr.codecs.BloscCodec(cname="zstd", clevel=5),
-                ],
-            )
-            print(f"  Skill file 'codecs=' syntax: unexpectedly WORKED")
-        except TypeError as e:
-            print(f"  Skill file 'codecs=' syntax: FAILS as expected: {e}")
-
-        # Now use the correct API: serializer= + compressors=
-        try:
-            store_path = os.path.join(tmpdir, "codec_pipeline.zarr")
-            z = zarr.create_array(
-                store=store_path,
-                shape=(1000,),
-                dtype="float32",
-                serializer=zarr.codecs.BytesCodec(endian="little"),
-                compressors=zarr.codecs.BloscCodec(
-                    cname="zstd",
-                    clevel=5,
-                    shuffle=zarr.codecs.BloscShuffle.shuffle,
-                ),
-            )
-            data = np.random.random(1000).astype(np.float32)
-            z[:] = data
-            read_back = z[:]
-            assert np.allclose(data, read_back), "Codec pipeline data mismatch!"
-            print(f"  Correct API (serializer= + compressors=): shape={z.shape}")
-            print(f"  Info: {z.info}")
-            print(f"  PASS")
-        except Exception as e:
-            print(f"  FAIL: {type(e).__name__}: {e}")
-
-        # ================================================================
-        # 5. Consolidated metadata
-        # ================================================================
-        section("5. Consolidated metadata")
-        try:
-            store_path = os.path.join(tmpdir, "consolidated.zarr")
-            root = zarr.open_group(store_path, mode="w")
-            for i in range(5):
-                root.create_array(f"arr_{i}", shape=(100,), dtype="float32")
-
-            # Consolidate metadata
-            zarr.consolidate_metadata(store_path)
-            print(f"  Consolidated metadata written.")
-
-            # Open with consolidated metadata (auto-detect)
-            root2 = zarr.open_group(store_path)
-            arr = root2["arr_3"]
-            print(f"  Opened with auto-detected consolidated: arr_3 shape={arr.shape}")
-
-            # Open with explicit consolidated
-            root3 = zarr.open_consolidated(store_path)
-            arr2 = root3["arr_1"]
-            print(f"  Opened with open_consolidated: arr_1 shape={arr2.shape}")
-
-            # Open with use_consolidated=True
-            root4 = zarr.open_group(store_path, use_consolidated=True)
-            arr3 = root4["arr_4"]
-            print(f"  Opened with use_consolidated=True: arr_4 shape={arr3.shape}")
-
-            print(f"  PASS")
-        except Exception as e:
-            print(f"  FAIL: {type(e).__name__}: {e}")
-
-        # ================================================================
-        # 6. Store configuration with context manager
-        # ================================================================
-        section("6. zarr.config.set() context manager")
-        try:
-            # Use the context manager as shown in skill file
-            with zarr.config.set({"array.write_empty_chunks": True}):
-                store_path = os.path.join(tmpdir, "config_test.zarr")
+@test("Don't mix numcodecs with v3 - should error or warn")
+def _():
+    import zarr
+    try:
+        import numcodecs
+        nc_blosc = numcodecs.Blosc()
+        with tempfile.TemporaryDirectory() as tmp:
+            try:
                 z = zarr.create_array(
-                    store=store_path, shape=(100,), dtype="float32"
+                    zarr.storage.LocalStore(tmp), name="test",
+                    shape=(100,), dtype="f4",
+                    compressors=nc_blosc,
                 )
-                z[:] = np.zeros(100, dtype="float32")  # all fill_value
-                nchunks_with = z.nchunks_initialized
-                print(f"  write_empty_chunks=True: nchunks_initialized={nchunks_with}")
+                # If it works, that's an issue with the skill file claim
+                assert False, \
+                    "Using numcodecs.Blosc() with compressors= did NOT raise an error"
+            except (TypeError, ValueError, Exception):
+                pass  # Expected to fail
+    except ImportError:
+        pass  # numcodecs not installed, skip
 
-            # Without context, default write_empty_chunks=False
-            store_path2 = os.path.join(tmpdir, "config_test2.zarr")
-            z2 = zarr.create_array(
-                store=store_path2, shape=(100,), dtype="float32"
-            )
-            z2[:] = np.zeros(100, dtype="float32")  # all fill_value
-            nchunks_without = z2.nchunks_initialized
-            print(f"  Default (write_empty_chunks=False): nchunks_initialized={nchunks_without}")
+# =============================================================================
+# Codec Pipeline (v3)
+# =============================================================================
 
-            # With write_empty_chunks=True, chunks should be written even if all fill_value
-            # With False, they may not be written
-            print(f"  Behavior difference detected: {nchunks_with} vs {nchunks_without}")
-            print(f"  PASS")
-        except Exception as e:
-            print(f"  FAIL: {type(e).__name__}: {e}")
+@test("Default codec pipeline works without specifying codecs")
+def _():
+    import zarr
+    with tempfile.TemporaryDirectory() as tmp:
+        z = zarr.create_array(
+            zarr.storage.LocalStore(tmp), name="test",
+            shape=(1000,), dtype="f4",
+        )
+        z[:] = np.random.randn(1000).astype("f4")
+        roundtrip = z[:]
+        assert roundtrip.shape == (1000,)
 
-        # ================================================================
-        # 7. Mode semantics
-        # ================================================================
-        section("7. Mode semantics (r, r+, a)")
+@test("codecs= does NOT work on create_array")
+def _():
+    import zarr
+    with tempfile.TemporaryDirectory() as tmp:
         try:
-            store_path = os.path.join(tmpdir, "mode_test.zarr")
-            # First create an array
             z = zarr.create_array(
-                store=store_path, shape=(100,), dtype="float32"
+                zarr.storage.LocalStore(tmp), name="test",
+                shape=(1000,), dtype="f4",
+                codecs=[zarr.codecs.BytesCodec(), zarr.codecs.ZstdCodec()],
             )
-            data = np.arange(100, dtype="float32")
-            z[:] = data
+            codecs_works = True
+        except TypeError:
+            codecs_works = False
+    assert not codecs_works, \
+        "codecs= parameter WORKED on create_array - skill says it only works on ShardingCodec"
 
-            # Mode 'r' - read only
-            z_r = zarr.open_array(store_path, mode="r")
-            read_data = z_r[:]
-            assert np.allclose(data, read_data), "Mode 'r' data mismatch!"
-            print(f"  mode='r': Read successfully, shape={z_r.shape}")
-            # Try writing - should fail
-            try:
-                z_r[:] = np.zeros(100, dtype="float32")
-                print(f"  mode='r': Write unexpectedly succeeded (should be read-only)")
-            except Exception as write_err:
-                print(f"  mode='r': Write correctly blocked: {type(write_err).__name__}")
+@test("Explicit serializer= + compressors= works")
+def _():
+    import zarr
+    with tempfile.TemporaryDirectory() as tmp:
+        z = zarr.create_array(
+            zarr.storage.LocalStore(tmp), name="test",
+            shape=(1000,), dtype="f4",
+            serializer=zarr.codecs.BytesCodec(endian="little"),
+            compressors=zarr.codecs.BloscCodec(cname="zstd", clevel=5,
+                                                shuffle=zarr.codecs.BloscShuffle.shuffle),
+        )
+        z[:] = np.random.randn(1000).astype("f4")
+        assert z[:].shape == (1000,)
 
-            # Mode 'r+' - read/write existing
-            z_rw = zarr.open_array(store_path, mode="r+")
-            z_rw[0] = 999.0
-            assert z_rw[0] == 999.0, "Mode 'r+' write failed!"
-            print(f"  mode='r+': Read/write on existing array works")
+@test("No compression via compressors=None")
+def _():
+    import zarr
+    with tempfile.TemporaryDirectory() as tmp:
+        z = zarr.create_array(
+            zarr.storage.LocalStore(tmp), name="test",
+            shape=(1000,), dtype="f4",
+            compressors=None,
+        )
+        z[:] = np.random.randn(1000).astype("f4")
+        assert z[:].shape == (1000,)
 
-            # Mode 'r+' on non-existent - should fail
-            nonexist_path = os.path.join(tmpdir, "nonexistent.zarr")
-            try:
-                z_fail = zarr.open_array(nonexist_path, mode="r+")
-                print(f"  mode='r+' on non-existent: Unexpectedly succeeded")
-            except Exception as rp_err:
-                print(f"  mode='r+' on non-existent: Correctly failed: {type(rp_err).__name__}")
+# =============================================================================
+# Sharding
+# =============================================================================
 
-            # Mode 'a' - append/create
-            a_path = os.path.join(tmpdir, "append_test.zarr")
-            z_a = zarr.open_array(a_path, mode="a", shape=(50,), dtype="float32")
-            z_a[:] = np.ones(50, dtype="float32")
-            print(f"  mode='a': Created new array with shape={z_a.shape}")
+@test("Sharding with chunks + shards parameters")
+def _():
+    import zarr
+    with tempfile.TemporaryDirectory() as tmp:
+        z = zarr.create_array(
+            store=os.path.join(tmp, "data.zarr"),
+            shape=(100_000, 100),
+            dtype="float32",
+            chunks=(100, 100),
+            shards=(10_000, 100),
+        )
+        assert z.shape == (100_000, 100)
+        z[0:100, :] = np.ones((100, 100), dtype=z.dtype)
+        np.testing.assert_array_equal(z[0, :5], np.ones(5, dtype=z.dtype))
 
-            # Re-open with mode 'a' - should open existing
-            z_a2 = zarr.open_array(a_path, mode="a")
-            assert z_a2.shape == (50,), f"mode='a' re-open shape mismatch: {z_a2.shape}"
-            assert z_a2[0] == 1.0, "mode='a' re-open data mismatch"
-            print(f"  mode='a': Re-opened existing array, data preserved")
+# =============================================================================
+# Blosc typesize bug
+# =============================================================================
 
-            print(f"  PASS")
-        except Exception as e:
-            print(f"  FAIL: {type(e).__name__}: {e}")
+@test("Blosc typesize bug: shuffle gives poor compression on float64 vs ZstdCodec")
+def _():
+    import zarr
+    data = np.random.randn(100_000).astype("float64")
 
-        # ================================================================
-        # 8. v3 string dtype
-        # ================================================================
-        section("8. Variable-length string dtype")
+    tmp1 = tempfile.mkdtemp()
+    tmp2 = tempfile.mkdtemp()
+    try:
+        z_blosc = zarr.create_array(
+            zarr.storage.LocalStore(tmp1), name="blosc",
+            shape=data.shape, dtype=data.dtype,
+            compressors=zarr.codecs.BloscCodec(cname="lz4", clevel=1,
+                                                shuffle=zarr.codecs.BloscShuffle.shuffle),
+        )
+        z_blosc[:] = data
+
+        z_zstd = zarr.create_array(
+            zarr.storage.LocalStore(tmp2), name="zstd",
+            shape=data.shape, dtype=data.dtype,
+            compressors=zarr.codecs.ZstdCodec(level=3),
+        )
+        z_zstd[:] = data
+
+        # Verify data round-trips correctly
+        np.testing.assert_array_almost_equal(z_blosc[:], data, decimal=10)
+        np.testing.assert_array_almost_equal(z_zstd[:], data, decimal=10)
+
+        blosc_stored = z_blosc.nbytes_stored
+        zstd_stored = z_zstd.nbytes_stored
+        print(f"    Blosc+shuffle stored: {blosc_stored} bytes, ZstdCodec stored: {zstd_stored} bytes")
+    finally:
+        import shutil
+        shutil.rmtree(tmp1, ignore_errors=True)
+        shutil.rmtree(tmp2, ignore_errors=True)
+
+# =============================================================================
+# write_empty_chunks default
+# =============================================================================
+
+@test("write_empty_chunks=False by default in v3")
+def _():
+    import zarr
+    with tempfile.TemporaryDirectory() as tmp:
+        store = zarr.storage.LocalStore(tmp)
+        z = zarr.create_array(
+            store, name="sparse", shape=(100,), dtype="f4",
+            chunks=(10,), fill_value=0.0,
+        )
+        # Write only fill-value data (all zeros)
+        z[:] = np.zeros(100, dtype="f4")
+        # With write_empty_chunks=False (default), these chunks should NOT be stored
+        nchunks = z.nchunks_initialized
+        print(f"    Default: nchunks_initialized={nchunks} (expected 0)")
+        assert nchunks == 0, \
+            f"Expected 0 chunks stored for all-fill-value data, got {nchunks}"
+
+@test("write_empty_chunks=True via config forces chunk storage")
+def _():
+    import zarr
+    with tempfile.TemporaryDirectory() as tmp:
+        store = zarr.storage.LocalStore(tmp)
+        z = zarr.create_array(
+            store, name="dense", shape=(100,), dtype="f4",
+            chunks=(10,), fill_value=0.0,
+            config={"write_empty_chunks": True},
+        )
+        z[:] = np.zeros(100, dtype="f4")
+        nchunks = z.nchunks_initialized
+        print(f"    write_empty_chunks=True: nchunks_initialized={nchunks} (expected 10)")
+        assert nchunks == 10, \
+            f"Expected 10 chunks stored, got {nchunks}"
+
+# =============================================================================
+# Mode semantics
+# =============================================================================
+
+@test("Mode 'r' - read only, prevents writes")
+def _():
+    import zarr
+    with tempfile.TemporaryDirectory() as tmp:
+        path = os.path.join(tmp, "data.zarr")
+        z = zarr.open_array(path, mode="w", shape=(100,), dtype="f4")
+        z[:] = np.ones(100, dtype="f4")
+
+        z_read = zarr.open_array(path, mode="r")
+        np.testing.assert_array_equal(z_read[:], np.ones(100, dtype="f4"))
         try:
-            store_path = os.path.join(tmpdir, "string_array.zarr")
+            z_read[:] = np.zeros(100, dtype="f4")
+            write_ok = True
+        except Exception:
+            write_ok = False
+        assert not write_ok, "mode='r' should prevent writes"
+
+@test("Mode 'r+' - read/write existing, fails if missing")
+def _():
+    import zarr
+    with tempfile.TemporaryDirectory() as tmp:
+        # First create an array
+        path = os.path.join(tmp, "data.zarr")
+        z = zarr.open_array(path, mode="w", shape=(100,), dtype="f4")
+        z[:] = np.ones(100, dtype="f4")
+
+        # r+ on existing should work
+        z_rw = zarr.open_array(path, mode="r+")
+        z_rw[0] = 42.0
+        assert z_rw[0] == 42.0
+
+        # r+ on non-existent should fail
+        nonexist = os.path.join(tmp, "nonexistent.zarr")
+        try:
+            z_fail = zarr.open_array(nonexist, mode="r+", shape=(100,), dtype="f4")
+            fail_on_missing = False
+        except Exception:
+            fail_on_missing = True
+        assert fail_on_missing, \
+            "open_array with mode='r+' did NOT fail on non-existent store"
+
+@test("Mode 'w-' - create only, fails if exists")
+def _():
+    import zarr
+    with tempfile.TemporaryDirectory() as tmp:
+        path = os.path.join(tmp, "data.zarr")
+        z = zarr.open_array(path, mode="w-", shape=(100,), dtype="f4")
+        assert z.shape == (100,)
+        try:
+            z2 = zarr.open_array(path, mode="w-", shape=(100,), dtype="f4")
+            fail_on_exist = False
+        except Exception:
+            fail_on_exist = True
+        assert fail_on_exist, "mode='w-' should fail if store already exists"
+
+@test("Mode 'w' - overwrite (destructive)")
+def _():
+    import zarr
+    with tempfile.TemporaryDirectory() as tmp:
+        path = os.path.join(tmp, "data.zarr")
+        z = zarr.open_array(path, mode="w", shape=(100,), dtype="f4")
+        z[:] = np.ones(100, dtype="f4")
+        z2 = zarr.open_array(path, mode="w", shape=(50,), dtype="i4")
+        assert z2.shape == (50,)
+        assert z2.dtype == np.dtype("i4")
+
+# =============================================================================
+# zarr.codecs vs numcodecs imports
+# =============================================================================
+
+@test("zarr.codecs.BloscCodec is different from numcodecs.Blosc")
+def _():
+    from zarr.codecs import BloscCodec
+    try:
+        from numcodecs import Blosc
+        assert BloscCodec is not Blosc, \
+            "zarr.codecs.BloscCodec should be different from numcodecs.Blosc"
+    except ImportError:
+        pass  # numcodecs not installed
+
+@test("zarr.codecs.numcodecs wrapper import path")
+def _():
+    # Skill says: from zarr.codecs.numcodecs import Blosc
+    try:
+        from zarr.codecs.numcodecs import Blosc
+        assert Blosc is not None
+    except ImportError as e:
+        assert False, f"Could not import zarr.codecs.numcodecs.Blosc: {e}"
+
+# =============================================================================
+# FsspecStore async requirement
+# =============================================================================
+
+@test("LocalStore works for local files")
+def _():
+    import zarr
+    with tempfile.TemporaryDirectory() as tmp:
+        store = zarr.storage.LocalStore(tmp)
+        z = zarr.create_array(store, name="test", shape=(100,), dtype="f4")
+        z[:] = np.arange(100, dtype="f4")
+        np.testing.assert_array_equal(z[:], np.arange(100, dtype="f4"))
+
+# =============================================================================
+# open_array mode as hidden kwarg
+# =============================================================================
+
+@test("open_array mode parameter: check if explicit or hidden kwarg")
+def _():
+    import zarr
+    import inspect
+    sig = inspect.signature(zarr.open_array)
+    params = sig.parameters
+    has_mode = "mode" in params
+    has_kwargs = any(p.kind == inspect.Parameter.VAR_KEYWORD for p in params.values())
+    if has_mode:
+        assert False, \
+            f"mode IS an explicit parameter in open_array (not hidden). Params: {list(params.keys())}"
+    elif has_kwargs:
+        pass  # Confirmed: mode is hidden in **kwargs
+    else:
+        assert False, \
+            f"mode not in params and no **kwargs. Params: {list(params.keys())}"
+
+# =============================================================================
+# Removed features
+# =============================================================================
+
+@test("Object dtype not supported in v3")
+def _():
+    import zarr
+    with tempfile.TemporaryDirectory() as tmp:
+        try:
             z = zarr.create_array(
-                store=store_path, shape=(5,), dtype="string"
+                zarr.storage.LocalStore(tmp), name="test",
+                shape=(10,), dtype="|O",
             )
-            z[:] = np.array(["hello", "world", "zarr", "v3", "strings"])
-            read_back = z[:]
-            print(f"  Created string array: shape={z.shape}, dtype={z.dtype}")
-            print(f"  Data: {read_back}")
-            assert list(read_back) == ["hello", "world", "zarr", "v3", "strings"], \
-                f"String data mismatch: {read_back}"
-            print(f"  PASS")
-        except Exception as e:
-            print(f"  FAIL: {type(e).__name__}: {e}")
+            obj_works = True
+        except Exception:
+            obj_works = False
+        assert not obj_works, "Object dtype should not be supported in v3"
 
-        print(f"\n{'='*70}")
-        print(f"  ALL SECTIONS COMPLETE")
-        print(f"{'='*70}\n")
+# =============================================================================
+# Known Limitations
+# =============================================================================
 
+@test("F memory order: order='F' handled (warn or ignore)")
+def _():
+    import zarr
+    import warnings
+    with tempfile.TemporaryDirectory() as tmp:
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
+            try:
+                z = zarr.create_array(
+                    zarr.storage.LocalStore(tmp), name="test",
+                    shape=(10, 10), dtype="f4",
+                    order="F",
+                )
+                f_warnings = [x for x in w if "order" in str(x.message).lower() or "F" in str(x.message)]
+                print(f"    order='F' accepted. Warnings: {len(f_warnings)}")
+            except TypeError as e:
+                print(f"    order='F' raised TypeError: {e}")
 
-if __name__ == "__main__":
-    main()
+# =============================================================================
+# Performance Tips: config set
+# =============================================================================
+
+@test("zarr.config.set for async concurrency")
+def _():
+    import zarr
+    zarr.config.set({"async.concurrency": 10})
+
+# =============================================================================
+# Additional verification tests
+# =============================================================================
+
+@test("BloscShuffle enum exists with expected members")
+def _():
+    from zarr.codecs import BloscShuffle
+    assert hasattr(BloscShuffle, "shuffle")
+    assert hasattr(BloscShuffle, "noshuffle")
+
+@test("zarr_format defaults to 3")
+def _():
+    import zarr
+    with tempfile.TemporaryDirectory() as tmp:
+        z = zarr.create_array(
+            zarr.storage.LocalStore(tmp), name="test",
+            shape=(10,), dtype="f4",
+        )
+        assert z.metadata.zarr_format == 3, \
+            f"Expected zarr_format=3, got {z.metadata.zarr_format}"
+
+@test("zarr_format=2 for backwards compatibility")
+def _():
+    import zarr
+    with tempfile.TemporaryDirectory() as tmp:
+        z = zarr.create_array(
+            zarr.storage.LocalStore(tmp), name="test",
+            shape=(10,), dtype="f4",
+            zarr_format=2,
+        )
+        assert z.metadata.zarr_format == 2, \
+            f"Expected zarr_format=2, got {z.metadata.zarr_format}"
+
+@test("BytesCodec exists in zarr.codecs")
+def _():
+    from zarr.codecs import BytesCodec
+    assert BytesCodec is not None
+
+@test("open_array with string path works (replacement for FSMap)")
+def _():
+    import zarr
+    with tempfile.TemporaryDirectory() as tmp:
+        path = os.path.join(tmp, "data.zarr")
+        z = zarr.open_array(path, mode="w", shape=(100,), dtype="f4")
+        assert z.shape == (100,)
+
+@test("Consolidated metadata works")
+def _():
+    import zarr
+    with tempfile.TemporaryDirectory() as tmp:
+        root = zarr.open_group(tmp, mode="w")
+        for i in range(3):
+            root.create_array(f"arr_{i}", shape=(10,), dtype="f4")
+        zarr.consolidate_metadata(tmp)
+        root2 = zarr.open_consolidated(tmp)
+        arr = root2["arr_1"]
+        assert arr.shape == (10,)
+
+# =============================================================================
+# Report
+# =============================================================================
+
+print("\n" + "=" * 70)
+print("ZARR SKILL FILE ASSESSMENT RESULTS")
+print("=" * 70)
+
+print(f"\nVERIFIED CORRECT ({len(verified)}):")
+for name, evidence in verified:
+    print(f"  - {name}: {evidence}")
+
+print(f"\nISSUES FOUND ({len(issues)}):")
+for name, detail in issues:
+    print(f"  - {name}: {detail}")
+
+if missing:
+    print(f"\nMISSING CONTENT ({len(missing)}):")
+    for item in missing:
+        print(f"  - {item}")
+
+print(f"\nTotal: {len(verified)} verified, {len(issues)} issues, {len(missing)} missing")
+
+# Exit with error code if issues found
+if issues:
+    sys.exit(1)

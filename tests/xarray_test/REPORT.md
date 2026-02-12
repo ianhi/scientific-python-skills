@@ -1,153 +1,74 @@
-# xarray Skill File Test Report
+# xarray Skill Assessment
 
-**Date**: 2026-02-11
-**Skill file**: `/Users/ian/Documents/dev/scientific-python-skills/skills/xarray.md`
-**Test script**: `/Users/ian/Documents/dev/scientific-python-skills/tests/xarray_test/test_xarray_skill.py`
-**xarray version**: 2026.1.0+
-**zarr version**: 3.1.5+
-**Python**: 3.12
+Tested against xarray v2026.1.0, zarr v3.1.5, dask v2026.1.2, h5netcdf v1.8.1.
 
----
+54 tests executed, 0 failures. Several skill file accuracy issues found below.
 
-## Results Summary
+## Verified Correct
 
-| # | Section | Result |
-|---|---------|--------|
-| 1 | Create Dataset with `xr.date_range(unit="s")` | PASS |
-| 2 | `apply_ufunc` with dask (`dask='parallelized'`, `output_dtypes`, `input_core_dims`, `output_core_dims`) | PASS |
-| 3 | GroupBy / Resample (`"ME"` frequency, `groupby("time.season").map(...)`, `groupby("time.month").mean()`) | PASS |
-| 4 | Write to zarr v3 (`zarr_format=3`, `BloscCodec`, `compressors=(codec,)`) | PASS |
-| 5 | `open_mfdataset` with `compat='override'`, `coords='minimal'` | PASS |
-| 6 | Encoding gotchas (`drop_encoding()` before re-saving) | PASS |
-| 7 | DataTree (`from_dict`, navigation, `subtree_with_keys`, `map_over_datasets`) | PASS |
-| 8 | `CFDatetimeCoder(time_unit="s")` passed to `decode_times=` | PASS |
+- **DataTree constructor**: `xr.DataTree(dataset=ds, children=None, name="root")` works. The `ds` param is fully removed (TypeError if used). Skill file's `dataset=` param is correct.
+- **DataTree.from_dict**: Works with hierarchical paths (`"/group1/subgroup"` etc). Children with conflicting dim sizes vs parent raise ValueError (alignment constraint).
+- **DataTree.map_over_datasets**: `dt.map_over_datasets(lambda ds: ds.mean())` works correctly.
+- **DataTree I/O**: `dt.to_zarr()` + `xr.open_datatree(path, engine="zarr")` round-trips correctly.
+- **apply_ufunc core dims**: Core dims are moved to last axis (-1), confirmed with assertion inside the function.
+- **apply_ufunc output_dtypes**: Required with `dask='parallelized'`, works as documented.
+- **apply_ufunc output_sizes**: `dask_gufunc_kwargs={"output_sizes": {...}}` works for dimension-changing functions.
+- **apply_ufunc multiple returns**: `output_core_dims=[[], []]` with `output_dtypes=[float, float]` correctly returns two arrays.
+- **apply_ufunc vectorize**: `vectorize=True` with `dask='parallelized'` works for scalar functions.
+- **map_blocks**: `xr.map_blocks(lambda block: block - block.mean(), ds)` works on chunked datasets.
+- **concat existing dim**: `xr.concat([ds1, ds2], dim="time")` joins along existing dimension.
+- **concat new dim**: `xr.concat([ds1, ds2], dim="ensemble")` creates a new dimension.
+- **merge different vars**: Combines datasets with different variable names.
+- **merge conflict detection**: Raises `MergeError` on conflicting values.
+- **combine_by_coords**: Auto-infers concat dimensions from coordinates.
+- **Custom groupers**: `BinGrouper`, `TimeResampler`, `SeasonGrouper` all import from `xarray.groupers` and work as documented.
+- **Resample freq aliases**: `"ME"` and `"YE"` work correctly. Old `"M"` raises ValueError (completely removed, not just deprecated).
+- **open_mfdataset performance**: `compat="override"`, `coords="minimal"`, `data_vars="minimal"`, `engine="h5netcdf"` all work together with `parallel=True`.
+- **Zarr v3 encoding**: `BloscCodec` from `zarr.codecs` with `compressors=(codec,)` (plural key) works correctly.
+- **drop_encoding()**: Clears encoding dict, enables clean re-write to different format/chunking.
+- **CFDatetimeCoder**: `xr.coders.CFDatetimeCoder(time_unit="s")` passed to `decode_times=` works correctly.
+- **CFDatetimeCoder(use_cftime=True)**: Constructor accepts the parameter (requires cftime package at runtime).
+- **sel() inclusive slicing**: `da.sel(x=slice(10, 30))` returns values at 10, 20, and 30 (both ends inclusive).
+- **.values vs .data**: `.data` returns dask array (lazy), `.values` triggers compute and returns numpy.
+- **concat_dim requires combine='nested'**: `open_mfdataset(concat_dim="time")` without `combine="nested"` raises ValueError.
+- **Encoding persistence**: Encoding is present after `open_zarr` and persists through operations.
+- **_FillValue=0 gotcha**: Zeros become NaN when `_FillValue=0`; `mask_and_scale=False` prevents this.
+- **String coordinates**: Object-dtype strings need `astype(str)` before writing to zarr.
+- **ds.sizes**: Works as documented replacement for `ds.dims` dict access.
+- **DataTree import**: `from xarray import DataTree` works (not from `datatree` package).
+- **use_cftime deprecation**: `open_dataset(use_cftime=True)` emits DeprecationWarning as documented.
+- **register_dataarray_accessor**: Exists for the subclassing alternative pattern.
 
-**All 8 sections passed.**
+## Issues Found
 
----
+### 1. Automatic alignment NaN gotcha is OUTDATED (High Impact)
+- **Skill file claim** (line 202-210): "a + b with partially overlapping coords fills gaps with NaN" and shows result with `x=[0,1,2,3]` including NaN.
+- **Actual behavior in v2026.1.0**: The default `arithmetic_join` is now `'inner'`, NOT `'outer'`. The result is `x=[1,2]` with values `[12, 23]` and NO NaN.
+- **Impact**: This is the first gotcha in the skill file and it's now wrong for the current version. The old behavior only occurs with `xr.set_options(arithmetic_join="outer")`.
+- **Fix**: Update the gotcha to explain that the default changed. With `arithmetic_join='inner'` (the new default), partial overlaps silently DROP non-overlapping coords instead of introducing NaN. The `xr.align(join="inner")` fix is now the default behavior. The NEW gotcha should be that non-overlapping data is silently dropped (rather than producing NaN).
 
-## What Worked Correctly
+### 2. "Attributes are dropped by default" claim is PARTIALLY WRONG (Medium Impact)
+- **Skill file claim** (line 227-231): `result = da1 + da2  # result.attrs == {}` with comment "Attributes are dropped by default in operations".
+- **Actual behavior**: With the default `keep_attrs='default'`, IDENTICAL attrs ARE preserved. `DataArray([1,2,3], attrs={"units":"K"}) + DataArray([4,5,6], attrs={"units":"K"})` yields `result.attrs == {"units": "K"}`. Only CONFLICTING attrs are dropped (e.g., `"units":"K"` vs `"units":"C"` yields `{}`).
+- **Fix**: Update the example to use arrays with different attrs to demonstrate the dropping behavior, or clarify the nuanced behavior.
 
-### 1. Dataset creation with `xr.date_range(unit="s")`
-The skill file's pattern `xr.date_range("2000-01-01", periods=365, freq="D", unit="s")` worked exactly as documented. The `unit="s"` parameter produced `datetime64[s]` coordinates.
+### 3. DataTree.from_dict alignment constraint not mentioned (Low Impact)
+- **Skill file** (line 14-19): Shows `from_dict` with `/` having `("x", [1,2,3])` and `/group1` using `ds1`. If `ds1` uses the same dimension name `x` with a different size, this raises `ValueError` due to parent-child alignment.
+- **Fix**: Add a brief note that child nodes sharing dimension names with parents must have compatible sizes, or use different dimension names.
 
-### 2. `apply_ufunc` with dask
-The skill file's guidance was accurate and critical:
-- **`dask='parallelized'` requires `output_dtypes`** -- confirmed; omitting it would fail.
-- **Core dims are moved to last axis (-1)** -- confirmed; the standardize function using `axis=-1` worked correctly.
-- **`input_core_dims` and `output_core_dims` syntax** -- the list-of-lists format `[["time"]]` is correct and worked.
+## Missing Content
 
-### 3. GroupBy / Resample with modern frequency codes
-- `resample(time="ME")` worked correctly (month-end). The skill file's note that `"M"` is deprecated in favor of `"ME"` is accurate.
-- `groupby("time.season").map(lambda x: x - x.mean("time"))` for seasonal anomalies worked.
-- `groupby("time.month").mean()` for monthly climatology worked.
+- **`arithmetic_join` default change**: The skill file should mention that the default `arithmetic_join` changed from `'outer'` to `'inner'`. This fundamentally changes how misaligned coordinate arithmetic behaves and is the biggest behavioral change users will encounter.
+- **`arithmetic_compat` default**: The default is now `'minimal'`, working together with the inner join default.
+- **DataTree alignment constraints**: The `from_dict` documentation should mention that nodes sharing dimension names must have compatible sizes with their parents.
+- **`use_new_combine_kwarg_defaults` option**: xarray has this option (`False` by default) that will change combine/concat defaults in the future. Worth mentioning for forward compatibility.
 
-### 4. Zarr v3 encoding
-The skill file's pattern is correct:
-```python
-from zarr.codecs import BloscCodec
-compressor = BloscCodec(cname="zstd", clevel=3, shuffle="shuffle")
-ds.to_zarr(path, zarr_format=3, encoding={"var": {"compressors": (compressor,)}})
-```
-Key points confirmed:
-- The key must be `"compressors"` (plural), not `"compressor"`.
-- The value must be a tuple `(codec,)`, not a bare codec instance.
-- `zarr_format=3` is the correct kwarg.
+## Overall Assessment
 
-### 5. `open_mfdataset` with performance options
-The skill file's recommended pattern worked:
-```python
-xr.open_mfdataset("data/*.nc", compat="override", coords="minimal", data_vars="minimal")
-```
+The skill file is **quite good overall** -- the vast majority of claims verified correct. The apply_ufunc documentation is excellent and all patterns work exactly as described. GroupBy, encoding, I/O, and zarr patterns are all accurate.
 
-### 6. Encoding gotchas / `drop_encoding()`
-`ds.drop_encoding()` correctly clears the encoding dict. The skill file's warning about encoding persisting through operations (and causing errors when re-writing to a different store) is accurate and important.
+The two significant issues both relate to **behavioral defaults that changed in recent xarray versions**:
+1. `arithmetic_join` defaulting to `'inner'` makes the NaN alignment gotcha outdated -- this is the highest-impact issue
+2. `keep_attrs='default'` now preserving identical attrs makes the "attrs dropped" claim partially wrong
 
-### 7. DataTree
-All DataTree patterns from the skill file worked:
-- `xr.DataTree.from_dict({"/": ds, "/group": ds1})` -- correct constructor.
-- `dt["/surface"]` navigation -- works.
-- `dt.children` -- returns dict of child nodes.
-- `dt.subtree_with_keys` -- iterates over `(path, node)` pairs. Paths are relative strings (`.`, `surface`, `upper_air`), not absolute paths starting with `/`.
-- `dt.map_over_datasets(lambda ds: ds.mean())` -- works.
-
-### 8. CFDatetimeCoder
-The skill file's pattern is correct:
-```python
-coder = xr.coders.CFDatetimeCoder(time_unit="s")
-ds = xr.open_dataset("file.nc", decode_times=coder)
-```
-The result has `datetime64[s]` dtype as expected.
-
----
-
-## What Was Wrong or Misleading
-
-### No outright errors in the skill file code patterns
-
-All code patterns tested from the skill file executed successfully. However, there are observations about things that could mislead:
-
-### 1. `Dataset.dims` returns a warning-emitting object, not a plain dict
-The skill file shows `ds.dims` as if it returns a standard mapping. In xarray 2026.1.0, accessing `ds.dims` emits:
-```
-FutureWarning: The return type of `Dataset.dims` will be changed to return a set
-of dimension names in future, in order to be more consistent with `DataArray.dims`.
-To access a mapping from dimension names to lengths, please use `Dataset.sizes`.
-```
-The skill file does not mention `Dataset.sizes` anywhere. Users following the skill file and writing `ds.dims["time"]` will get noisy warnings. The skill file should recommend `ds.sizes` instead.
-
-### 2. Zarr v3 consolidated metadata warning
-When writing zarr with `zarr_format=3`, a warning is emitted:
-```
-ZarrUserWarning: Consolidated metadata is currently not part in the Zarr format 3
-specification. It may not be supported by other zarr implementations and may change
-in the future.
-```
-The skill file mentions `consolidated=True` as a performance tip but does not note this v3 incompatibility. Users may want to pass `consolidated=False` when using `zarr_format=3`.
-
-### 3. `subtree_with_keys` path format
-The skill file shows:
-```python
-for path, node in dt.subtree_with_keys:
-    print(path, node.dataset)
-```
-This implies `path` is a string like `"/"` or `"/group1"`. In practice, paths are relative names like `"."`, `"surface"`, `"upper_air"` (not absolute paths starting with `/`). This could confuse users expecting the same path format used in `DataTree.from_dict`.
-
----
-
-## What Was Missing from the Skill File
-
-### 1. NetCDF backend dependency requirements
-The skill file shows `to_netcdf()` and `open_dataset()` patterns but never mentions that these require a backend library (`h5netcdf`, `netCDF4`, or `scipy`) to be installed. When none is present, xarray raises:
-```
-ValueError: cannot write NetCDF files because none of the suitable backend
-libraries (netCDF4, h5netcdf, scipy) are installed
-```
-And `h5netcdf` itself requires `h5py`. The skill file should note these dependencies, especially since the `pyproject.toml` for a zarr-focused project may not include them.
-
-### 2. `Dataset.sizes` as the preferred way to get dimension lengths
-As noted above, `ds.dims` is being deprecated for dict-like access. The skill file should mention `ds.sizes` as the preferred replacement.
-
-### 3. `consolidated=False` recommendation for zarr v3
-The skill file should note that `consolidated=True` (the default) emits a warning with `zarr_format=3` since consolidated metadata is not yet part of the zarr v3 spec.
-
-### 4. `exclude_dims` for `apply_ufunc` when reducing dimensions
-The skill file mentions `exclude_dims=set()` in the rules section but doesn't show a concrete example of when you need it (e.g., when the output has fewer core dims than the input and the dim changes size).
-
----
-
-## Suggestions for Improving the Skill File
-
-1. **Add a "Dependencies" section** at the top listing what backends are needed for NetCDF I/O (`h5netcdf` + `h5py`, or `netCDF4`, or `scipy`). This is a common stumbling block.
-
-2. **Replace `ds.dims` with `ds.sizes`** throughout. The `dims` attribute on `Dataset` is transitioning to return a set (like `DataArray.dims`), so `ds.sizes` is the forward-compatible way to get a `{dim_name: length}` mapping.
-
-3. **Add `consolidated=False` to the zarr v3 example.** Since consolidated metadata is not part of the zarr v3 spec, the example should either pass `consolidated=False` or note the warning.
-
-4. **Clarify `subtree_with_keys` path format.** Note that paths are relative node names (like `"."`, `"surface"`), not absolute paths (like `"/surface"`).
-
-5. **Add a concrete `exclude_dims` example** for `apply_ufunc` to complement the brief mention in the rules.
-
-6. **Note that `open_mfdataset` with `engine="h5netcdf"` requires `h5py`** -- the skill file recommends this engine for parallel reads but doesn't flag the dependency.
-
-7. **Minor: add a note about `FutureWarning` noise.** Users running xarray 2026.x will see several `FutureWarning` messages related to the `dims` transition. Acknowledging this helps users distinguish expected warnings from real problems.
+These should be updated since they affect how users understand xarray's fundamental behavior. The DataTree alignment note is minor but would prevent confusion.

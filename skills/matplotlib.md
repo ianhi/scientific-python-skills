@@ -135,7 +135,7 @@ ax.plot(x, y, markevery=10)                      # render every 10th marker only
 
 ### Use 'fast' style for interactive work
 ```python
-mplstyle.use(['ggplot', 'fast'])  # fast must be last; enables simplification + chunking
+plt.style.use(['ggplot', 'fast'])  # fast must be last; enables simplification + chunking
 ```
 
 ### Use Agg backend for non-interactive scripts

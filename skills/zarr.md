@@ -53,6 +53,7 @@ z = zarr.create_array(store, shape=(1000,), dtype='f4', compressors=None)
 z = zarr.create_array(
     store='data.zarr',
     shape=(100_000, 100),
+    dtype='float32',
     chunks=(100, 100),       # logical chunks (access granularity)
     shards=(10_000, 100),    # physical shards (100 chunks per shard)
 )
