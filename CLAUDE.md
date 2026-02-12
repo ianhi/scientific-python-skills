@@ -22,8 +22,13 @@ Create Claude Code skills (.md files in `skills/`) that teach Claude to write id
 - xarray (pydata/xarray) - v2026.1.0
 - icechunk (earth-mover/icechunk) - v1.1.18
 
-### Phase 2 (Planned)
-- numpy, scipy, pandas, polars, matplotlib
+### Phase 2 (Complete)
+- numpy (numpy/numpy) - v2.4.2
+- pandas (pandas-dev/pandas) - v3.0.0
+- matplotlib (matplotlib/matplotlib) - v3.10.x
+
+### Future
+- scipy, polars
 - Integration skill (zarr + xarray + icechunk together)
 
 ## Skill File Requirements
@@ -34,7 +39,7 @@ Create Claude Code skills (.md files in `skills/`) that teach Claude to write id
 - Code over prose - working snippets over explanations
 - Include function signatures for key APIs, verified against actual source code
 - Link issue numbers for known bugs/gotchas
-- Structure: Modern Patterns -> Core API -> Migration Notes (compact) -> Integration -> Gotchas -> Known Limitations -> Performance Tips
+- Structure: Modern Patterns -> Migration Notes (compact) -> Gotchas & Common Mistakes -> Known Limitations -> Performance Tips
 - Consolidate removed/deprecated API lists into compact markdown tables, NOT verbose code blocks for each item
 - Label performance-only issues as "SLOW"/"FAST", NOT "WRONG"/"RIGHT" (Claude will refuse to generate functional "WRONG" code)
 
@@ -83,15 +88,20 @@ Create Claude Code skills (.md files in `skills/`) that teach Claude to write id
 - **Performance issues need different labels than correctness issues.** Using "WRONG" for slow-but-correct code (e.g., groupby without flox) makes Claude refuse to generate functional code. Use "SLOW"/"FAST" instead.
 
 ### Content Priorities
+- **Focus on subtle errors and performance traps** over basic API reference. Only get into details when there is real risk of silent errors or performance detriments.
 - **Issue comments from maintainers** are the most valuable research source - they reveal real user pain points and correct solutions.
 - **Migration guides** (e.g., v2 to v3) should be a first-class research artifact, not just extracted from scattered issues.
 - **Don't include basic content Claude already knows** (e.g., `import xarray as xr`, basic plotting). Every line should teach something non-obvious.
 - **StackOverflow/Discourse would complement GitHub issues** - issues skew toward bugs/features, forums capture "how do I" confusion.
+- **Keep skill files lean** (4-10KB). Trim aggressively - cut API signatures, store configuration, integration examples, and anything Claude can derive from general knowledge.
 
 ### Specific Library Notes
 - **zarr v3**: `codecs=` only works on `ShardingCodec`, NOT on `create_array()`. Use `serializer=`, `compressors=`, `filters=` separately. `from_array()` has store-first, data keyword-only signature.
 - **xarray**: `ds.dims` is being deprecated for dict access - use `ds.sizes`. `use_cftime` kwarg is deprecated - use `CFDatetimeCoder`. Consolidated metadata emits warning with zarr v3.
 - **icechunk**: `save_config()` takes no args. `flush()` requires `message`. Use `open_or_create()` instead of try/except for repo creation. All methods have `_async` counterparts.
+- **numpy**: NEP 50 type promotion silently causes overflow/precision loss (Python scalars adapt to array dtype). `copy=False` raises ValueError if copy needed.
+- **pandas 3.0**: Copy-on-Write always on - chained assignment silently fails. `axis=None` reduces all axes. String columns default to `str` dtype. Offset aliases changed (`ME` not `M`).
+- **matplotlib**: Always use OO interface + `layout='constrained'`. `legend(loc='best')` is slow. Colorbar steals space from wrong axes without explicit `ax=`. `FuncAnimation` must be stored in a variable.
 
 ## Environment
 - Use `uv run python` for Python commands
