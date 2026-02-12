@@ -1,6 +1,6 @@
-# NumPy - Claude Code Skill
+# NumPy
 
-> Skill for writing idiomatic NumPy code. Current version: 2.4.2 (Python 3.11+)
+> Python scalars now silently adapt to array dtype (NEP 50), causing overflow and precision loss that never happened before. `copy=False` semantics changed. Use `np.strings` instead of `np.char`.
 
 ## NEP 50 Type Promotion (SILENT Behavioral Change)
 

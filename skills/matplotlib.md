@@ -1,6 +1,6 @@
-# Matplotlib - Claude Code Skill
+# Matplotlib
 
-> Skill for writing idiomatic matplotlib code. Current version: 3.10.x (Python 3.11+)
+> Common pitfalls: colorbar steals space from the wrong axes, `FuncAnimation` silently stops if not stored in a variable, `legend(loc='best')` is slow. Always use OO interface with `layout='constrained'`.
 
 ## Key Patterns
 

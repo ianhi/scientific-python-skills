@@ -1,8 +1,6 @@
-# Icechunk - Claude Code Skill
+# Icechunk
 
-> Skill for writing idiomatic icechunk code. Version: 1.1.x (stable, production-ready)
-
-Icechunk is a transactional storage engine for Zarr with git-like version control. It adds ACID transactions, branching, tagging, and snapshot history to array data in cloud object storage.
+> Transactional storage engine for Zarr with git-like version control. Data is lost without `commit()`. Sessions become read-only after commit. Use `to_icechunk` (not `to_zarr`) for dask-backed data. Always pass `consolidated=False` when reading.
 
 ## Common Operations (Copy-Paste Ready)
 

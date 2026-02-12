@@ -1,6 +1,6 @@
-# Zarr - Claude Code Skill
+# Zarr
 
-> Skill for writing idiomatic zarr v3 code. Current version: 3.1.5+ (Python 3.11+, NumPy 2.0+)
+> v3 is a breaking rewrite. Store classes, codec classes, and function signatures all changed. Use `compressors=` not `codecs=` on `create_array`. Blosc shuffle is silently broken (typesize=1). `write_empty_chunks` default flipped to False.
 
 ## v2 → v3 Migration Quick Reference
 

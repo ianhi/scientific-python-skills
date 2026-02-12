@@ -1,6 +1,6 @@
-# xarray - Claude Code Skill
+# xarray
 
-> Skill for writing idiomatic xarray code. Version: 2026.01.0+
+> `apply_ufunc` core dims go on the last axis, not axis=0. Arithmetic with mismatched coords silently introduces NaN. `open_mfdataset` is slow without `compat="override"`. Encoding persists through operations and causes write errors. Install `flox` for 10-100x faster groupby.
 
 ## DataTree (New - in xarray since v2024.10)
 

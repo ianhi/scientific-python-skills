@@ -1,6 +1,6 @@
-# Pandas - Claude Code Skill
+# Pandas
 
-> Skill for writing idiomatic pandas code. Current version: 3.0.0 (Python 3.11+)
+> Copy-on-Write is always on — chained assignment and subset mutation silently do nothing. String columns are now `str` dtype, not `object`. Many defaults changed (`groupby observed`, `axis=None`, offset aliases).
 
 ## Copy-on-Write (CoW) - Always On
 
