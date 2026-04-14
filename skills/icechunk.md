@@ -2,6 +2,44 @@
 
 > Transactional storage engine for Zarr with git-like version control. Data is lost without `commit()`. Sessions become read-only after commit. Use `to_icechunk` (not `to_zarr`) for dask-backed data. Always pass `consolidated=False` when reading.
 
+## CRITICAL: Stay at the Zarr Level
+
+The #1 mistake pattern (145 occurrences across 42 sessions): when debugging or
+inspecting store contents, Claude drops to low-level internal APIs instead of
+using the simple zarr group/array interface. This cascades into async errors,
+type mismatches, and broken imports.
+
+```python
+# WRONG - dropping to store internals
+from zarr.core.buffer.cpu import Buffer
+await store.set("zarr.json", Buffer.from_bytes(b'{"zarr_format": 3}'))
+
+# WRONG - manual async wrappers for store inspection
+async def _keys(store):
+    return sorted([k async for k in store.list_prefix("")])
+keys = asyncio.run(_keys(store))
+
+# WRONG - inventing sync methods that don't exist
+store.list_prefix_sync("")  # AttributeError
+
+# WRONG - calling store.set() without await (silently drops the write!)
+session.store.set("zarr.json", meta)  # coroutine never awaited, commit fails
+
+# RIGHT - use zarr API for everything
+root = zarr.group(store=session.store)
+arr = root.create_array("data", shape=(10,), dtype="f8")
+arr[:] = np.arange(10)
+
+# RIGHT - inspect contents through zarr
+root = zarr.open_group(session.store)
+print(root.tree())
+print(list(root.members()))
+```
+
+**Rule:** If you're importing from `zarr.core.*`, `zarr.abc.*`,
+`zarr.storage._*`, or `icechunk._*`, you're almost certainly doing it wrong.
+The zarr group/array API handles buffers, async, and store operations for you.
+
 ## Common Operations (Copy-Paste Ready)
 
 ```python
@@ -35,16 +73,41 @@ ds_old = xr.open_zarr(session.store, consolidated=False)
 
 # --- Branching ---
 main_snap = repo.lookup_branch("main")
-repo.create_branch("experiment", snapshot_id=main_snap)
+repo.create_branch("experiment", main_snap)
 session = repo.writable_session("experiment")
 
 # --- Tagging ---
 snapshot_id = session.commit("Release v2.0")
-repo.create_tag("v2.0-release", snapshot_id=snapshot_id)
+repo.create_tag("v2.0-release", snapshot_id)
 
 # --- Transaction context manager (auto-commits) ---
 with repo.transaction("main", message="Auto-commit") as store:
     zarr.create_array(store, name="data", shape=(10,), dtype=float)
+```
+
+## Lifecycle: Storage -> Repository -> Session -> Store
+
+The IC2 object model has four layers. Methods live on specific objects --
+calling them on the wrong one is the #2 most common mistake.
+
+```python
+# 1. Storage (where bytes live)
+storage = icechunk.local_filesystem_storage("/tmp/repo")
+storage = icechunk.in_memory_storage()
+storage = icechunk.s3_storage(bucket="my-bucket", region="us-east-1")
+
+# 2. Repository (version control operations)
+repo = icechunk.Repository.create(storage)
+repo = icechunk.Repository.open(storage)
+repo = icechunk.Repository.open_or_create(storage)  # preferred
+
+# 3. Session (read/write context -- three types, each with different powers)
+session = repo.writable_session("main")        # data writes only
+session = repo.readonly_session(branch="main") # reads only, no commit
+session = repo.rearrange_session("main")       # moves only, no data writes
+
+# 4. Store (zarr-compatible store, always from session)
+store = session.store  # never construct IcechunkStore directly
 ```
 
 ## Dask/Distributed Writes
@@ -73,6 +136,83 @@ session.commit("Wrote dask array")
 ```
 
 ## Common Mistakes & Gotchas
+
+### IC1 vs IC2 API confusion (the old API no longer exists)
+Claude's training data includes IC1 patterns. The entire object model changed.
+```python
+# WRONG (IC1 -- these methods do not exist)
+store = icechunk.IcechunkStore.create(storage=config, mode="w")
+store = icechunk.IcechunkStore.open_or_create(storage=config, mode="w")
+config = icechunk.StorageConfig.filesystem("/tmp/test")
+store.commit("message")  # IC1 committed on the store
+
+# RIGHT (IC2 -- current API)
+storage = icechunk.local_filesystem_storage("/tmp/test")
+repo = icechunk.Repository.create(storage)
+session = repo.writable_session("main")
+store = session.store
+# ... use store with zarr ...
+session.commit("message")  # IC2 commits on the session
+```
+
+### StorageConfig vs Storage type confusion
+```python
+# WRONG -- StorageConfig/ObjectStoreConfig is not a Storage
+config = icechunk.StorageConfig.filesystem("/tmp/test")
+repo = icechunk.Repository.create(config)
+# TypeError: 'PyObjectStoreConfig_LocalFileSystem' cannot be cast as 'Storage'
+
+# RIGHT -- factory functions return Storage objects
+storage = icechunk.local_filesystem_storage("/tmp/test")
+repo = icechunk.Repository.create(storage)
+```
+
+### Moves require rearrange_session, not writable_session
+Two mistakes compounded: wrong session type AND wrong method name.
+```python
+# WRONG -- move_node() does not exist, and writable_session can't move
+session = repo.writable_session("main")
+session.move_node("/a", "/b")  # AttributeError: no 'move_node'
+session.move("/a", "/b")       # IcechunkError: need rearrange session
+
+# RIGHT
+session = repo.rearrange_session("main")
+session.move("/a", "/b")       # method is move(), not move_node()
+session.commit("moved a to b")
+```
+Rearrange sessions can ONLY do moves. Writable sessions can ONLY do data writes.
+
+### Methods on wrong object (Session vs Repository)
+```python
+# WRONG -- these do not exist on Session
+session.rewrite_manifests(...)   # lives on Repository
+session.set_metadata({...})      # lives on Repository (v2 only)
+session.get_node("/path")        # does not exist
+session.delete_array("/data")    # does not exist on Python Session
+session.delete_group("/data")    # does not exist on Python Session
+
+# RIGHT
+repo.rewrite_manifests(...)
+repo.set_metadata({...})         # v2 repos only
+```
+
+### Amend is a separate method, not a kwarg
+```python
+# WRONG
+session.commit("message", amend=True)  # TypeError: unexpected keyword argument
+
+# RIGHT
+session.amend("message")  # separate method
+```
+
+### SnapshotInfo attribute names
+```python
+# WRONG -- flushed_at does not exist
+older_than = snap_info.flushed_at  # AttributeError
+
+# RIGHT
+older_than = snap_info.written_at
+```
 
 ### Always commit after writes (#619)
 Data is invisible to other sessions until committed.
@@ -130,6 +270,16 @@ repo = icechunk.Repository.open_or_create(storage)   # Safe - creates or opens
 to_icechunk(ds, session, mode="w")  # NOT session.store
 ```
 
+### S3 anonymous access: wrong region still works but adds latency
+```python
+# Wrong region adds a redirect round-trip but does not fail:
+storage = icechunk.s3_storage(
+    bucket="my-bucket",
+    region="us-east-1",     # correct region avoids redirect overhead
+    anonymous=True,
+)
+```
+
 ### Virtual chunks require explicit authorization (#1032, #1545)
 Opening a repo with virtual chunks without `authorize_virtual_chunk_access` gives cryptic `AccessDenied` errors at read time.
 ```python
@@ -168,6 +318,15 @@ except icechunk.ConflictError:
 session.commit("Update", rebase_with=icechunk.ConflictDetector())
 ```
 
+### ic.Buffer does not exist in IC2
+```python
+# WRONG
+ic.Buffer.from_bytes(b'{"zarr_format": 3}')  # AttributeError
+
+# RIGHT -- don't write raw metadata, use zarr
+root = zarr.group(store=session.store)
+```
+
 ### Known fixed issues (upgrade if encountering)
 
 | Issue | Symptom | Fixed In |
@@ -186,3 +345,4 @@ session.commit("Update", rebase_with=icechunk.ConflictDetector())
 - **Rebase**: Only resolves chunk conflicts; metadata conflicts need manual resolution
 - **GCS**: Bearer token refresh not yet supported
 - **Object stores without conditional writes**: Lose ACID consistency with concurrent writers (#743)
+- **Snapshot.parent_id()**: Deprecated in spec v2, always returns `None`. Use `RepoInfo` for ancestry.

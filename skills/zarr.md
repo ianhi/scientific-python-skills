@@ -2,7 +2,47 @@
 
 > v3 is a breaking rewrite. Store classes, codec classes, and function signatures all changed. Use `compressors=` not `codecs=` on `create_array`. Blosc shuffle is silently broken (typesize=1). `write_empty_chunks` default flipped to False.
 
-## v2 → v3 Migration Quick Reference
+## CRITICAL: Do Not Drop to Store Internals
+
+The most common mistake pattern: when debugging or inspecting data, Claude
+reaches for low-level store APIs and internal imports instead of using the
+zarr group/array interface. This cascades into async errors, type mismatches,
+and broken import paths.
+
+```python
+# WRONG - over-specified internal imports
+from zarr.core.buffer.cpu import Buffer
+from zarr.core.buffer import default_buffer_prototype, PROTOTYPE
+from zarr.core.buffer.numpy_buffer import NumpyBuffer
+from zarr.core.sync import sync
+from zarr.storage._common import StorePath
+from zarr.abc.store import Store
+
+# WRONG - manual async store calls
+asyncio.run(store.list_prefix(""))        # async generator, not awaitable
+asyncio.run(store.delete("data/c/0"))     # just use the array API
+sync(store.list_prefix(""))               # TypeError: can't await async generator
+store.set("key", some_bytes)              # needs await AND Buffer type, not bytes
+store.get("key", prototype=_PROTOTYPE)    # don't call store.get() directly
+
+# WRONG - constructing internal objects manually
+AsyncGroup(GroupMetadata(), store_path=StorePath(store=store, path="root"))
+zarr.api.asynchronous.open_group(store, mode="r")
+
+# RIGHT - stay at the zarr level
+root = zarr.open_group(store)             # sync, handles everything
+root = zarr.group(store=store)            # create new group
+arr = root.create_array("data", shape=(10,), dtype="f8")
+arr[:] = np.arange(10)
+print(root.tree())                        # inspect structure
+print(list(root.members()))               # list contents
+data = arr[:]                             # read data
+```
+
+**Rule:** If you're importing from `zarr.core.*`, `zarr.abc.*`, or
+`zarr.storage._*`, stop and use the top-level zarr API instead.
+
+## v2 -> v3 Migration Quick Reference
 
 If you learned zarr v2 patterns, here are the critical changes. **Most of these are breaking changes that will cause errors.**
 
@@ -18,14 +58,16 @@ If you learned zarr v2 patterns, here are the critical changes. **Most of these 
 | `compressors=[numcodecs.Blosc()]` | `compressors=zarr.codecs.BloscCodec()` | Don't mix numcodecs with v3 |
 | `zarr.from_array(data, 'store.zarr')` | `zarr.from_array('store.zarr', data=data)` | Store is first, data is kwarg-only |
 | `grp.create_dataset('name', ...)` | `grp.create_array('name', ...)` | Method renamed (deprecated but works) |
+| `grp.create_array('x', shape=s, dtype=d, data=arr)` | See "create_array + data" below | Cannot mix shape/dtype with data |
+| `node.flat[0]` | `node[0]` | zarr.Array has no .flat attribute |
 
 **Removed features (no v3 equivalent):**
 - Object dtype (`dtype='|O'`) and structured dtypes - use separate arrays instead (#2134)
 - Dot notation for group members - use `group['member']` bracket syntax
 
 **Default changes (SILENT behavior differences):**
-- `write_empty_chunks`: `True` (v2) → `False` (v3) - sparse arrays now skip writing fill-value chunks
-- `zarr_format`: `2` (v2) → `3` (v3) - use `zarr_format=2` for backwards compatibility
+- `write_empty_chunks`: `True` (v2) -> `False` (v3) - sparse arrays now skip writing fill-value chunks
+- `zarr_format`: `2` (v2) -> `3` (v3) - use `zarr_format=2` for backwards compatibility
 
 ## Codec Pipeline (v3)
 
@@ -60,6 +102,82 @@ z = zarr.create_array(
 ```
 
 ## Gotchas & Common Mistakes
+
+### create_array: dtype is required in v3
+```python
+# WRONG - missing dtype
+root.create_array("arr", shape=(1,))  # TypeError
+
+# RIGHT
+root.create_array("arr", shape=(1,), dtype="i4")
+```
+
+### create_array: cannot mix shape/dtype with data=
+```python
+# WRONG (v2 habit) - passing data= alongside explicit shape/dtype
+group.create_array("arr", shape=(3,), dtype="i4", data=np.array([1, 2, 3]))
+
+# RIGHT - two-step: create then assign
+arr = group.create_array("arr", shape=(3,), dtype="i4")
+arr[:] = np.array([1, 2, 3])
+
+# RIGHT - OR let zarr infer from data (no shape/dtype)
+arr = group.create_array("arr", data=np.array([1, 2, 3], dtype="i4"))
+```
+
+### store.list_prefix() is an async generator, not an awaitable
+```python
+# WRONG - all of these fail
+sync(store.list_prefix(""))          # TypeError: can't await async generator
+asyncio.run(store.list_prefix(""))   # ValueError: coroutine expected
+sorted(store.list_prefix(""))        # TypeError: async_generator not iterable
+store.list_prefix_sync("")           # AttributeError: does not exist
+
+# RIGHT (if you truly need store-level keys)
+async def _keys(store):
+    return sorted([k async for k in store.list_prefix("")])
+keys = asyncio.run(_keys(store))
+
+# BETTER - stay at zarr level
+root = zarr.open_group(store)
+print(list(root.members()))
+```
+
+### store.set() is async -- calling without await silently drops writes
+```python
+# WRONG - coroutine created but never awaited (SILENT FAILURE)
+session.store.set("zarr.json", meta)
+# RuntimeWarning: coroutine 'IcechunkStore.set' was never awaited
+# Then commit fails: "no changes made to the session"
+
+# ALSO WRONG - set() requires Buffer, not bytes
+await store.set("zarr.json", b'{"zarr_format": 3}')
+# TypeError: value must be a Buffer instance
+
+# RIGHT - don't call store.set() directly, use zarr
+root = zarr.group(store=session.store)
+arr = root.create_array("data", shape=(10,), dtype="f8")
+arr[:] = np.arange(10)
+```
+
+### IcechunkStore (and other stores) are not iterable
+```python
+# WRONG
+list(store)   # TypeError: 'IcechunkStore' object is not iterable
+
+# RIGHT
+root = zarr.open_group(store)
+print(root.tree())
+```
+
+### zarr.Array has no .flat attribute
+```python
+# WRONG (numpy habit)
+node.flat[0]  # AttributeError
+
+# RIGHT
+node[0]
+```
 
 ### Blosc compression ratio degradation v2 vs v3 (#2171, #2766)
 Blosc typesize defaults to 1 byte in v3 (instead of dtype size), causing 10-20x worse compression with shuffle.
