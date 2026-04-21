@@ -45,6 +45,17 @@ curl -o ~/.claude/skills/icechunk/SKILL.md \
   https://raw.githubusercontent.com/ianhi/scientific-python-skills/main/skills/icechunk/SKILL.md
 ```
 
+### Option 3: Reference via CLAUDE.md
+
+Add a reference in your project's `CLAUDE.md`:
+
+```markdown
+## Skills
+
+When working with zarr, xarray, or icechunk, read the relevant skill file from
+`/path/to/scientific-python-skills/skills/` before writing code.
+```
+
 ## What's in a Skill File?
 
 Each `SKILL.md` follows the [Agent Skills](https://agentskills.io) open standard with YAML frontmatter and markdown content:
