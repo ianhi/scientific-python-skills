@@ -1,3 +1,9 @@
+---
+name: numpy
+description: Writing idiomatic NumPy code with modern APIs. Use when working with NumPy arrays, dtype operations, string handling, or numeric computations that may be affected by NEP 50 type promotion changes.
+user-invocable: false
+---
+
 # NumPy
 
 > Python scalars now silently adapt to array dtype (NEP 50), causing overflow and precision loss that never happened before. `copy=False` semantics changed. Use `np.strings` instead of `np.char`.

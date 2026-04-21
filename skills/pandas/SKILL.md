@@ -1,3 +1,9 @@
+---
+name: pandas
+description: Writing idiomatic pandas 3.x code. Use when working with DataFrames, Series, groupby, IO, or any pandas operation that may be affected by Copy-on-Write semantics or string dtype changes.
+user-invocable: false
+---
+
 # Pandas
 
 > Copy-on-Write is always on — chained assignment and subset mutation silently do nothing. String columns are now `str` dtype, not `object`. Many defaults changed (`groupby observed`, `axis=None`, offset aliases).

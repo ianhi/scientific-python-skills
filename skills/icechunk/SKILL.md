@@ -1,3 +1,9 @@
+---
+name: icechunk
+description: Writing idiomatic icechunk v2 code. Use when creating or opening icechunk repositories, reading/writing zarr data through icechunk sessions, branching, tagging, time travel, or distributed dask writes.
+user-invocable: false
+---
+
 # Icechunk
 
 > Transactional storage engine for Zarr with git-like version control. Data is lost without `commit()`. Sessions become read-only after commit. Use `to_icechunk` (not `to_zarr`) for dask-backed data. Always pass `consolidated=False` when reading.

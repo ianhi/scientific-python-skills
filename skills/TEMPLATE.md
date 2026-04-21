@@ -1,10 +1,16 @@
-# {Library Name} - Claude Code Skill
+---
+name: {library-name}
+description: Writing idiomatic {library} code. Use when working with {library} for {primary use cases}.
+user-invocable: false
+---
 
-> Skill for writing idiomatic {library} code. Version: {version}
+# {Library Name}
 
-## CRITICAL: Do NOT Use These Outdated Patterns
+> {One-line preamble: the highest-risk behavioral change or silent error Claude is likely to hit. E.g. "v3 is a breaking rewrite." or "Copy-on-Write is always on."}
 
-{Anti-patterns section - most valuable part. Show wrong way -> right way}
+## CRITICAL: Do Not Use These Outdated Patterns
+
+{Anti-patterns section - most valuable part. Show wrong way -> right way for the #1 mistake pattern.}
 
 ```python
 # WRONG - outdated/broken pattern
@@ -16,12 +22,6 @@
 
 ## Quick Reference
 
-### Installation & Import
-```python
-# Standard import pattern
-...
-```
-
 ### Common Operations (Copy-Paste Ready)
 ```python
 # Pattern 1: ...
@@ -31,63 +31,42 @@
 ...
 ```
 
-## Core API
+## {Core Feature 1}
 
-### {Primary Class/Function 1}
 ```python
-# Signature
-def function_name(param1: type, param2: type = default) -> ReturnType:
-    ...
-
-# Usage
-...
+# ...
 ```
 
-### {Primary Class/Function 2}
-...
+## {Core Feature 2}
 
-## Patterns & Idioms
-
-### {Pattern Category 1}
 ```python
-...
-```
-
-### {Pattern Category 2}
-```python
-...
-```
-
-## Integration
-
-### With {Related Library 1}
-```python
-...
-```
-
-### With {Related Library 2}
-```python
-...
+# ...
 ```
 
 ## Gotchas & Common Mistakes
 
 ### {Gotcha 1} (#{issue_number})
-{Brief explanation}
+{Brief explanation - one sentence max, only if non-obvious}
 ```python
-# This will fail/produce wrong results:
+# WRONG
 ...
 
-# Do this instead:
+# RIGHT
 ...
 ```
 
-## Known Limitations & Bugs
+## Deprecation Reference
+
+| Deprecated | Replacement | Since |
+|------------|-------------|-------|
+| `old_api()` | `new_api()` | vX.Y |
+
+## Known Limitations
 
 - **{Limitation 1}** (#{issue_number}): {description}
 - **{Limitation 2}**: {description}
 
 ## Performance Tips
 
-- {Tip 1}
-- {Tip 2}
+- **FAST: pattern** - reason
+- **SLOW: pattern** - reason
