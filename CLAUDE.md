@@ -5,7 +5,7 @@ Create Claude Code skills that teach Claude to write idiomatic code for the scie
 
 ## Structure
 - `skills/{name}/SKILL.md` - Final skill files (the deliverables), one directory per library
-- `skills/TEMPLATE.md` - Template for new skill files
+- `skills/TEMPLATE/TEMPLATE.md` - Template for new skill files (not named SKILL.md so it is not discovered as a skill)
 - `repos/` - Local shallow clones of upstream repos (for reading docs + source, gitignored)
 - `research/{lib}/` - Intermediate research data (docs_summary.md, topic_summary.json, review.md)
 - `scripts/` - Shared tooling for fetching/analyzing GitHub data
