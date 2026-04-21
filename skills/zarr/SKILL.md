@@ -1,3 +1,9 @@
+---
+name: zarr
+description: Writing idiomatic zarr v3 code. Use when reading/writing zarr arrays or groups, configuring codecs or sharding, migrating from zarr v2, using cloud stores (S3, GCS), or debugging zarr storage issues.
+user-invocable: false
+---
+
 # Zarr
 
 > v3 is a breaking rewrite. Store classes, codec classes, and function signatures all changed. Use `compressors=` not `codecs=` on `create_array`. Blosc shuffle is silently broken (typesize=1). `write_empty_chunks` default flipped to False.

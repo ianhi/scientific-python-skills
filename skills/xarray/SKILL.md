@@ -1,3 +1,9 @@
+---
+name: xarray
+description: Writing idiomatic xarray code. Use when working with xarray DataArrays, Datasets, DataTree, apply_ufunc, open_mfdataset, zarr/NetCDF I/O, or dask-backed computations.
+user-invocable: false
+---
+
 # xarray
 
 > `apply_ufunc` core dims go on the last axis, not axis=0. Arithmetic with mismatched coords silently introduces NaN. `open_mfdataset` is slow without `compat="override"`. Encoding persists through operations and causes write errors. Install `flox` for 10-100x faster groupby.

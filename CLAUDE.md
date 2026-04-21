@@ -1,11 +1,11 @@
 # Scientific Python Skills Project
 
 ## Goal
-Create Claude Code skills (.md files in `skills/`) that teach Claude to write idiomatic code for the scientific Python ecosystem.
+Create Claude Code skills that teach Claude to write idiomatic code for the scientific Python ecosystem. Each skill lives at `skills/{name}/SKILL.md` following the [Agent Skills](https://agentskills.io) open standard.
 
 ## Structure
-- `skills/` - Final skill files (the deliverables)
-- `skills/TEMPLATE.md` - Template for new skill files
+- `skills/{name}/SKILL.md` - Final skill files (the deliverables), one directory per library
+- `skills/TEMPLATE/TEMPLATE.md` - Template for new skill files (not named SKILL.md so it is not discovered as a skill)
 - `repos/` - Local shallow clones of upstream repos (for reading docs + source, gitignored)
 - `research/{lib}/` - Intermediate research data (docs_summary.md, topic_summary.json, review.md)
 - `scripts/` - Shared tooling for fetching/analyzing GitHub data
@@ -13,7 +13,8 @@ Create Claude Code skills (.md files in `skills/`) that teach Claude to write id
 - `PROJECT.md` - Project planning, phases, and status tracking
 
 ## Skill File Requirements
-- **Max 30KB** per skill file, target 4-10KB
+- **YAML frontmatter required**: `name`, `description` (for auto-invocation), and `user-invocable: false` (reference skills, not user commands)
+- **Max 30KB** per skill file, target 4-10KB (keep `SKILL.md` under 500 lines)
 - **Focus on subtle errors and performance traps** - only get into details when there is real risk of silent errors or performance detriments
 - **Lead with modern patterns** - teach the correct, idiomatic way first
 - **Don't over-focus on removed APIs** - only warn about removals Claude is likely to generate

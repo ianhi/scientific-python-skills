@@ -1,3 +1,9 @@
+---
+name: matplotlib
+description: Writing idiomatic matplotlib code. Use when creating plots, figures, colorbars, animations, or layouts with matplotlib.
+user-invocable: false
+---
+
 # Matplotlib
 
 > Common pitfalls: colorbar steals space from the wrong axes, `FuncAnimation` silently stops if not stored in a variable, `legend(loc='best')` is slow. Always use OO interface with `layout='constrained'`.
