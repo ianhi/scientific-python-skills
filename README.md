@@ -2,7 +2,7 @@
 
 > **WARNING: These skills are in active development and have not been thoroughly tested. Code examples may contain errors. Use at your own risk and always verify generated code against official documentation.**
 
-Claude Code [skill files](https://code.claude.com/docs/en/skills) that teach Claude to write idiomatic, up-to-date code for scientific Python libraries. Each skill focuses on preventing common mistakes, especially around major version migrations (e.g., zarr v2 to v3).
+Claude Code [skill files](https://code.claude.com/docs/en/skills) that teach AI coding assistants to write idiomatic, up-to-date code for scientific Python libraries. Each skill focuses on preventing common mistakes, especially around major version migrations (e.g., zarr v2 to v3).
 
 ## Available Skills
 
@@ -17,7 +17,7 @@ Claude Code [skill files](https://code.claude.com/docs/en/skills) that teach Cla
 
 ## How to Use
 
-Each skill lives in its own directory as `SKILL.md`. Skills are automatically loaded by Claude Code when relevant — no explicit invocation needed.
+Each skill lives in its own directory as `SKILL.md`. Skills are automatically loaded by Claude Code when relevant — no explicit invocation needed. The same files can be referenced from `CLAUDE.md` (Claude Code) or `AGENTS.md` (other AI coding assistants).
 
 ### Option 1: Add to Your Project (Recommended)
 
@@ -45,9 +45,9 @@ curl -o ~/.claude/skills/icechunk/SKILL.md \
   https://raw.githubusercontent.com/ianhi/scientific-python-skills/main/skills/icechunk/SKILL.md
 ```
 
-### Option 3: Reference via CLAUDE.md
+### Option 3: Reference via CLAUDE.md / AGENTS.md
 
-Add a reference in your project's `CLAUDE.md`:
+Add a reference in your project's `CLAUDE.md` (Claude Code) or `AGENTS.md` (other AI coding assistants):
 
 ```markdown
 ## Skills
