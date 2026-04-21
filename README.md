@@ -56,9 +56,9 @@ When working with zarr, xarray, or icechunk, read the relevant skill file from
 `/path/to/scientific-python-skills/skills/` before writing code.
 ```
 
-## What's in a Skill File?
+## What's in a Skill?
 
-Each `SKILL.md` follows the [Agent Skills](https://agentskills.io) open standard with YAML frontmatter and markdown content:
+Each skill follows the [Agent Skills](https://agentskills.io) open standard with YAML frontmatter and markdown content:
 
 ```yaml
 ---
@@ -74,9 +74,12 @@ Content structure:
 
 1. **Anti-patterns** (most valuable) - "DO NOT do this, DO this instead" with code examples
 2. **Quick Reference** - Copy-paste ready common operations
-3. **Gotchas** - Subtle bugs with GitHub issue references
-4. **Known Limitations** - What doesn't work yet
-5. **Performance Tips** - Actionable optimization advice
+3. **Core API** - Key function signatures verified against source code
+4. **Patterns & Idioms** - Real-world usage patterns
+5. **Integration** - Cross-library patterns (dask, xarray, etc.)
+6. **Gotchas** - Subtle bugs with GitHub issue references
+7. **Known Limitations** - What doesn't work yet
+8. **Performance Tips** - Actionable optimization advice
 
 Skills are kept under 30KB to fit within context windows while maximizing signal.
 
