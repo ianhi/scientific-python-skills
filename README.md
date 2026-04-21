@@ -21,21 +21,10 @@ Each skill lives in its own directory as `SKILL.md`. Skills are automatically lo
 
 ### Option 1: Add to Your Project (Recommended)
 
-Copy the skill directories you need into your project's `.claude/skills/` directory:
+Fetch the skills you need directly from GitHub into your project's `.claude/skills/` directory:
 
 ```bash
-# From your project root
-mkdir -p .claude/skills
-
-# Copy individual skills (repeat for each library you need)
-cp -r /path/to/scientific-python-skills/skills/zarr .claude/skills/
-cp -r /path/to/scientific-python-skills/skills/xarray .claude/skills/
-cp -r /path/to/scientific-python-skills/skills/icechunk .claude/skills/
-```
-
-Or fetch directly from GitHub:
-
-```bash
+# From your project root (repeat for each library you need)
 mkdir -p .claude/skills/zarr
 curl -o .claude/skills/zarr/SKILL.md \
   https://raw.githubusercontent.com/ianhi/scientific-python-skills/main/skills/zarr/SKILL.md
