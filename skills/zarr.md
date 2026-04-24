@@ -1,267 +1,364 @@
-# Zarr
+# Zarr v3
 
-> v3 is a breaking rewrite. Store classes, codec classes, and function signatures all changed. Use `compressors=` not `codecs=` on `create_array`. Blosc shuffle is silently broken (typesize=1). `write_empty_chunks` default flipped to False.
+Prescriptive guide for using the zarr-python v3 public API correctly. For v2 -> v3
+migration patterns and anti-patterns, see `zarr-v2-v3-migration.md`.
 
-## CRITICAL: Do Not Drop to Store Internals
+## Mental Model
 
-The most common mistake pattern: when debugging or inspecting data, Claude
-reaches for low-level store APIs and internal imports instead of using the
-zarr group/array interface. This cascades into async errors, type mismatches,
-and broken import paths.
+Zarr stores chunked, compressed, N-dimensional arrays. Three objects matter:
+
+- **Store** — where bytes live (filesystem, memory, S3, zip). A `Store` is an
+  abstract key-value interface.
+- **Array** — a chunked N-D array bound to a store at some path.
+- **Group** — a directory-like container of arrays and subgroups.
+
+Data flows: `Store` -> (create_array / open_array) -> `Array`. Writes go through
+slice assignment (`arr[...] = data`). The store's async-ness is handled for you
+by the top-level API.
+
+**Stay at the public API.** If you import from `zarr.core.*`, `zarr.abc.*`, or
+`zarr.storage._*`, you're doing it wrong. The public API handles buffers, async,
+and serialization automatically.
+
+## Stores
 
 ```python
-# WRONG - over-specified internal imports
-from zarr.core.buffer.cpu import Buffer
-from zarr.core.buffer import default_buffer_prototype, PROTOTYPE
-from zarr.core.buffer.numpy_buffer import NumpyBuffer
-from zarr.core.sync import sync
-from zarr.storage._common import StorePath
-from zarr.abc.store import Store
+import zarr
 
-# WRONG - manual async store calls
-asyncio.run(store.list_prefix(""))        # async generator, not awaitable
-asyncio.run(store.delete("data/c/0"))     # just use the array API
-sync(store.list_prefix(""))               # TypeError: can't await async generator
-store.set("key", some_bytes)              # needs await AND Buffer type, not bytes
-store.get("key", prototype=_PROTOTYPE)    # don't call store.get() directly
+# In-memory (for tests)
+store = zarr.storage.MemoryStore()
 
-# WRONG - constructing internal objects manually
-AsyncGroup(GroupMetadata(), store_path=StorePath(store=store, path="root"))
-zarr.api.asynchronous.open_group(store, mode="r")
+# Local filesystem
+store = zarr.storage.LocalStore("/path/to/data.zarr")
 
-# RIGHT - stay at the zarr level
-root = zarr.open_group(store)             # sync, handles everything
-root = zarr.group(store=store)            # create new group
-arr = root.create_array("data", shape=(10,), dtype="f8")
-arr[:] = np.arange(10)
-print(root.tree())                        # inspect structure
-print(list(root.members()))               # list contents
-data = arr[:]                             # read data
+# Remote via fsspec (S3, GCS, etc.)
+store = zarr.storage.FsspecStore.from_url("s3://bucket/data.zarr")
+
+# Zip file
+store = zarr.storage.ZipStore("/path/to/data.zip", mode="w")
+
+# Or just pass a string — zarr builds the right store
+# This works for all zarr.open_*, zarr.create_*, zarr.from_array calls:
+arr = zarr.open_array("s3://bucket/data.zarr")
+arr = zarr.open_array("/local/path.zarr")
 ```
 
-**Rule:** If you're importing from `zarr.core.*`, `zarr.abc.*`, or
-`zarr.storage._*`, stop and use the top-level zarr API instead.
-
-## v2 -> v3 Migration Quick Reference
-
-If you learned zarr v2 patterns, here are the critical changes. **Most of these are breaking changes that will cause errors.**
-
-| v2 Pattern (WRONG in v3) | v3 Pattern (CORRECT) | Notes |
-|--------------------------|----------------------|-------|
-| `from zarr import Blosc, Zlib` | `from zarr.codecs import BloscCodec, ZstdCodec, GzipCodec` | Codec classes moved |
-| `zarr.Array(store, ...)` | `zarr.create_array(store, ...)` or `zarr.open_array(...)` | Use factory functions |
-| `group.array_name` | `group['array_name']` | Dot notation removed |
-| `from zarr import DirectoryStore, FSStore` | `from zarr.storage import LocalStore, FsspecStore` | Store classes moved/renamed |
-| `compressor=Blosc()` | `compressors=zarr.codecs.BloscCodec()` | Param renamed (note plural) |
-| `mapper = fsspec.get_mapper(...); zarr.open(mapper)` | `zarr.open_array('s3://...')` or `FsspecStore.from_url(...)` | FSMap no longer supported |
-| `z.resize(1000, 1000)` | `z.resize((1000, 1000))` | Must pass tuple |
-| `compressors=[numcodecs.Blosc()]` | `compressors=zarr.codecs.BloscCodec()` | Don't mix numcodecs with v3 |
-| `zarr.from_array(data, 'store.zarr')` | `zarr.from_array('store.zarr', data=data)` | Store is first, data is kwarg-only |
-| `grp.create_dataset('name', ...)` | `grp.create_array('name', ...)` | Method renamed (deprecated but works) |
-| `grp.create_array('x', shape=s, dtype=d, data=arr)` | See "create_array + data" below | Cannot mix shape/dtype with data |
-| `node.flat[0]` | `node[0]` | zarr.Array has no .flat attribute |
-
-**Removed features (no v3 equivalent):**
-- Object dtype (`dtype='|O'`) and structured dtypes - use separate arrays instead (#2134)
-- Dot notation for group members - use `group['member']` bracket syntax
-
-**Default changes (SILENT behavior differences):**
-- `write_empty_chunks`: `True` (v2) -> `False` (v3) - sparse arrays now skip writing fill-value chunks
-- `zarr_format`: `2` (v2) -> `3` (v3) - use `zarr_format=2` for backwards compatibility
-
-## Codec Pipeline (v3)
+## Creating Arrays
 
 ```python
-# Default: BytesCodec + ZstdCodec (good default, just works)
-z = zarr.create_array(store, shape=(1000,), dtype='f4')
+import zarr
+import numpy as np
 
-# Explicit codec pipeline: use serializer= + compressors=, NOT codecs=
-# NOTE: codecs= only works on ShardingCodec, NOT on create_array()
-z = zarr.create_array(
-    store, shape=(1000,), dtype='f4',
-    serializer=zarr.codecs.BytesCodec(endian='little'),
-    compressors=zarr.codecs.BloscCodec(cname='zstd', clevel=5,
-                                        shuffle=zarr.codecs.BloscShuffle.shuffle),
+# From shape + dtype (creates empty array)
+arr = zarr.create_array(
+    store,
+    shape=(1000, 1000),
+    dtype="float32",
+    chunks=(100, 100),
 )
 
-# No compression
-z = zarr.create_array(store, shape=(1000,), dtype='f4', compressors=None)
+# From existing data (shape/dtype inferred)
+arr = zarr.from_array(store, data=np.arange(100))
+
+# With compression (defaults are good; override only if needed)
+arr = zarr.create_array(
+    store,
+    shape=(1000,),
+    dtype="f4",
+    compressors=zarr.codecs.ZstdCodec(level=5),
+)
 ```
 
-## Sharding (v3 only)
+**Don't mix `data=` with `shape=`/`dtype=` — it raises ValueError:**
 
 ```python
-# Groups many small chunks into larger storage objects - critical for cloud
-z = zarr.create_array(
-    store='data.zarr',
+# WRONG — raises ValueError
+zarr.create_array(store, shape=(3,), dtype="i4", data=np.array([1, 2, 3]))
+
+# RIGHT — use data alone
+arr = zarr.from_array(store, data=np.array([1, 2, 3], dtype="i4"))
+
+# RIGHT — or shape+dtype alone, then assign
+arr = zarr.create_array(store, shape=(3,), dtype="i4")
+arr[:] = np.array([1, 2, 3])
+```
+
+## Creating Groups
+
+```python
+# Create a new group (preferred for new code)
+root = zarr.create_group(store)
+
+# Create nested arrays and groups inside it
+data = root.create_array("data", shape=(100,), dtype="f8")
+subgroup = root.create_group("experiments")
+results = subgroup.create_array("results", shape=(10,), dtype="i4")
+```
+
+## Opening Existing Arrays/Groups
+
+```python
+# Open array (read-only)
+arr = zarr.open_array(store, mode="r")
+
+# Open group
+root = zarr.open_group(store, mode="r")
+
+# Auto-detect (returns Array OR Group depending on what's there)
+obj = zarr.open(store, mode="r")
+```
+
+**Mode semantics** (same across `open`, `open_array`, `open_group`):
+
+| Mode | Behavior |
+|------|----------|
+| `r` | Read only, must exist |
+| `r+` | Read/write, must exist |
+| `a` | Read/write, create if missing (default for `open_group`) |
+| `w` | Create, overwrite if exists (destructive) |
+| `w-` | Create, fail if exists |
+
+## Reading and Writing Data
+
+```python
+# Full read
+data = arr[:]
+
+# Slice read
+subset = arr[0:100, 50:150]
+
+# Write via slice assignment (there is NO .write() method)
+arr[0:10] = np.arange(10)
+arr[...] = 0          # fill with zeros
+arr[0, 0] = 42        # scalar write
+```
+
+## Inspecting Groups
+
+```python
+# Visual tree
+print(root.tree())
+
+# Immediate children (tuple of (name, Array|Group))
+for name, child in root.members():
+    print(name, type(child).__name__)
+
+# Only arrays, only groups
+for name, arr in root.arrays():
+    print(name, arr.shape)
+
+for name, grp in root.groups():
+    print(name)
+
+# Just the keys
+list(root.keys())
+
+# Bracket access
+arr = root["data"]
+nested = root["experiments/results"]
+```
+
+**Note:** Group has no `.items()` method in v3. Use `.members()` for
+`(name, child)` pairs, or `.arrays()` / `.groups()` for filtered iteration.
+
+## Resizing Arrays
+
+```python
+# N-D: pass a tuple
+arr.resize((2000, 2000))
+
+# 1-D: int or tuple both work
+arr.resize(2000)
+arr.resize((2000,))
+```
+
+## Codecs
+
+The default compression (ZstdCodec) is good. Override only if you have a reason.
+
+```python
+# No compression
+arr = zarr.create_array(store, shape=(100,), dtype="f4", compressors=None)
+
+# Custom compression
+arr = zarr.create_array(
+    store,
+    shape=(1000,),
+    dtype="f4",
+    compressors=zarr.codecs.BloscCodec(cname="zstd", clevel=5),
+)
+
+# Explicit codec pipeline: filters -> serializer -> compressors
+arr = zarr.create_array(
+    store,
+    shape=(1000,),
+    dtype="f4",
+    filters=[zarr.codecs.TransposeCodec(order=(0,))],
+    serializer=zarr.codecs.BytesCodec(endian="little"),
+    compressors=zarr.codecs.ZstdCodec(level=3),
+)
+```
+
+Available codecs at `zarr.codecs`:
+- Compressors: `BloscCodec`, `ZstdCodec`, `GzipCodec`, `Crc32cCodec`
+- Serializers: `BytesCodec`, `VLenBytesCodec`, `VLenUTF8Codec`
+- Filters: `TransposeCodec`
+- Sharding: `ShardingCodec`
+
+**Prefer `ZstdCodec` over `BloscCodec`** — Blosc has a typesize bug in v3 that
+silently degrades compression with shuffle (#2171).
+
+## Sharding
+
+For cloud stores with many small chunks, group them into larger storage objects:
+
+```python
+arr = zarr.create_array(
+    store,
     shape=(100_000, 100),
-    dtype='float32',
+    dtype="float32",
     chunks=(100, 100),       # logical chunks (access granularity)
     shards=(10_000, 100),    # physical shards (100 chunks per shard)
 )
 ```
 
-## Gotchas & Common Mistakes
+Target 10-100+ chunks per shard. Sharding significantly reduces the number of
+store operations for remote data.
 
-### create_array: dtype is required in v3
+## Configuration
+
 ```python
-# WRONG - missing dtype
-root.create_array("arr", shape=(1,))  # TypeError
+import zarr
 
-# RIGHT
-root.create_array("arr", shape=(1,), dtype="i4")
+# Global config
+zarr.config.set({
+    "async.concurrency": 20,           # tune for cloud workloads
+    "array.write_empty_chunks": True,  # override v3 default (False)
+})
+
+# Per-array config
+arr = zarr.create_array(
+    store, shape=(100,), dtype="f4",
+    config={"write_empty_chunks": True},
+)
 ```
 
-### create_array: cannot mix shape/dtype with data=
+**Default changed in v3:** `write_empty_chunks` is `False` (v2 was `True`).
+Fill-value-only chunks are skipped on write. Reads return the fill value
+silently — no error. If external tools require all chunks to be present, set
+`write_empty_chunks=True`.
+
+## Common Recipes
+
+### Write a numpy array to local zarr
+
 ```python
-# WRONG (v2 habit) - passing data= alongside explicit shape/dtype
-group.create_array("arr", shape=(3,), dtype="i4", data=np.array([1, 2, 3]))
+import numpy as np
+import zarr
 
-# RIGHT - two-step: create then assign
-arr = group.create_array("arr", shape=(3,), dtype="i4")
-arr[:] = np.array([1, 2, 3])
-
-# RIGHT - OR let zarr infer from data (no shape/dtype)
-arr = group.create_array("arr", data=np.array([1, 2, 3], dtype="i4"))
+data = np.random.random((1000, 1000)).astype("f4")
+arr = zarr.from_array("data.zarr", data=data)
 ```
 
-### store.list_prefix() is an async generator, not an awaitable
+### Read a remote zarr
+
 ```python
-# WRONG - all of these fail
-sync(store.list_prefix(""))          # TypeError: can't await async generator
-asyncio.run(store.list_prefix(""))   # ValueError: coroutine expected
-sorted(store.list_prefix(""))        # TypeError: async_generator not iterable
-store.list_prefix_sync("")           # AttributeError: does not exist
+import zarr
 
-# RIGHT (if you truly need store-level keys)
-async def _keys(store):
-    return sorted([k async for k in store.list_prefix("")])
-keys = asyncio.run(_keys(store))
-
-# BETTER - stay at zarr level
-root = zarr.open_group(store)
-print(list(root.members()))
+arr = zarr.open_array("s3://bucket/data.zarr", mode="r")
+chunk = arr[0:100, :]
 ```
 
-### store.set() is async -- calling without await silently drops writes
+### Create a group with multiple arrays
+
 ```python
-# WRONG - coroutine created but never awaited (SILENT FAILURE)
-session.store.set("zarr.json", meta)
-# RuntimeWarning: coroutine 'IcechunkStore.set' was never awaited
-# Then commit fails: "no changes made to the session"
+import zarr
 
-# ALSO WRONG - set() requires Buffer, not bytes
-await store.set("zarr.json", b'{"zarr_format": 3}')
-# TypeError: value must be a Buffer instance
-
-# RIGHT - don't call store.set() directly, use zarr
-root = zarr.group(store=session.store)
-arr = root.create_array("data", shape=(10,), dtype="f8")
-arr[:] = np.arange(10)
+root = zarr.create_group("experiment.zarr")
+root.create_array("inputs", shape=(1000, 50), dtype="f4")
+root.create_array("labels", shape=(1000,), dtype="i4")
+root.attrs["description"] = "training dataset"
 ```
 
-### IcechunkStore (and other stores) are not iterable
-```python
-# WRONG
-list(store)   # TypeError: 'IcechunkStore' object is not iterable
+### Append to an existing array
 
-# RIGHT
-root = zarr.open_group(store)
-print(root.tree())
+```python
+arr = zarr.open_array("data.zarr", mode="r+")
+new_size = arr.shape[0] + new_data.shape[0]
+arr.resize((new_size,) + arr.shape[1:])
+arr[-new_data.shape[0]:] = new_data
 ```
 
-### zarr.Array has no .flat attribute
-```python
-# WRONG (numpy habit)
-node.flat[0]  # AttributeError
+### Inspect an unknown zarr
 
-# RIGHT
-node[0]
+```python
+obj = zarr.open("unknown.zarr", mode="r")
+if isinstance(obj, zarr.Group):
+    print(obj.tree())
+else:
+    print(f"Array: shape={obj.shape}, dtype={obj.dtype}")
 ```
 
-### Blosc compression ratio degradation v2 vs v3 (#2171, #2766)
-Blosc typesize defaults to 1 byte in v3 (instead of dtype size), causing 10-20x worse compression with shuffle.
-```python
-# SLOW - shuffle is ineffective because typesize=1 internally
-z = zarr.create_array(store, shape=(1000,), dtype='float64',
-                      compressors=zarr.codecs.BloscCodec(cname='lz4', clevel=1,
-                                                          shuffle=zarr.codecs.BloscShuffle.shuffle))
+## Integration
 
-# FAST - ZstdCodec (default) is not affected by the typesize bug
-z = zarr.create_array(store, shape=(1000,), dtype='float64',
-                      compressors=zarr.codecs.ZstdCodec(level=3))
+### xarray
+
+```python
+import xarray as xr
+
+# Write
+ds.to_zarr("data.zarr", zarr_format=3, consolidated=False)
+
+# Read
+ds = xr.open_zarr("data.zarr", consolidated=False)
 ```
 
-### write_empty_chunks default changed (#853)
+Pass `consolidated=False` if you're writing incrementally or using icechunk.
+
+### icechunk
+
+See `icechunk.md` skill. Short version: `store = session.store`, then use the
+usual zarr API on top.
+
+### dask
+
 ```python
-# v2 default: write_empty_chunks=True (stores all chunks)
-# v3 default: write_empty_chunks=False (skips fill-value-only chunks)
-# Missing chunks return fill_value silently - no error raised
+import dask.array as da
 
-# If external tools need all chunks present:
-z = zarr.create_array(store, shape=(100,), dtype='f4',
-                      config={'write_empty_chunks': True})
+# Write a dask array to zarr (parallel)
+dask_arr = da.random.random((10000, 10000), chunks=(1000, 1000))
+arr = zarr.create_array("data.zarr", shape=dask_arr.shape,
+                         dtype=dask_arr.dtype, chunks=dask_arr.chunksize)
+dask_arr.store(arr)
+
+# Read zarr as dask
+arr = zarr.open_array("data.zarr", mode="r")
+dask_arr = da.from_zarr(arr)
 ```
-
-### Mode semantics changed (#3062)
-```python
-# DANGER: mode='a' (default for open_array) was buggy before 3.0.8
-# It could DELETE existing data. Always use 3.0.8+
-
-zarr.open_array('data.zarr', mode='r')    # read only
-zarr.open_array('data.zarr', mode='r+')   # read/write existing (fails if missing)
-zarr.open_array('data.zarr', mode='w-')   # create only (fails if exists)
-zarr.open_array('data.zarr', mode='w')    # overwrite (DESTRUCTIVE)
-```
-
-### from_array() signature gotcha
-```python
-# Store is FIRST arg, data is keyword-only
-z = zarr.from_array('data.zarr', data=np_array, chunks=(100, 100))
-# WRONG: zarr.from_array(np_array, store='data.zarr')  # TypeError
-```
-
-### zarr.codecs.Blosc is NOT numcodecs.Blosc
-```python
-# These are DIFFERENT types - do not interchange:
-from zarr.codecs import BloscCodec, ZstdCodec  # native v3 codecs (preferred)
-from zarr.codecs.numcodecs import Blosc         # v3 wrapper class (edge cases only)
-from numcodecs import Blosc                     # raw numcodecs class (don't use with v3)
-```
-
-### FsspecStore requires async filesystem (#2706)
-```python
-# WRONG - local filesystem is not async
-store = zarr.storage.FsspecStore(fsspec.filesystem("file"), path="/local/path")
-
-# RIGHT - use LocalStore for local files
-store = zarr.storage.LocalStore("/local/path")
-
-# RIGHT - for cloud, use asynchronous=True
-fs = s3fs.S3FileSystem(anon=True, asynchronous=True)
-store = zarr.storage.FsspecStore(fs, path="bucket/data.zarr")
-```
-
-### open_array mode is a hidden kwarg
-```python
-# IDEs will not autocomplete 'mode', but it works:
-zarr.open_array('data.zarr', mode='r')  # mode is passed via **kwargs
-```
-
-## Known Limitations
-
-- **Blosc shuffle typesize bug** (#2171, #2766): Use ZstdCodec as default compressor to avoid.
-- **Performance regression in v3** (#2710): Large array writes slower due to async overhead. Being addressed.
-- **fsspec caching broken before fsspec 2025.7.0** (#2988): `simplecache::` protocols did not work with v3 async stores.
-- **Thread-safety of group/array init** (#1435): Not fully thread-safe.
-- **F memory order**: v3 always stores in C order. `order='F'` emits a warning.
-- **moto mock_aws incompatible** with v3 async stores: Use moto server mode for testing.
 
 ## Performance Tips
 
-- **Chunk size**: Target 1 MB+ uncompressed per chunk. Too small = filesystem overhead; too large = poor partial-read performance.
-- **Sharding**: Use for datasets with many small chunks on cloud stores. Target 10-100+ chunks per shard.
-- **Consolidated metadata**: Always use for read-heavy cloud data. Eliminates per-array metadata reads.
-- **ZstdCodec over BloscCodec**: ZstdCodec is not affected by the typesize bug and provides good default compression.
-- **Async concurrency**: Tune `zarr.config.set({'async.concurrency': N})` for cloud workloads.
-- **Avoid row-by-row iteration**: Significantly slower in v3 (#2529). Use bulk slicing.
+- **Chunk size**: target 1 MB+ uncompressed per chunk. Too small = filesystem
+  overhead; too large = wasted reads when you only need a slice.
+- **Sharding**: use for cloud stores with many small chunks. 10-100+ chunks per shard.
+- **Consolidated metadata**: `zarr.consolidate_metadata(store)` after building a
+  read-heavy dataset — eliminates per-array metadata reads.
+- **Async concurrency**: tune `zarr.config.set({'async.concurrency': N})` for
+  cloud workloads (default is conservative).
+- **Bulk slicing over iteration**: `arr[:]` or `arr[0:1000]` is much faster
+  than `[arr[i] for i in range(1000)]`. Row-by-row iteration has significant
+  per-access overhead in v3.
+- **Default compressor**: `ZstdCodec` is fast and not affected by the Blosc
+  typesize bug. Use it as your default.
+
+## Known Issues
+
+- **Blosc typesize bug** (#2171, #2766): `BloscCodec` defaults typesize to 1
+  byte instead of dtype size, causing 10-20x worse compression when using
+  shuffle. Use `ZstdCodec` unless you need Blosc specifically.
+- **Performance regression vs v2** (#2710): Large array writes slower due to
+  async overhead. Being addressed.
+- **FsspecStore requires async filesystem** (#2706): For local files use
+  `LocalStore`. For cloud, use `asynchronous=True` on the fsspec filesystem.
+- **Thread-safety** (#1435): Group/array initialization not fully thread-safe.
+- **F memory order**: v3 always stores in C order. `order='F'` emits a warning.
