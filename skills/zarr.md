@@ -5,45 +5,30 @@ migration patterns and anti-patterns, see `zarr-v2-v3-migration.md`.
 
 ## Mental Model
 
-Zarr stores chunked, compressed, N-dimensional arrays. Three objects matter:
+Zarr stores chunked, compressed, N-dimensional arrays. You interact with three
+objects, in order of importance:
 
-- **Store** — where bytes live (filesystem, memory, S3, zip). A `Store` is an
-  abstract key-value interface.
-- **Array** — a chunked N-D array bound to a store at some path.
-- **Group** — a directory-like container of arrays and subgroups.
+- **Array** — a chunked N-D array. This is what you read and write. Slice
+  assignment (`arr[...] = data`) writes; slicing (`arr[0:100]`) reads.
+- **Group** — a directory-like container of arrays and subgroups. Use bracket
+  access (`group["name"]`) and `members()` to inspect.
+- **Store** — where bytes live (filesystem, memory, S3, zip). You usually pass
+  a path string and let zarr build the store for you. **Avoid calling Store
+  methods directly.**
 
-Data flows: `Store` -> (create_array / open_array) -> `Array`. Writes go through
-slice assignment (`arr[...] = data`). The store's async-ness is handled for you
-by the top-level API.
+The Store is plumbing. Almost all your code should be at the Array/Group level.
+The top-level API (`zarr.create_array`, `zarr.open_group`, `zarr.from_array`)
+handles store construction, async, buffers, and serialization for you.
 
 **Stay at the public API.** If you import from `zarr.core.*`, `zarr.abc.*`, or
-`zarr.storage._*`, you're doing it wrong. The public API handles buffers, async,
-and serialization automatically.
-
-## Stores
-
-```python
-import zarr
-
-# In-memory (for tests)
-store = zarr.storage.MemoryStore()
-
-# Local filesystem
-store = zarr.storage.LocalStore("/path/to/data.zarr")
-
-# Remote via fsspec (S3, GCS, etc.)
-store = zarr.storage.FsspecStore.from_url("s3://bucket/data.zarr")
-
-# Zip file
-store = zarr.storage.ZipStore("/path/to/data.zip", mode="w")
-
-# Or just pass a string — zarr builds the right store
-# This works for all zarr.open_*, zarr.create_*, zarr.from_array calls:
-arr = zarr.open_array("s3://bucket/data.zarr")
-arr = zarr.open_array("/local/path.zarr")
-```
+`zarr.storage._*`, you're doing it wrong. If you find yourself calling
+`store.set()`, `store.get()`, or `store.list_prefix()`, stop — use the
+Array/Group API instead.
 
 ## Creating Arrays
+
+The most common starting point. You usually pass a path string for the store —
+zarr builds the right Store for you (LocalStore for paths, FsspecStore for URLs).
 
 ```python
 import zarr
@@ -51,18 +36,21 @@ import numpy as np
 
 # From shape + dtype (creates empty array)
 arr = zarr.create_array(
-    store,
+    "data.zarr",
     shape=(1000, 1000),
     dtype="float32",
     chunks=(100, 100),
 )
 
 # From existing data (shape/dtype inferred)
-arr = zarr.from_array(store, data=np.arange(100))
+arr = zarr.from_array("data.zarr", data=np.arange(100))
+
+# Remote: just pass the URL
+arr = zarr.create_array("s3://bucket/data.zarr", shape=(100,), dtype="f4")
 
 # With compression (defaults are good; override only if needed)
 arr = zarr.create_array(
-    store,
+    "data.zarr",
     shape=(1000,),
     dtype="f4",
     compressors=zarr.codecs.ZstdCodec(level=5),
@@ -87,7 +75,7 @@ arr[:] = np.array([1, 2, 3])
 
 ```python
 # Create a new group (preferred for new code)
-root = zarr.create_group(store)
+root = zarr.create_group("experiment.zarr")
 
 # Create nested arrays and groups inside it
 data = root.create_array("data", shape=(100,), dtype="f8")
@@ -99,13 +87,13 @@ results = subgroup.create_array("results", shape=(10,), dtype="i4")
 
 ```python
 # Open array (read-only)
-arr = zarr.open_array(store, mode="r")
+arr = zarr.open_array("data.zarr", mode="r")
 
 # Open group
-root = zarr.open_group(store, mode="r")
+root = zarr.open_group("data.zarr", mode="r")
 
 # Auto-detect (returns Array OR Group depending on what's there)
-obj = zarr.open(store, mode="r")
+obj = zarr.open("data.zarr", mode="r")
 ```
 
 **Mode semantics** (same across `open`, `open_array`, `open_group`):
@@ -350,6 +338,33 @@ dask_arr = da.from_zarr(arr)
   per-access overhead in v3.
 - **Default compressor**: `ZstdCodec` is fast and not affected by the Blosc
   typesize bug. Use it as your default.
+
+## Stores (Reference)
+
+Most code should pass path strings, not Store objects. But sometimes you need
+explicit Store construction — for non-trivial fsspec configuration, in-memory
+testing, or zip files.
+
+```python
+# In-memory (for tests)
+store = zarr.storage.MemoryStore()
+
+# Local filesystem (when you need explicit construction)
+store = zarr.storage.LocalStore("/path/to/data.zarr")
+
+# Remote with fsspec configuration
+store = zarr.storage.FsspecStore.from_url(
+    "s3://bucket/data.zarr",
+    storage_options={"anon": True},
+)
+
+# Zip file
+store = zarr.storage.ZipStore("/path/to/data.zip", mode="w")
+```
+
+Then pass `store` to `zarr.create_array(store, ...)`, `zarr.open_group(store, ...)`,
+etc. **Never call `store.set()`, `store.get()`, or `store.list_prefix()` directly**
+— these are async and require Buffer types. Always go through Array/Group.
 
 ## Known Issues
 
